@@ -60,7 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Test\Test.cs" />
     <Compile Include="Assets\Test\TestControl.cs" />
+    <Compile Include="Assets\Test\TestInteract.cs" />
     <Compile Include="Assets\Test\TestSoild.cs" />
     <Compile Include="Assets\Test\TestWall.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
