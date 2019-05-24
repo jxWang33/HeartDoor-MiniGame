@@ -60,11 +60,94 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Test\Test.cs" />
-    <Compile Include="Assets\Test\TestControl.cs" />
-    <Compile Include="Assets\Test\TestInteract.cs" />
-    <Compile Include="Assets\Test\TestSoild.cs" />
-    <Compile Include="Assets\Test\TestWall.cs" />
+    <Compile Include="Assets\_Test\TestControl.cs" />
+    <Compile Include="Assets\_Test\TestInteract.cs" />
+    <Compile Include="Assets\_Test\TestSoild.cs" />
+    <Compile Include="Assets\_Test\TestState.cs" />
+    <Compile Include="Assets\_Test\TestUsrAniCallback.cs" />
+    <Compile Include="Assets\_Test\TestWall.cs" />
+    <Compile Include="Assets\2DDL\2DLight\AssetUtility\AssetUtility.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Core\CasterCollider.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Core\CoreUtils.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Core\DynamicLight.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Core\DynamicLightEvents.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\Attributes.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\ButtonAttributeDrawer.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\FieldDescriptionAttributeDrawer.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\IncrementableAttribute.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\IncrementableAttributeDrawer.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\PopUpAttributeDrawer.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\SeparatorAttributeDrawer.cs" />
+    <Compile Include="Assets\2DDL\2DLight\PropertyDrawers\TitleAttributeDrawer.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Sight\SightListenerTemplate.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\CoroutineExt\CoroutineExtentions.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\ExtendsMe.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\fpsClass.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\GLDebug.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\interface_touch.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\SetRenderQueue.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\TablaSenoCoseno.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\more\TimerClass.cs" />
+    <Compile Include="Assets\2DDL\2DLight\Utils\RegisterCaster.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\AddOnBase\AddOnBase.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\ColorBlending.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\Fire.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\Illumination.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\LensFlares.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\LookAt.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\Rotation.cs" />
+    <Compile Include="Assets\2DDL\Add-ons\Source.cs" />
+    <Compile Include="Assets\2DDL\Examples\__Examples_Scripts\CharacterController2D\CharacterController2D.cs" />
+    <Compile Include="Assets\2DDL\Examples\__Examples_Scripts\restoreStone.cs" />
+    <Compile Include="Assets\2DDL\Examples\__Examples_Scripts\rotate.cs" />
+    <Compile Include="Assets\2DDL\Examples\__Examples_Scripts\rotationUsingSync.cs" />
+    <Compile Include="Assets\2DDL\Examples\__Examples_Scripts\SmoothFollow.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\BlinkLight.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\CatchTheBlueTorch.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\CharacterMovement.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\CreditsScript.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\followPlayer.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\OpenEgyptianGate.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\SetProximityFactor.cs" />
+    <Compile Include="Assets\2DDL\Examples\0 - DUNGEON GAME\UnlockTheExitDoor.cs" />
+    <Compile Include="Assets\2DDL\Examples\12 - Create and register Casters by code\addingCastersUnefficient.cs" />
+    <Compile Include="Assets\2DDL\Examples\12 - Create and register Casters by code\UsingAddColliderToScene.cs" />
+    <Compile Include="Assets\2DDL\Examples\13 - Delete Casters by code in PlayMode\DeleteCasters.cs" />
+    <Compile Include="Assets\2DDL\Examples\14 - Creation of both 2DDLight and Casters Procedurally\ProceduralLightAndCasters.cs" />
+    <Compile Include="Assets\2DDL\Examples\15 - Light with Physics\followBody.cs" />
+    <Compile Include="Assets\2DDL\Examples\16 - Soft and Smooth shadows edges\Blur.cs" />
+    <Compile Include="Assets\2DDL\Examples\16 - Soft and Smooth shadows edges\PostEffectsBase.cs" />
+    <Compile Include="Assets\2DDL\Examples\2 - Fire Light\AnimateFireSprite.cs" />
+    <Compile Include="Assets\2DDL\Examples\3 - Multiples Lights\interface_manager.cs" />
+    <Compile Include="Assets\2DDL\Examples\4 - Events\InstanceEvents.cs" />
+    <Compile Include="Assets\2DDL\Examples\5 - Bomb Explosion Simulation and Visibility algorithm\bomb.cs" />
+    <Compile Include="Assets\2DDL\Examples\5 - Bomb Explosion Simulation and Visibility algorithm\PlayerStatusManager.cs" />
+    <Compile Include="Assets\2DDL\Examples\6 - Fog of War with Occlusion effect and Sight with dispatch events\OcclusionEventsDelegate.cs" />
+    <Compile Include="Assets\2DDL\Examples\9 - Light Car\SpawnCasters.cs" />
+    <Compile Include="Assets\2DDL\Examples\OLD Examples\0 - First Simple\punchRadius.cs" />
+    <Compile Include="Assets\2DDL\Examples\OLD Examples\8 - ConeOfSight - FieldOfView\bullet.cs" />
+    <Compile Include="Assets\2DDL\Examples\OLD Examples\8 - ConeOfSight - FieldOfView\fire.cs" />
+    <Compile Include="Assets\2DDL\Examples\OLD Examples\8 - ConeOfSight - FieldOfView\rotate_2.cs" />
+    <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrAniCallBack.cs" />
+    <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrControl.cs" />
+    <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrState.cs" />
+    <Compile Include="Assets\Scripts\GMManager.cs" />
+    <None Include="Assets\2DDL\Examples\16 - Soft and Smooth shadows edges\_BloomAndFlares\MobileBlur.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\StencilObject.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\DefaultTexturized.shader" />
+    <None Include="Assets\2DDL\Bugs\READ FIRST.txt" />
+    <None Include="Assets\2DDL\2DLight\Shaders\occluded.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\RadialGradientAlphaBlend.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\DepthMask.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\CGTexturizing.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\OffsetShader.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\DefaultTexturizedAdditive.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\DefaultTexturizedWithAlpha.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\StencilMask.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\VertexColor.shader" />
+    <None Include="Assets\2DDL\2DLight\Shaders\Gradient-ZFighting.shader" />
+    <None Include="Assets\Resources\Constitution\N_Usr\Texture\N动作建议.txt" />
+    <None Include="Assets\2DDL\2DLight\Shaders\occluder.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/project/unity/HeartDoor/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -280,6 +363,9 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Resources2DDL">
+      <HintPath>D:/project/unity/HeartDoor/Assets/2DDL/2DLight/Utils/Resources2DDL.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/project/unity/HeartDoor/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
