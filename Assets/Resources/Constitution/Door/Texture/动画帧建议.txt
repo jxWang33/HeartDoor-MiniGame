@@ -1,0 +1,20 @@
+门_闲置(door_idle): // 后续可能会补多几帧门上花纹发光的效果，铃铛摇动的效果
+    ||: door_0 :||
+
+门_开始冲刺(door_dash_on): // 残影数量的变化规律是0到1到2。注意这里是0.01s一帧！
+    door_1, door_2
+
+门_冲刺中(door_dashing): // 后续可能会补多几帧冲刺特效
+   ||: door_2 :||
+
+门_结束冲刺(door_dash_off): // 残影数量的变化规律是2到1到0。注意这里是0.01s一帧！
+    door_1, door_3, door_0
+
+门_猛烈打开(door_super_open): // 打开时有变形
+    door_4, door_5, door_6
+
+门_打开中(door_opening): // 后续可能会补多几帧门上花纹发光的效果，铃铛摇动的效果
+    ||: door_6 :||
+
+门_关闭(door_close): // 关闭后就可以渐渐透明化然后销毁object了
+    door_6, door_5, door_7, door_0

@@ -6,9 +6,9 @@ using UnityEngine;
 public class GMManager : MonoBehaviour
 {
     public static readonly System.Random rd = new System.Random(GetRandomSeed());//随机种子
-    void Start()
+    void Awake()
     {
-        
+        Application.targetFrameRate = 60;
     }
 
     void Update()

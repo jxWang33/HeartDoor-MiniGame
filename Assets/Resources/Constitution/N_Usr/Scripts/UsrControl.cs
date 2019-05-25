@@ -13,6 +13,7 @@ public class UsrControl : MonoBehaviour
     private ControlMode currentMode;
     private UsrState state;
     private readonly bool isControlEnable = true;
+    private float startG;
 
     public float horizonA = 0.15f;//空气阻力
     public float maxMoveSpeed = 2.0f;
@@ -21,6 +22,7 @@ public class UsrControl : MonoBehaviour
     {
         currentMode = ControlMode.COMMON;
         state = GetComponent<UsrState>();
+        startG = state.rigidbody2D.gravityScale;
     }
 
     void Update()
@@ -43,7 +45,7 @@ public class UsrControl : MonoBehaviour
         switch (cm) {
             case ControlMode.COMMON:
                 state.ResetClimbCounter();
-                state.rigidbody2D.gravityScale = 1;
+                state.rigidbody2D.gravityScale = startG;
                 break;
             case ControlMode.CLIMBING:
                 state.isOnMove = false;
@@ -69,51 +71,51 @@ public class UsrControl : MonoBehaviour
     }
 
     private void UsrControlCommon() {//一般玩家交互
-        if (Input.GetKeyUp(KeyCode.LeftArrow)) {
+        if (Input.GetButtonUp("Left")) {
             state.isOnMove = false;
         }
-        if (Input.GetKeyUp(KeyCode.RightArrow)) {
+        if (Input.GetButtonUp("Right")) {
             state.isOnMove = false;
         }
-        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow)) {
+        if (Input.GetButton("Left") && Input.GetButton("Right")) {
             state.isOnMove = false;
         }
 
-        else if (Input.GetKey(KeyCode.LeftArrow)) {
+        else if (Input.GetButton("Left")) {
             Move(UsrState.LEFT_DIR);//左移动
         }
-        else if (Input.GetKey(KeyCode.RightArrow)) {
+        else if (Input.GetButton("Right")) {
             Move(UsrState.RIGHT_DIR);//右移动
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        if (Input.GetButtonDown("Down")) {
             Slide();
         }
-        if (Input.GetKeyDown(KeyCode.Z)) {
+        if (Input.GetButtonDown("Jump")) {
             Jump();//跳跃
         }
-        if (Input.GetKeyDown(KeyCode.X)) {
-            Dash();//特殊技
+        if (Input.GetButtonDown("Dash")) {
+            Dash();//瞬移
         }
     }
     private void UsrControlClimbing() {//爬墙交互
-        if (Input.GetKey(KeyCode.LeftArrow)) {
+        if (Input.GetButton("Left")) {
             if (!state.IsNearWall(UsrState.LEFT_DIR) || state.isOnGround)
                 ChangeControlMode(ControlMode.COMMON);
         }
-        if (!Input.GetKey(KeyCode.LeftArrow)) {
+        if (!Input.GetButton("Left")) {
             if (state.OnClimb == UsrState.LEFT_DIR)
                 ChangeControlMode(ControlMode.COMMON);
         }
-        if (Input.GetKey(KeyCode.RightArrow)) {
+        if (Input.GetButton("Right")) {
             if (!state.IsNearWall(UsrState.RIGHT_DIR) || state.isOnGround)
                 ChangeControlMode(ControlMode.COMMON);
         }
-        if (!Input.GetKey(KeyCode.RightArrow)) {
+        if (!Input.GetButton("Right")) {
             if (state.OnClimb == UsrState.RIGHT_DIR)
                 ChangeControlMode(ControlMode.COMMON);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z)) {
+        if (Input.GetButtonDown("Jump")) {
             ClimbingJump();
         }
     }
@@ -144,39 +146,16 @@ public class UsrControl : MonoBehaviour
                 ChangeControlMode(ControlMode.CLIMBING, moveDir);
             }
         }
-        state.rigidbody2D.AddForce(state.currentDir * state.moveForceValue, ForceMode2D.Force);
+        if (Mathf.Abs(state.rigidbody2D.velocity.x) < maxMoveSpeed) {
+            state.rigidbody2D.AddForce(state.currentDir * state.moveForceValue, ForceMode2D.Force);
+        }
     }
     public void Dash() {
-        //if (isOnDash || !currentAni.IsName("run") || !isOnMove) {
-        //    return;
-        //}
-        //if (!isOnWallL) {
-        //    Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
-        //    Collider2D hit = Physics2D.OverlapBox(colliderPos + new Vector2(-1.5f, 0), boxCollider2D.size, 0,
-        //        1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));
-        //    if (hit == null) {
-        //        //transform.Translate(new Vector2(-1.5f, 0), Space.Self);
-        //    }
-
-        //    isOnMove = false;
-        //    isOnDash = true;
-        //    animator.SetBool("isDash", true);
-        //    dashDir = currentDir;
-        //}
-        //if (isOnWallR) {
-        //    Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
-        //    Collider2D hit = Physics2D.OverlapBox(colliderPos + new Vector2(1.5f, 0), boxCollider2D.size, 0,
-        //        1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));
-        //    if (hit == null) {
-        //        //transform.Translate(new Vector2(1.5f, 0), Space.Self);
-        //    }
-
-        //    isOnMove = false;
-        //    isOnDash = true;
-        //    animator.SetBool("isDash", true);
-        //    dashDir = currentDir;
-        //}
+        if (!state.animator.GetBool("isDash") && state.currentAni.IsName("run") && state.isOnMove && state.nearDoor != 0 && state.GetDoor().IsEnable()) {
+            state.animator.SetBool("isDash", true);
+        }
     }
+
     public void Slide() {
         if (!state.animator.GetBool("isSlide") && state.currentAni.IsName("run") && state.isOnMove) {
             state.animator.SetBool("isSlide", true);
@@ -194,7 +173,8 @@ public class UsrControl : MonoBehaviour
             if (state.rigidbody2D.velocity.x > 0)
                 state.rigidbody2D.velocity = new Vector2(0, state.rigidbody2D.velocity.y);
         }
-        //限制最大移速
+    }
+    public void LimitV() {//限制最大移速
         if (state.rigidbody2D.velocity.x > maxMoveSpeed) {
             float tempy = state.rigidbody2D.velocity.y;
             state.rigidbody2D.velocity = new Vector2(maxMoveSpeed, tempy);

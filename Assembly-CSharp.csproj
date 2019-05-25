@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Test\TestControl.cs" />
+    <Compile Include="Assets\_Test\TestDoor.cs" />
     <Compile Include="Assets\_Test\TestInteract.cs" />
     <Compile Include="Assets\_Test\TestSoild.cs" />
     <Compile Include="Assets\_Test\TestState.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\2DDL\Examples\OLD Examples\8 - ConeOfSight - FieldOfView\bullet.cs" />
     <Compile Include="Assets\2DDL\Examples\OLD Examples\8 - ConeOfSight - FieldOfView\fire.cs" />
     <Compile Include="Assets\2DDL\Examples\OLD Examples\8 - ConeOfSight - FieldOfView\rotate_2.cs" />
+    <Compile Include="Assets\Resources\Constitution\Door\Script\MapDoor.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrAniCallBack.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrControl.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrState.cs" />
@@ -146,6 +148,7 @@
     <None Include="Assets\2DDL\2DLight\Shaders\StencilMask.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\VertexColor.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\Gradient-ZFighting.shader" />
+    <None Include="Assets\Resources\Constitution\Door\Texture\动画帧建议.txt" />
     <None Include="Assets\Resources\Constitution\N_Usr\Texture\N动作建议.txt" />
     <None Include="Assets\2DDL\2DLight\Shaders\occluder.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">

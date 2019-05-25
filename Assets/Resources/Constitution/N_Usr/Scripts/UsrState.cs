@@ -3,18 +3,23 @@ using UnityEngine;
 
 public class UsrState : MonoBehaviour
 {
-    const float IDLEINTER = 2.0f;//闲置idle播放间隔
-    const float SLIDEINTER = 1.0f;//基本滑行时间
-    const float CLIMBINGINTER = 0.5f;//两次climb最小间隔
+    public const float idelInter = 5.0f;//闲置idle播放间隔
+    public const float slideInter = 0.4f;//基本滑行时间
+    public const float climbingInter = 0.5f;//两次climb最小间隔
     public const int LEFT_DIR = 1;
     public const int RIGHT_DIR = 2;
     public bool isOnGround = false;
     public bool isOnMove = false;//是否被控制移动
     public int OnClimb = 0;//0->未处在爬墙状态，1->Left，2->Right
-    public int nearWall = 0;
 
+    public int nearWall = 0;
     private List<TestWall> nearWallsL;
     private List<TestWall> nearWallsR;
+
+    public int nearDoor = 0;
+    private List<MapDoor> nearDoorL;
+    private List<MapDoor> nearDoorR;
+
     private float idleCounter = 0;
     private float slideCounter = 0;
     private float climbingCounter = 0;
@@ -24,11 +29,12 @@ public class UsrState : MonoBehaviour
     public new Rigidbody2D rigidbody2D;
     public BoxCollider2D boxCollider2D;
     public AnimatorStateInfo currentAni;
-    
+
     public Vector2 startColliderOffset;
     public Vector2 startColliderSize;
     public AudioClip audioRunL;
     public AudioClip audioRunR;
+    public AudioClip audioIdle;
     //
     public Vector2 currentDir;
     public float moveForceValue = 0.01f;
@@ -48,8 +54,10 @@ public class UsrState : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         nearWallsL = new List<TestWall>();
         nearWallsR = new List<TestWall>();
+        nearDoorL = new List<MapDoor>();
+        nearDoorR = new List<MapDoor>();
         currentDir = new Vector2(0, 1);
-        climbingCounter = CLIMBINGINTER;
+        climbingCounter = climbingInter;
         
         audioSource = GetComponent<AudioSource>();
         startColliderSize = GetComponent<BoxCollider2D>().size;
@@ -57,10 +65,9 @@ public class UsrState : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        currentAni = animator.GetCurrentAnimatorStateInfo(0);
-
         UpdateOnGround();
         UpdateNearWall();
+        UpdateNearDoor();
         UpdateJumpEnable();
         UpdateClimbingEnable();
         UpdateAni();
@@ -72,20 +79,29 @@ public class UsrState : MonoBehaviour
     private void UpdateSound() {
         if (GetComponent<SpriteRenderer>().sprite.name == "run_2" && isOnGround) {
             if (!audioSource.isPlaying) {
+                audioSource.volume = 0.4f;
                 audioSource.clip = audioRunL;
                 audioSource.Play();
             }
         }
         if (GetComponent<SpriteRenderer>().sprite.name == "run_6" && isOnGround) {
             if (!audioSource.isPlaying) {
+                audioSource.volume = 0.4f;
                 audioSource.clip = audioRunR;
+                audioSource.Play();
+            }
+        }
+        if (GetComponent<SpriteRenderer>().sprite.name == "idle_2" && isOnGround) {
+            if (!audioSource.isPlaying) {
+                audioSource.volume = 1.0f;
+                audioSource.clip = audioIdle;
                 audioSource.Play();
             }
         }
     }
 
     private void UpdateClimbingEnable() {
-        if (climbingCounter >= CLIMBINGINTER)
+        if (climbingCounter >= climbingInter)
             isClimbEnable = true;
         else {
             isClimbEnable = false;
@@ -109,10 +125,19 @@ public class UsrState : MonoBehaviour
             nearWall = 0;
     }
 
+    private void UpdateNearDoor() {
+        if (nearDoorL.Count != 0)
+            nearDoor = LEFT_DIR;
+        else if (nearDoorR.Count != 0)
+            nearDoor = RIGHT_DIR;
+        else
+            nearDoor = 0;
+    }
+
     private void UpdateOnGround() {
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
         Collider2D hit = Physics2D.OverlapBox(colliderPos + new Vector2(0, -0.1f), boxCollider2D.size + new Vector2(-0.1f, 0), 0,
-            1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));
+            1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
         if (hit != null) 
             isOnGround = true;
         else 
@@ -120,6 +145,8 @@ public class UsrState : MonoBehaviour
     }
 
     private void UpdateAni() {
+        currentAni = animator.GetCurrentAnimatorStateInfo(0);
+
         #region scale
         if (currentDir == new Vector2(1, 0))
             transform.localScale = new Vector3(1, 1, 1);
@@ -138,7 +165,7 @@ public class UsrState : MonoBehaviour
         #endregion
 
         #region isIdle
-        if (idleCounter >= IDLEINTER) {
+        if (idleCounter >= idelInter) {
             int temp = GMManager.rd.Next() % 2;
             if (temp == 0) {
                 animator.SetBool("isIdleBlink", false);
@@ -183,14 +210,10 @@ public class UsrState : MonoBehaviour
         #region isSlide
         slideCounter += Time.deltaTime;
         if (animator.GetBool("isSlide")) {
-            if (!isOnGround || nearWall != 0) {
-                slideCounter = 0;
-                animator.SetBool("isSlide",false);
-            }
-            else if (slideCounter >= SLIDEINTER) {
-                Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y + 0.2f) + startColliderOffset;
+            if (!isOnGround || nearWall != 0 || nearDoor != 0|| slideCounter >= slideInter) {
+                Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y + 0.2f);
                 Collider2D hit = Physics2D.OverlapBox(colliderPos, startColliderSize, 0,
-                    1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));//站起碰撞盒检测
+                    1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));//站起碰撞盒检测
                 if (hit == null) {
                     slideCounter = 0;
                     animator.SetBool("isSlide", false);
@@ -224,15 +247,29 @@ public class UsrState : MonoBehaviour
         OnClimb = 0;
     }
 
+    public MapDoor GetDoor() {
+        if (nearDoor == LEFT_DIR) {
+            return nearDoorL[0];
+        }
+        else if (nearDoor == RIGHT_DIR) {
+            return nearDoorR[0];
+        }
+        return null;
+    }
+
     #region Physics CallBack
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.contacts[0].normal.x == 1) {//左边碰撞
             if (collision.collider.GetComponent<TestWall>())
                 nearWallsL.Add(collision.collider.GetComponent<TestWall>());
+            if (collision.collider.GetComponent<MapDoor>())
+                nearDoorL.Add(collision.collider.GetComponent<MapDoor>());
         }
         else if (collision.contacts[0].normal.x == -1) {//右边碰撞
             if (collision.collider.GetComponent<TestWall>())
                 nearWallsR.Add(collision.collider.GetComponent<TestWall>());
+            if (collision.collider.GetComponent<MapDoor>())
+                nearDoorR.Add(collision.collider.GetComponent<MapDoor>());
         }
     }
     private void OnCollisionExit2D(Collision2D collision) {
@@ -241,6 +278,12 @@ public class UsrState : MonoBehaviour
                 nearWallsL.Remove(collision.transform.GetComponent<TestWall>());
             else if (nearWallsR.Contains(collision.transform.GetComponent<TestWall>()))
                 nearWallsR.Remove(collision.transform.GetComponent<TestWall>());
+        }
+        if (collision.transform.GetComponent<MapDoor>()) {
+            if (nearDoorL.Contains(collision.transform.GetComponent<MapDoor>()))
+                nearDoorL.Remove(collision.transform.GetComponent<MapDoor>());
+            else if (nearDoorR.Contains(collision.transform.GetComponent<MapDoor>()))
+                nearDoorR.Remove(collision.transform.GetComponent<MapDoor>());
         }
     }
     #endregion
