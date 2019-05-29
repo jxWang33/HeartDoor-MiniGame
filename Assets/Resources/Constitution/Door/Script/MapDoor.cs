@@ -9,9 +9,12 @@ public class MapDoor : MonoBehaviour
     public AnimatorStateInfo currentAni;
     public float dashTime = 10f;
     private float dashCounter;
+    public float dashDistance = 2.0f;
 
     public float openTime = 10f;
     private float openCounter;
+    [SerializeField]
+    private float aSpeed=2f;
 
     private float dashSpeed = 0;
     private Vector2 dashDir = Vector2.zero;
@@ -38,6 +41,7 @@ public class MapDoor : MonoBehaviour
         if (currentAni.IsName("idle"))
             animator.SetBool("isClose", false);
 
+        UpdateColorA();
         UpdateOpen();
         UpdateDash();
     }
@@ -65,11 +69,24 @@ public class MapDoor : MonoBehaviour
         }
     }
 
+    private void UpdateColorA() {
+        if (GetComponent<SpriteRenderer>().color.a < 1)
+            GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, aSpeed * Time.deltaTime);
+        else if (GetComponent<SpriteRenderer>().color.a > 1)
+            SetColorA(1);
+    }
+
+    public void SetColorA(float a) {
+        GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g,
+            GetComponent<SpriteRenderer>().color.b,a);
+    }
+
     public void SetDash(UsrState state) {
         record = state;
         dashCounter = 0;
         dashDir = state.currentDir;
-        dashSpeed = (state.dashDistance-boxCollider2D.size.x-state.startColliderSize.x) / dashTime;
+        dashSpeed = (dashDistance-boxCollider2D.size.x-state.startColliderSize.x) / dashTime;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         animator.SetBool("isDash",true);
 
         if (dashDir == new Vector2(1, 0))
@@ -88,6 +105,8 @@ public class MapDoor : MonoBehaviour
     private void OpenEnd() {
         openCounter = 0;
         record.animator.SetBool("isDash", false);
+        record.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         record.rigidbody2D.velocity = record.currentDir;
     }
 }

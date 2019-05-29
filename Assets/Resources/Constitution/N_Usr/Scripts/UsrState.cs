@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class UsrState : MonoBehaviour
 {
-    public const float idelInter = 5.0f;//闲置idle播放间隔
-    public const float slideInter = 0.4f;//基本滑行时间
-    public const float climbingInter = 0.5f;//两次climb最小间隔
+    public float idelInter = 5.0f;//闲置idle播放间隔
+    public float slideInter = 0.4f;//基本滑行时间
+    public float climbingInter = 0.5f;//两次climb最小间隔
     public const int LEFT_DIR = 1;
     public const int RIGHT_DIR = 2;
     public bool isOnGround = false;
@@ -41,9 +41,9 @@ public class UsrState : MonoBehaviour
     public float jumpForceValue = 0.01f;
     public float climbSlideSpeed = 0.8f;
     public float slideSpeed = 5.0f;
-    public float dashDistance = 1.0f;
     public float climbJumpSpeed = 2.0f;
-    
+    public float dashOffset = 0.5f;
+
     public bool isJumpEnable = false;
     public bool isClimbEnable = false;
 
@@ -126,6 +126,13 @@ public class UsrState : MonoBehaviour
     }
 
     private void UpdateNearDoor() {
+        for (int i = 0; i < nearDoorL.Count; i++)
+            if (nearDoorL[i] == null)
+                nearDoorL.RemoveAt(i);
+        for (int i = 0; i < nearDoorR.Count; i++)
+            if (nearDoorR[i] == null)
+                nearDoorR.RemoveAt(i);
+
         if (nearDoorL.Count != 0)
             nearDoor = LEFT_DIR;
         else if (nearDoorR.Count != 0)
@@ -185,7 +192,7 @@ public class UsrState : MonoBehaviour
         #endregion
 
         #region isClimb
-        if (OnClimb != 0) {
+        if (OnClimb != 0&&!currentAni.IsName("climbing_jump")) {
             animator.SetBool("isClimb", true);
         }
         else
@@ -194,14 +201,14 @@ public class UsrState : MonoBehaviour
         #endregion
 
         #region isFall
-        if (rigidbody2D.velocity.y <= 0 && !isOnGround && OnClimb == 0)
+        if (rigidbody2D.velocity.y <= 0 && !isOnGround)
             animator.SetBool("isFall", true);
         else
             animator.SetBool("isFall", false);
         #endregion
 
         #region isRise
-        if (rigidbody2D.velocity.y > 0 && !isOnGround && OnClimb == 0)
+        if (rigidbody2D.velocity.y > 0 && !isOnGround)
             animator.SetBool("isRise", true);
         else if (!currentAni.IsName("jump") && !currentAni.IsName("climbing_jump"))
             animator.SetBool("isRise", false);
@@ -223,10 +230,6 @@ public class UsrState : MonoBehaviour
         else
             slideCounter = 0;
         #endregion
-
-        #region isDash
-
-        #endregion
     }
 
     private void Check() {//更新合法值
@@ -247,7 +250,7 @@ public class UsrState : MonoBehaviour
         OnClimb = 0;
     }
 
-    public MapDoor GetDoor() {
+    public MapDoor GetDoor() {//return neardoor
         if (nearDoor == LEFT_DIR) {
             return nearDoorL[0];
         }
@@ -255,6 +258,14 @@ public class UsrState : MonoBehaviour
             return nearDoorR[0];
         }
         return null;
+    }
+
+    public void CheckDoor(MapDoor md) {
+        if (nearDoorL.Contains(md))
+            nearDoorL.Remove(md);
+        else if (nearDoorR.Contains(md))
+            nearDoorR.Remove(md);
+        nearDoor = 0;
     }
 
     #region Physics CallBack

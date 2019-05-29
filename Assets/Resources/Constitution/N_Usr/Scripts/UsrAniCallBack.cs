@@ -17,6 +17,9 @@ public class UsrAniCallBack : MonoBehaviour
     public AnimationClip dashOn; 
     public AnimationClip land;
 
+    public AudioClip audioLand;
+    public AudioClip audioJump;
+
     void Awake() {
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -25,9 +28,17 @@ public class UsrAniCallBack : MonoBehaviour
             time = jump.length,
             functionName = "JumpEnd"
         };
+        AnimationEvent jumpStartEvent = new AnimationEvent {
+            time = 0,
+            functionName = "JumpStart"
+        };
         AnimationEvent climbingJumpEndEvent = new AnimationEvent {
             time = climbingJump.length,
             functionName = "ClimbingJumpEnd"
+        };
+        AnimationEvent climbingJumpStartEvent = new AnimationEvent {
+            time = 0,
+            functionName = "ClimbingJumpStart"
         };
         AnimationEvent idleBreatheEndEvent = new AnimationEvent {
             time = idleBreathe.length,
@@ -62,7 +73,9 @@ public class UsrAniCallBack : MonoBehaviour
             functionName = "LandStart"
         };
         jump.AddEvent(jumpEndEvent);
+        jump.AddEvent(jumpStartEvent);
         climbingJump.AddEvent(climbingJumpEndEvent);
+        climbingJump.AddEvent(climbingJumpStartEvent);
         idleBreathe.AddEvent(idleBreatheEndEvent);
         idleBlink.AddEvent(idleBlinkEndEvent);
         slideOn.AddEvent(slideOnEndEvent);
@@ -79,17 +92,27 @@ public class UsrAniCallBack : MonoBehaviour
         rigidbody2D.AddForce(forceDir * state.jumpForceValue, ForceMode2D.Impulse);
     }
 
+    private void JumpStart() {
+        if (!state.audioSource.isPlaying) {
+            state.audioSource.volume = 0.1f;
+            state.audioSource.clip = audioJump;
+            state.audioSource.Play();
+        }
+    }
+
     private void ClimbingJumpEnd() {
-        if (state.OnClimb == UsrState.LEFT_DIR) {
-            rigidbody2D.velocity = new Vector2(state.climbJumpSpeed, 0);
-            rigidbody2D.AddForce(new Vector2(0, 1) * state.jumpForceValue, ForceMode2D.Impulse);
-        }
-        if (state.OnClimb == UsrState.RIGHT_DIR) {
-            rigidbody2D.velocity = new Vector2(-state.climbJumpSpeed, 0);
-            rigidbody2D.AddForce(new Vector2(0, 1) * state.jumpForceValue, ForceMode2D.Impulse);
-        }
-        GetComponent<UsrControl>().ChangeControlMode(ControlMode.COMMON);
+        rigidbody2D.velocity = new Vector2(state.climbJumpSpeed * -state.currentDir.x, 0);
+        rigidbody2D.AddForce(new Vector2(0, 1) * state.jumpForceValue, ForceMode2D.Impulse);
+    }
+
+    private void ClimbingJumpStart() {
         animator.SetBool("isJump", false);
+        animator.SetBool("isClimb", false);
+        if (!state.audioSource.isPlaying) {
+            state.audioSource.volume = 0.1f;
+            state.audioSource.clip = audioJump;
+            state.audioSource.Play();
+        }
     }
 
     private void IdleBreatheEnd() {
@@ -114,16 +137,26 @@ public class UsrAniCallBack : MonoBehaviour
     }
 
     private void DashOnEnd() {
+        MapDoor mapDoor= GetComponent<UsrControl>().dashTarget;
+        if (mapDoor == null||Mathf.Abs(transform.position.y-mapDoor.transform.position.y)>state.dashOffset) {
+            state.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            animator.SetBool("isDash", false);
+            state.isOnMove = false;
+            state.rigidbody2D.velocity = Vector2.zero;
+            return;
+        }
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + state.boxCollider2D.offset;
-        Vector2 endColliderPos = colliderPos + state.currentDir * state.dashDistance - new Vector2(0, -0.1f);
+        Vector2 endColliderPos = colliderPos + state.currentDir * mapDoor.dashDistance - new Vector2(0, -0.1f);
         Collider2D hit = Physics2D.OverlapBox(endColliderPos, state.boxCollider2D.size, 0,
             1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
-        if (hit == null) {
-            transform.Translate(state.currentDir * state.dashDistance, Space.Self);
-            state.GetDoor().SetDash(state);
+        if (hit == null) {//瞬移目标位置无碰撞
+            transform.Translate(state.currentDir * mapDoor.dashDistance, Space.Self);
+            mapDoor.SetDash(state);
         }
-        else
-            Debug.Log(hit.name);
+        else {
+            state.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            animator.SetBool("isDash",false);
+        }
         state.isOnMove = false;
         state.rigidbody2D.velocity = Vector2.zero;
     }
@@ -134,5 +167,10 @@ public class UsrAniCallBack : MonoBehaviour
 
     private void LandStart() {
         GetComponent<UsrControl>().LimitV();
+        if (!state.audioSource.isPlaying) {
+            state.audioSource.volume = 0.4f;
+            state.audioSource.clip = audioLand;
+            state.audioSource.Play();
+        }
     }
 }

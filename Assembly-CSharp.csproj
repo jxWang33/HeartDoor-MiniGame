@@ -133,7 +133,9 @@
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrAniCallBack.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrControl.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrState.cs" />
+    <Compile Include="Assets\Scripts\DialoguePanel.cs" />
     <Compile Include="Assets\Scripts\GMManager.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
     <None Include="Assets\2DDL\Examples\16 - Soft and Smooth shadows edges\_BloomAndFlares\MobileBlur.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\StencilObject.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\DefaultTexturized.shader" />

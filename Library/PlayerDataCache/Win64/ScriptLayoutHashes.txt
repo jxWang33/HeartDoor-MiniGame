@@ -2,8 +2,9 @@ Win64
 PlayerPath?
 D:/project/unity/_Build/Windows/HeartDoor/HeartDoor.exe
 SceneListBegin?
-Assets/Test/SampleScene.unity
+Assets/_Test/SampleScene.unity
 SceneListEnd?
+9d81fd4c89758bab5320e9480bfe8d03 Assembly-CSharp.dll:.MapDoor
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:DynamicLight2D.InstanceEvents
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.UsingAddColliderToScene
@@ -22,7 +23,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.P
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestWall
 e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
-361b92451b3fe5ce48b346fbc524bf04 Assembly-CSharp.dll:.TestControl
+f7aa551ae2e20bf498c9c27e653875fa Assembly-CSharp.dll:.TestControl
 09f8a67d47d3c8d6519ddde9b2058686 Assembly-CSharp.dll:Prime31.CharacterController2D
 f09b45b439372b5677cdfb4b3c046210 Assembly-CSharp.dll:DynamicLight2D.DynamicLight
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -129,6 +130,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+4a5729fb3c46a21541d3123429b210d6 Assembly-CSharp.dll:.DialoguePanel
 8ecfda2e80e3dbf87725ad9427bece0f Assembly-CSharp.dll:.punchRadius
 afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.rotationUsingSync
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.AnimateFireSprite
@@ -139,6 +141,7 @@ fdd825d5614085569f86f2e56ba646d7 Assembly-CSharp.dll:.CharacterMovement
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestSoild
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 820b8d97adc6e0364c1d4a54d06dbc0f Assembly-CSharp.dll:.BlinkLight
+31d539087b66eabf65e6ce2671ff6ea9 Assembly-CSharp.dll:.TestUsrAniCallback
 7e4a66514ed599c154b63b3fd3c7386f Assembly-CSharp.dll:DynamicLight2D.Illumination
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
@@ -150,6 +153,8 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 14a5a2e5cdf8fb05a06abfcbd609c22a Assembly-CSharp.dll:.followPlayer
 fcc524e590f5b53ae7cc133882265388 Assembly-CSharp.dll:.TimerClass
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
+2e788b61a9f51391220da7eaabdb6589 Assembly-CSharp.dll:.UsrState
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestDoor
 3b9f1dba7df63266fe4a9b297de38706 Assembly-CSharp.dll:.SetProximityFactor
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -174,6 +179,7 @@ cf96e5f7b3d069bab453925bd41be04e UnityEngine.TestRunner.dll:UnityEngine.TestTool
 259d013faac28e8ba0aa2a7542273735 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.TestResultRendererCallback
+3ad83a14b22a6106c313b473b3ebc501 Assembly-CSharp.dll:.UIManager
 931f489e44eadf809e9310429c99dde5 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
@@ -186,16 +192,19 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 733f6fdc55569168cbc0f8459e327a36 Assembly-CSharp.dll:.GLDebug
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.rotate
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestState
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestInteract
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.addingCastersUnefficient
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+d8a38309247b3dcee248a8abe04851b5 Assembly-CSharp.dll:.UsrControl
 afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.interface_touch
 c150d9404e6b53770dd5f5e91004bccd Assembly-CSharp.dll:.Blur
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SightListenerTemplate
 99b52f2139c6043b14c9fdc7962452bc Assembly-CSharp.dll:.SetRenderQueue
 75e5558522b5b4c4174a417caa293e23 Assembly-CSharp.dll:DynamicLight2D.OcclusionEventsDelegate
+2777de9105ff332015adb1dcdcaaa9c2 Assembly-CSharp.dll:.UsrAniCallBack
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.restoreStone
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 fe7aaf807a631ef0ce2071dd05ade1a9 Assembly-CSharp.dll:.UnlockTheExitDoor
@@ -207,7 +216,5 @@ afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.rotate_2
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 3762bdcad64e775a654c87c54c385262 Assembly-CSharp.dll:DynamicLight2D.Source
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:DynamicLight2D.AddOnBase
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Test
 7d49f616f4fa0bea10a0eb41a691c2df Assembly-CSharp.dll:DynamicLight2D.Rotation
-31d539087b66eabf65e6ce2671ff6ea9 Assembly-CSharp.dll:.TestUsrAniCallback
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestState
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GMManager
