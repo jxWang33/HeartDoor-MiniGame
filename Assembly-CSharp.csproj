@@ -132,6 +132,7 @@
     <Compile Include="Assets\Resources\Constitution\Door\Script\MapDoor.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrAniCallBack.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrControl.cs" />
+    <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrDustEffect.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrState.cs" />
     <Compile Include="Assets\Scripts\DialoguePanel.cs" />
     <Compile Include="Assets\Scripts\GMManager.cs" />
@@ -146,12 +147,15 @@
     <None Include="Assets\2DDL\2DLight\Shaders\CGTexturizing.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\OffsetShader.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\DefaultTexturizedAdditive.shader" />
+    <None Include="Assets\_Test\Materials\Shaders\PriorityParticleAlpha.shader" />
+    <None Include="Assets\_Test\Materials\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\DefaultTexturizedWithAlpha.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\StencilMask.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\VertexColor.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\Gradient-ZFighting.shader" />
     <None Include="Assets\Resources\Constitution\Door\Texture\动画帧建议.txt" />
     <None Include="Assets\Resources\Constitution\N_Usr\Texture\N动作建议.txt" />
+    <None Include="Assets\_Test\Materials\Shaders\PriorityParticleAdd.shader" />
     <None Include="Assets\2DDL\2DLight\Shaders\occluder.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/project/unity/HeartDoor/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

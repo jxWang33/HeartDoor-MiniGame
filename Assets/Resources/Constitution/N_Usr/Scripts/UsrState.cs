@@ -29,6 +29,7 @@ public class UsrState : MonoBehaviour
     public new Rigidbody2D rigidbody2D;
     public BoxCollider2D boxCollider2D;
     public AnimatorStateInfo currentAni;
+    public UsrDustEffect dustEffect;
 
     public Vector2 startColliderOffset;
     public Vector2 startColliderSize;
@@ -52,6 +53,7 @@ public class UsrState : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        dustEffect = GetComponentInChildren<UsrDustEffect>();
         nearWallsL = new List<TestWall>();
         nearWallsR = new List<TestWall>();
         nearDoorL = new List<MapDoor>();

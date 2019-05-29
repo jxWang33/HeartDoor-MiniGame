@@ -50,10 +50,12 @@ public class UsrControl : MonoBehaviour
     public void ChangeControlMode(ControlMode cm, int param = 0) {
         switch (cm) {
             case ControlMode.COMMON:
+                state.dustEffect.CancelEffect();
                 state.ResetClimbCounter();
                 state.rigidbody2D.gravityScale = startG;
                 break;
             case ControlMode.CLIMBING:
+                state.dustEffect.SetEffect();
                 state.isOnMove = false;
                 state.rigidbody2D.velocity = new Vector2(0, -state.climbSlideSpeed);
                 state.rigidbody2D.gravityScale = 0;
