@@ -1,69 +1,101 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UsrState : MonoBehaviour
 {
-    public float idelInter = 5.0f;//闲置idle播放间隔
-    public float slideInter = 0.4f;//基本滑行时间
-    public float climbingInter = 0.5f;//两次climb最小间隔
     public const int LEFT_DIR = 1;
     public const int RIGHT_DIR = 2;
+
+    [Space()]
+    [Header("常量设置")]
+
+    [Range(3,10)]
+    public float idelInter = 5.0f;//闲置idle播放间隔
+    private float idleCounter = 0;
+    [Range(0,1)]
+    public float slideInter = 0.4f;//基本滑行时间
+    private float slideCounter = 0;
+    [Range(0.3f,1)]
+    public float climbingInter = 0.5f;//两次climb最小间隔
+    private float climbingCounter = 0;
+
+    public float moveForceValue = 0.01f;
+    public float jumpForceValue = 0.01f;
+    public float climbSlideSpeed = 0.8f;
+    public float minSlideSpeed = 3.0f;
+    public float maxSlideSpeed = 8.0f;
+    public float maxMoveSpeed = 2.0f;
+    public float climbJumpSpeed = 2.0f;
+
+    public float slideSpeedDecA = 1;
+    public float airDragA = 0.5f;//空气阻力
+
+    public float createDistance = 0.5f;
+    public float doorDistance = 0.5f;//垂直距离
+    
+    public float ManualCostOnClimbingJump = 40;
+
+    [Space()]
+    [Header("状态反馈")]
+
+    public Vector2 currentDir;
+    public AnimatorStateInfo currentAni;
     public bool isOnGround = false;
     public bool isOnMove = false;//是否被控制移动
-    public int OnClimb = 0;//0->未处在爬墙状态，1->Left，2->Right
+    public bool isJumpEnable = false;
+    public bool isClimbEnable = false;
+    public bool isControlEnable = true;
+    public int OnClimb = 0;//0->否，1->左，2->右
 
     public int nearWall = 0;
-    private List<TestWall> nearWallsL;
-    private List<TestWall> nearWallsR;
+    private List<MapWall> nearWallsL;
+    private List<MapWall> nearWallsR;
 
     public int nearDoor = 0;
     private List<MapDoor> nearDoorL;
     private List<MapDoor> nearDoorR;
 
-    private float idleCounter = 0;
-    private float slideCounter = 0;
-    private float climbingCounter = 0;
-    //Compnents
+    [Space()]
+    [Header("信息")]
+
     public Animator animator;
-    public AudioSource audioSource;
     public new Rigidbody2D rigidbody2D;
     public BoxCollider2D boxCollider2D;
-    public AnimatorStateInfo currentAni;
     public UsrDustEffect dustEffect;
+    public UsrStatePanel stateUI;
 
     public Vector2 startColliderOffset;
     public Vector2 startColliderSize;
-    public AudioClip audioRunL;
-    public AudioClip audioRunR;
-    public AudioClip audioIdle;
-    //
-    public Vector2 currentDir;
-    public float moveForceValue = 0.01f;
-    public float jumpForceValue = 0.01f;
-    public float climbSlideSpeed = 0.8f;
-    public float slideSpeed = 5.0f;
-    public float climbJumpSpeed = 2.0f;
-    public float dashOffset = 0.5f;
 
-    public bool isJumpEnable = false;
-    public bool isClimbEnable = false;
+    [Space()]
+    [Header("人物属性")]
 
-    void Awake()
-    {
+    public float maxManualPower = 100;//体力
+    public float currentManualPower = 0;
+    public float remanualSpeed = 10f;//恢复速度
+
+    public int myHeart = 3;//心
+    public float maxMentalPower = 100;//精神力
+    public float currentMentalPower = 100;
+
+
+    void Awake() {
+        currentDir = new Vector2(0, 1);
+        climbingCounter = climbingInter;
+        currentManualPower = maxManualPower;
+        currentMentalPower = maxMentalPower;
+        startColliderSize = GetComponent<BoxCollider2D>().size;
+        startColliderOffset = GetComponent<BoxCollider2D>().offset;
+
+        nearDoorL = new List<MapDoor>();
+        nearDoorR = new List<MapDoor>();
+        nearWallsL = new List<MapWall>();
+        nearWallsR = new List<MapWall>();
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        dustEffect = GetComponentInChildren<UsrDustEffect>();
-        nearWallsL = new List<TestWall>();
-        nearWallsR = new List<TestWall>();
-        nearDoorL = new List<MapDoor>();
-        nearDoorR = new List<MapDoor>();
-        currentDir = new Vector2(0, 1);
-        climbingCounter = climbingInter;
-        
-        audioSource = GetComponent<AudioSource>();
-        startColliderSize = GetComponent<BoxCollider2D>().size;
-        startColliderOffset = GetComponent<BoxCollider2D>().offset;
+        dustEffect = GetComponentInChildren<UsrDustEffect>();        
     }
 
     private void FixedUpdate() {
@@ -72,34 +104,16 @@ public class UsrState : MonoBehaviour
         UpdateNearDoor();
         UpdateJumpEnable();
         UpdateClimbingEnable();
+        UpdateUI();
         UpdateAni();
-        UpdateSound();
 
-        Check();
+        ResumeManual();
     }
 
-    private void UpdateSound() {
-        if (GetComponent<SpriteRenderer>().sprite.name == "run_2" && isOnGround) {
-            if (!audioSource.isPlaying) {
-                audioSource.volume = 0.4f;
-                audioSource.clip = audioRunL;
-                audioSource.Play();
-            }
-        }
-        if (GetComponent<SpriteRenderer>().sprite.name == "run_6" && isOnGround) {
-            if (!audioSource.isPlaying) {
-                audioSource.volume = 0.4f;
-                audioSource.clip = audioRunR;
-                audioSource.Play();
-            }
-        }
-        if (GetComponent<SpriteRenderer>().sprite.name == "idle_2" && isOnGround) {
-            if (!audioSource.isPlaying) {
-                audioSource.volume = 1.0f;
-                audioSource.clip = audioIdle;
-                audioSource.Play();
-            }
-        }
+    #region UPDATE
+
+    private void UpdateUI() {
+        stateUI.SetManualValue(transform.position, currentManualPower/maxManualPower);
     }
 
     private void UpdateClimbingEnable() {
@@ -153,7 +167,7 @@ public class UsrState : MonoBehaviour
             isOnGround = false;
     }
 
-    private void UpdateAni() {
+    private void UpdateAni() {//动画状态机更新
         currentAni = animator.GetCurrentAnimatorStateInfo(0);
 
         #region scale
@@ -228,17 +242,34 @@ public class UsrState : MonoBehaviour
                     animator.SetBool("isSlide", false);
                 }
             }
+            if (Mathf.Abs(rigidbody2D.velocity.x) > minSlideSpeed) {
+                rigidbody2D.velocity = (Mathf.Abs(rigidbody2D.velocity.x)-slideSpeedDecA*Time.deltaTime) * currentDir;
+                if (Mathf.Abs(rigidbody2D.velocity.x) < minSlideSpeed) {
+                    rigidbody2D.velocity = minSlideSpeed * currentDir;
+                }
+            }
+
         }
         else
             slideCounter = 0;
         #endregion
     }
 
-    private void Check() {//更新合法值
-        if (OnClimb < 0)
-            OnClimb = 0;
-        if (OnClimb > 2)
-            OnClimb = 2;
+    #endregion
+
+    private void ResumeManual() {
+        currentManualPower += remanualSpeed * Time.deltaTime;
+        currentManualPower = Mathf.Clamp(currentManualPower, 0, maxManualPower);
+    }
+
+    public MapDoor GetDoor() {//return neardoor
+        if (nearDoor == LEFT_DIR) {
+            return nearDoorL[0];
+        }
+        else if (nearDoor == RIGHT_DIR) {
+            return nearDoorR[0];
+        }
+        return null;
     }
 
     public bool IsNearWall(int param) {
@@ -252,16 +283,6 @@ public class UsrState : MonoBehaviour
         OnClimb = 0;
     }
 
-    public MapDoor GetDoor() {//return neardoor
-        if (nearDoor == LEFT_DIR) {
-            return nearDoorL[0];
-        }
-        else if (nearDoor == RIGHT_DIR) {
-            return nearDoorR[0];
-        }
-        return null;
-    }
-
     public void CheckDoor(MapDoor md) {
         if (nearDoorL.Contains(md))
             nearDoorL.Remove(md);
@@ -270,27 +291,30 @@ public class UsrState : MonoBehaviour
         nearDoor = 0;
     }
 
-    #region Physics CallBack
+
+    #region PHYSICS_CALLBACK
+
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.contacts[0].normal.x == 1) {//左边碰撞
-            if (collision.collider.GetComponent<TestWall>())
-                nearWallsL.Add(collision.collider.GetComponent<TestWall>());
+            if (collision.collider.GetComponent<MapWall>())
+                nearWallsL.Add(collision.collider.GetComponent<MapWall>());
             if (collision.collider.GetComponent<MapDoor>())
                 nearDoorL.Add(collision.collider.GetComponent<MapDoor>());
         }
         else if (collision.contacts[0].normal.x == -1) {//右边碰撞
-            if (collision.collider.GetComponent<TestWall>())
-                nearWallsR.Add(collision.collider.GetComponent<TestWall>());
+            if (collision.collider.GetComponent<MapWall>())
+                nearWallsR.Add(collision.collider.GetComponent<MapWall>());
             if (collision.collider.GetComponent<MapDoor>())
                 nearDoorR.Add(collision.collider.GetComponent<MapDoor>());
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision) {
-        if (collision.transform.GetComponent<TestWall>()) {
-            if (nearWallsL.Contains(collision.transform.GetComponent<TestWall>()))
-                nearWallsL.Remove(collision.transform.GetComponent<TestWall>());
-            else if (nearWallsR.Contains(collision.transform.GetComponent<TestWall>()))
-                nearWallsR.Remove(collision.transform.GetComponent<TestWall>());
+        if (collision.transform.GetComponent<MapWall>()) {
+            if (nearWallsL.Contains(collision.transform.GetComponent<MapWall>()))
+                nearWallsL.Remove(collision.transform.GetComponent<MapWall>());
+            else if (nearWallsR.Contains(collision.transform.GetComponent<MapWall>()))
+                nearWallsR.Remove(collision.transform.GetComponent<MapWall>());
         }
         if (collision.transform.GetComponent<MapDoor>()) {
             if (nearDoorL.Contains(collision.transform.GetComponent<MapDoor>()))
@@ -299,5 +323,6 @@ public class UsrState : MonoBehaviour
                 nearDoorR.Remove(collision.transform.GetComponent<MapDoor>());
         }
     }
+
     #endregion
 }

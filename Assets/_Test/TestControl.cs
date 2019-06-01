@@ -51,8 +51,8 @@ public class TestControl : MonoBehaviour
     [SerializeField]
     public int climbing = 0;//1->left,2->right
 
-    private List<TestWall> touchedWallsL;
-    private List<TestWall> touchedWallsR;
+    private List<MapWall> touchedWallsL;
+    private List<MapWall> touchedWallsR;
     private new Rigidbody2D rigidbody2D;
     private Vector2 currentDir;
     private BoxCollider2D boxCollider2D;
@@ -70,8 +70,8 @@ public class TestControl : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        touchedWallsL = new List<TestWall>();
-        touchedWallsR = new List<TestWall>();
+        touchedWallsL = new List<MapWall>();
+        touchedWallsR = new List<MapWall>();
         currentDir = new Vector2(0, 1);
         currentMode = ControlMode.COMMON;
         climbingCounter = MAX_CLIMBINGINTER;
@@ -455,20 +455,20 @@ public class TestControl : MonoBehaviour
     //
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.contacts[0].normal.x == 1) {//左边碰撞
-            if (collision.collider.GetComponent<TestWall>())
-                touchedWallsL.Add(collision.collider.GetComponent<TestWall>());
+            if (collision.collider.GetComponent<MapWall>())
+                touchedWallsL.Add(collision.collider.GetComponent<MapWall>());
         }
         else if (collision.contacts[0].normal.x == -1) {//右边碰撞
-            if (collision.collider.GetComponent<TestWall>())
-                touchedWallsR.Add(collision.collider.GetComponent<TestWall>());
+            if (collision.collider.GetComponent<MapWall>())
+                touchedWallsR.Add(collision.collider.GetComponent<MapWall>());
         }
     }
     private void OnCollisionExit2D(Collision2D collision) {
-        if (collision.transform.GetComponent<TestWall>()) {
-            if (touchedWallsL.Contains(collision.transform.GetComponent<TestWall>()))
-                touchedWallsL.Remove(collision.transform.GetComponent<TestWall>());
-            else if (touchedWallsR.Contains(collision.transform.GetComponent<TestWall>()))
-                touchedWallsR.Remove(collision.transform.GetComponent<TestWall>());
+        if (collision.transform.GetComponent<MapWall>()) {
+            if (touchedWallsL.Contains(collision.transform.GetComponent<MapWall>()))
+                touchedWallsL.Remove(collision.transform.GetComponent<MapWall>());
+            else if (touchedWallsR.Contains(collision.transform.GetComponent<MapWall>()))
+                touchedWallsR.Remove(collision.transform.GetComponent<MapWall>());
         }
     }
 }

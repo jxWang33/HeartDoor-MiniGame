@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(UsrState))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class UsrAniCallBack : MonoBehaviour
 {
     private new Rigidbody2D rigidbody2D;
+    private AudioSource audioSource;
     private Animator animator;
     private UsrState state;
 
+    [Space()]
+    [Header("响应片段")]
     public AnimationClip jump;
     public AnimationClip climbingJump;
     public AnimationClip idleBreathe;
@@ -17,13 +23,19 @@ public class UsrAniCallBack : MonoBehaviour
     public AnimationClip dashOn; 
     public AnimationClip land;
 
+    [Space()]
+    [Header("音频源")]
+    public AudioClip audioRunL;
+    public AudioClip audioRunR;
+    public AudioClip audioIdle;
     public AudioClip audioLand;
     public AudioClip audioJump;
 
     void Awake() {
+        state = GetComponent<UsrState>();
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        state = GetComponent<UsrState>();
+        audioSource = GetComponent<AudioSource>();
         AnimationEvent jumpEndEvent = new AnimationEvent {
             time = jump.length,
             functionName = "JumpEnd"
@@ -86,6 +98,8 @@ public class UsrAniCallBack : MonoBehaviour
         land.AddEvent(landStartEvent);
     }
 
+    #region CALLBACK
+
     private void JumpEnd() {
         animator.SetBool("isJump", false);
         Vector2 forceDir = new Vector2(0, 1);
@@ -93,26 +107,19 @@ public class UsrAniCallBack : MonoBehaviour
     }
 
     private void JumpStart() {
-        if (!state.audioSource.isPlaying) {
-            state.audioSource.volume = 0.1f;
-            state.audioSource.clip = audioJump;
-            state.audioSource.Play();
-        }
+        SoundPlay(audioJump, 0.4f);
     }
 
     private void ClimbingJumpEnd() {
         rigidbody2D.velocity = new Vector2(state.climbJumpSpeed * -state.currentDir.x, 0);
         rigidbody2D.AddForce(new Vector2(0, 1) * state.jumpForceValue, ForceMode2D.Impulse);
+        GetComponent<UsrControl>().ChangeControlMode(ControlMode.COMMON);
+        SoundPlay(audioJump, 0.4f);
     }
 
     private void ClimbingJumpStart() {
         animator.SetBool("isJump", false);
         animator.SetBool("isClimb", false);
-        if (!state.audioSource.isPlaying) {
-            state.audioSource.volume = 0.1f;
-            state.audioSource.clip = audioJump;
-            state.audioSource.Play();
-        }
     }
 
     private void IdleBreatheEnd() {
@@ -124,7 +131,7 @@ public class UsrAniCallBack : MonoBehaviour
     }
 
     private void SlideOnEnd() {
-        rigidbody2D.velocity = state.slideSpeed * state.currentDir;
+        rigidbody2D.velocity = state.maxSlideSpeed * state.currentDir;
         state.isOnMove = false;
     }
 
@@ -138,7 +145,7 @@ public class UsrAniCallBack : MonoBehaviour
 
     private void DashOnEnd() {
         MapDoor mapDoor= GetComponent<UsrControl>().dashTarget;
-        if (mapDoor == null||Mathf.Abs(transform.position.y-mapDoor.transform.position.y)>state.dashOffset) {
+        if (mapDoor == null||Mathf.Abs(transform.position.y-mapDoor.transform.position.y)>state.doorDistance) {
             state.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
             animator.SetBool("isDash", false);
             state.isOnMove = false;
@@ -167,10 +174,32 @@ public class UsrAniCallBack : MonoBehaviour
 
     private void LandStart() {
         GetComponent<UsrControl>().LimitV();
-        if (!state.audioSource.isPlaying) {
-            state.audioSource.volume = 0.4f;
-            state.audioSource.clip = audioLand;
-            state.audioSource.Play();
+        SoundPlay(audioLand, 0.4f);
+    }
+
+    #endregion
+
+    private void SoundPlay(AudioClip ac, float vol = 1.0f) {
+        if (!audioSource.isPlaying) {
+            audioSource.volume = vol;
+            audioSource.clip = ac;
+            audioSource.Play();
         }
+    }
+
+    private void UpdateSound() {//帧关联音效
+        if (GetComponent<SpriteRenderer>().sprite.name == "run_2" && state.isOnGround) {
+            SoundPlay(audioRunL, 0.4f);
+        }
+        if (GetComponent<SpriteRenderer>().sprite.name == "run_6" && state.isOnGround) {
+            SoundPlay(audioRunR, 0.4f);
+        }
+        if (GetComponent<SpriteRenderer>().sprite.name == "idle_2" && state.isOnGround) {
+            SoundPlay(audioIdle);
+        }
+    }
+
+    private void FixedUpdate() {
+        UpdateSound();
     }
 }

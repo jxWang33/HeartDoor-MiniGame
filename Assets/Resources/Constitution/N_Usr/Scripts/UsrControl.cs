@@ -10,21 +10,16 @@ public enum ControlMode
 
 public class UsrControl : MonoBehaviour
 {
-    private readonly bool isControlEnable = true;
-    private ControlMode currentMode;
     private UsrState state;
-    //move about
-    private float startG;
-    public float horizonA = 0.15f;//空气阻力
-    public float maxMoveSpeed = 2.0f;
-    //door about
+    private ControlMode currentMode;
     [SerializeField]
-    private float createDistance = 0.5f;
-    public GameObject pbDoor;
+    private GameObject pbDoor;
     public MapDoor myCreate = null;
     public MapDoor dashTarget = null;
 
-    void Awake()
+    private float startG;
+
+    void Start()
     {
         currentMode = ControlMode.COMMON;
         state = GetComponent<UsrState>();
@@ -33,7 +28,7 @@ public class UsrControl : MonoBehaviour
 
     void Update()
     {
-        if (!isControlEnable|| IsInUnActAni())
+        if (!state.isControlEnable|| IsInUnActAni())
             return;
         switch (currentMode) {
             case ControlMode.COMMON:
@@ -44,40 +39,6 @@ public class UsrControl : MonoBehaviour
                 break;
         }
         SetF();//水平阻力
-    }
-
-
-    public void ChangeControlMode(ControlMode cm, int param = 0) {
-        switch (cm) {
-            case ControlMode.COMMON:
-                state.dustEffect.CancelEffect();
-                state.ResetClimbCounter();
-                state.rigidbody2D.gravityScale = startG;
-                break;
-            case ControlMode.CLIMBING:
-                state.dustEffect.SetEffect();
-                state.isOnMove = false;
-                state.rigidbody2D.velocity = new Vector2(0, -state.climbSlideSpeed);
-                state.rigidbody2D.gravityScale = 0;
-                state.OnClimb = param;
-                break;
-        }
-        currentMode = cm;
-    }
-    private bool IsInUnActAni() {//检查是否在不可交互动画中
-        return
-            state.currentAni.IsName("dashing") ||
-            state.currentAni.IsName("dash_on") ||
-            state.currentAni.IsName("dash_off") ||
-            state.currentAni.IsName("sliding") ||
-            state.currentAni.IsName("slide_on") ||
-            state.currentAni.IsName("slide_off") ||
-            state.currentAni.IsName("climb_on") ||
-            state.currentAni.IsName("climb_off") ||
-            state.currentAni.IsName("climbing_jump") ||
-            //            state.currentAni.IsName("land") ||
-            state.currentAni.IsName("jump")||
-            state.animator.GetBool("isDash");
     }
 
     private void UsrControlCommon() {//一般玩家交互
@@ -106,10 +67,11 @@ public class UsrControl : MonoBehaviour
         if (Input.GetButtonDown("Dash")) {
             Dash();//瞬移
         }
-        if (Input.GetButtonDown("Create")) {
+        if (Input.GetButtonDown("Door")) {
             Create();
         }
     }
+
     private void UsrControlClimbing() {//爬墙交互
         if (Input.GetButton("Left")) {
             if (!state.IsNearWall(UsrState.LEFT_DIR) || state.isOnGround)
@@ -136,21 +98,41 @@ public class UsrControl : MonoBehaviour
             ClimbingDash();
         }
     }
-    /// <summary>
-    /// act
-    /// </summary>
+
+    public void ChangeControlMode(ControlMode cm, int param = 0) {
+        switch (cm) {
+            case ControlMode.COMMON:
+                state.dustEffect.CancelEffect();
+                state.ResetClimbCounter();
+                state.rigidbody2D.gravityScale = startG;
+                break;
+            case ControlMode.CLIMBING:
+                state.dustEffect.SetEffect();
+                state.isOnMove = false;
+                state.rigidbody2D.velocity = new Vector2(0, -state.climbSlideSpeed);
+                state.rigidbody2D.gravityScale = 0;
+                state.OnClimb = param;
+                break;
+        }
+        currentMode = cm;
+    }
+
+    #region ACT
+
     public void Jump() {
         if (!state.isJumpEnable)
             return;
         state.isJumpEnable = false;
         state.animator.SetBool("isJump", true);
     }
+
     public void ClimbingJump() {
-        if (state.isJumpEnable && state.currentAni.IsName("climbing")) {
+        if (state.isJumpEnable && state.currentAni.IsName("climbing") && state.currentManualPower >= state.ManualCostOnClimbingJump) {
             state.animator.SetBool("isJump", true);
-            ChangeControlMode(ControlMode.COMMON);
+            state.currentManualPower -= state.ManualCostOnClimbingJump;
         }
     }
+
     public void Move(int moveDir) {
         state.isOnMove = true;
         state.animator.SetBool("isRun", true);
@@ -166,10 +148,11 @@ public class UsrControl : MonoBehaviour
                 ChangeControlMode(ControlMode.CLIMBING, moveDir);
             }
         }
-        if (Mathf.Abs(state.rigidbody2D.velocity.x) < maxMoveSpeed) {
+        if (Mathf.Abs(state.rigidbody2D.velocity.x) < state.maxMoveSpeed) {
             state.rigidbody2D.AddForce(state.currentDir * state.moveForceValue, ForceMode2D.Force);
         }
     }
+
     public void Dash() {
         if (!state.animator.GetBool("isDash") && state.currentAni.IsName("run") && state.isOnMove && state.nearDoor != 0) {
             //
@@ -177,15 +160,16 @@ public class UsrControl : MonoBehaviour
             if (dashTarget == null)
                 return;
 
-            if (dashTarget.enabled && Mathf.Abs(transform.position.y - dashTarget.transform.position.y) <= state.dashOffset) {
+            if (dashTarget.enabled && Mathf.Abs(transform.position.y - dashTarget.transform.position.y) <= state.doorDistance) {
                 state.animator.SetBool("isDash", true);
                 state.rigidbody2D.bodyType = RigidbodyType2D.Static;
             }
         }
     }
+
     public bool Create() {
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + state.boxCollider2D.offset;
-        Vector2 endColliderPos = colliderPos + state.currentDir * createDistance - new Vector2(0, -0.1f);
+        Vector2 endColliderPos = colliderPos + state.currentDir * state.createDistance - new Vector2(0, -0.1f);
         Collider2D hit = Physics2D.OverlapBox(endColliderPos, state.boxCollider2D.size, 0,
             1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
         if (hit != null) { return false; }
@@ -194,11 +178,12 @@ public class UsrControl : MonoBehaviour
             state.CheckDoor(myCreate);
             Destroy(myCreate.gameObject);
         }
-        GameObject temp = Instantiate(pbDoor, (Vector2)transform.position + state.currentDir * createDistance, Quaternion.identity);
+        GameObject temp = Instantiate(pbDoor, (Vector2)transform.position + state.currentDir * state.createDistance, Quaternion.identity);
         myCreate = temp.GetComponent<MapDoor>();
         myCreate.SetColorA(0);
         return true;
     }
+
     public void ClimbingDash() {
         if (!state.currentAni.IsName("climbing"))
             return;
@@ -215,41 +200,58 @@ public class UsrControl : MonoBehaviour
         ChangeControlMode(ControlMode.COMMON);        
 
         dashTarget = myCreate;
-        if (Mathf.Abs(transform.position.y - dashTarget.transform.position.y) <= state.dashOffset) {
+        if (Mathf.Abs(transform.position.y - dashTarget.transform.position.y) <= state.doorDistance) {
             state.animator.SetBool("isDash", true);
             state.rigidbody2D.bodyType = RigidbodyType2D.Static;
         }
     }
+
     public void Slide() {
         if (!state.animator.GetBool("isSlide") && state.currentAni.IsName("run") && state.isOnMove) {
             state.animator.SetBool("isSlide", true);
         }
     }
-    /// <summary>
-    /// subact
-    /// </summary>
-    
+
+    #endregion
+
+    private bool IsInUnActAni() {//检查是否在不可交互动画中
+        return
+            state.currentAni.IsName("dashing") ||
+            state.currentAni.IsName("dash_on") ||
+            state.currentAni.IsName("dash_off") ||
+            state.currentAni.IsName("sliding") ||
+            state.currentAni.IsName("slide_on") ||
+            state.currentAni.IsName("slide_off") ||
+            state.currentAni.IsName("climb_on") ||
+            state.currentAni.IsName("climb_off") ||
+            state.currentAni.IsName("climbing_jump") ||
+            //            state.currentAni.IsName("land") ||
+            state.currentAni.IsName("jump") ||
+            state.animator.GetBool("isDash");
+    }
 
     private void SetF() {
         if (state.rigidbody2D.velocity.x > 0) {
-            state.rigidbody2D.velocity -= new Vector2(horizonA, 0);
+            state.rigidbody2D.velocity -= new Vector2(state.airDragA, 0);
             if (state.rigidbody2D.velocity.x < 0)
                 state.rigidbody2D.velocity = new Vector2(0, state.rigidbody2D.velocity.y);
         }
         else if (state.rigidbody2D.velocity.x < 0) {
-            state.rigidbody2D.velocity += new Vector2(horizonA, 0);
+            state.rigidbody2D.velocity += new Vector2(state.airDragA, 0);
             if (state.rigidbody2D.velocity.x > 0)
                 state.rigidbody2D.velocity = new Vector2(0, state.rigidbody2D.velocity.y);
         }
     }
+
     public void LimitV() {//限制最大移速
-        if (state.rigidbody2D.velocity.x > maxMoveSpeed) {
+        if (state.rigidbody2D.velocity.x > state.maxMoveSpeed) {
             float tempy = state.rigidbody2D.velocity.y;
-            state.rigidbody2D.velocity = new Vector2(maxMoveSpeed, tempy);
+            state.rigidbody2D.velocity = new Vector2(state.maxMoveSpeed, tempy);
         }
-        else if (state.rigidbody2D.velocity.x < -maxMoveSpeed) {
+        else if (state.rigidbody2D.velocity.x < -state.maxMoveSpeed) {
             float tempy = state.rigidbody2D.velocity.y;
-            state.rigidbody2D.velocity = new Vector2(-maxMoveSpeed, tempy);
+            state.rigidbody2D.velocity = new Vector2(-state.maxMoveSpeed, tempy);
         }
     }
+
 }

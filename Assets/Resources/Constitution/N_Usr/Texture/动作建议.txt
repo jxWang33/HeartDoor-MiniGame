@@ -1,0 +1,53 @@
+跑步(run):
+    ||: run_0, run_1, run_2, run_3, run_4, run_5, run_6, run_7 :||
+
+闲置_呼吸(idle_breathe):
+    ||: (idle_0 * 5), (idle_1 * 2), (idle_2 * 2), (idle_1 * 2), (idle_0 * 5) :||
+
+闲置_眨眼(idle_blink):
+    ||: (idle_0 * 5), idle_3, idle_4, idle_5, idle_4, idle_3, (idle_0 * 5) :||
+
+跳跃_开始(jump_start):
+    jump_0
+
+跳跃_上升(jump_rise): // 后续可能会补多几帧衣服和呆毛飘动的动作
+    ||: jump_1 :||
+
+跳跃_最高高度附近(jump_max): // 如果人物y方向的速度绝对值小于某个阈值，则播放这个动作
+    ||: jump_2 :||
+
+跳跃_下降(jump_fall): // 后续可能会补多几帧衣服和呆毛飘动的动作
+    ||: jump_3 :||
+
+跳跃_着陆(jump_land):
+    jump_3, jump_0
+
+爬墙_上墙(climb_on):
+    climb_0, climb_1, climb_2
+
+爬墙_在墙上(climb_now): // 后续可能会补多几帧衣服和呆毛飘动的动作，以及添加灰尘动画
+    ||: climb_2 :||
+
+爬墙_蹬墙跳(climb_jump):
+    climb_2, climb_1, climb_0, jump_1
+
+爬墙_下墙(climb_off):
+    climb_2, climb_1, climb_0, jump_2
+
+滑铲_开始(slide_start):
+    jump_0, slide_0
+
+滑铲_持续中(slide_now): // 后续可能会补多几帧衣服和呆毛飘动的动作，以及添加灰尘动画
+    ||: slide_0 :||
+
+滑铲_结束(slide_end):
+    slide_0, jump_0
+
+瞬移_开始(dash_start): // 瞬移其实相当于冲刺动作啦
+    jump_0, dash_0
+
+瞬移_持续中(dash_now): // 后续可能会补多几帧衣服和呆毛飘动的动作，以及添加灰尘动画和光效
+    ||: dash_0 :||
+
+瞬移_结束(dash_end): // 后续可能会补多几帧衣服和呆毛飘动的动作，以及添加灰尘动画和光效
+    ||: dash_1 :||

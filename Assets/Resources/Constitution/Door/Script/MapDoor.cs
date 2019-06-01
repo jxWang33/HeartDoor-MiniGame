@@ -6,16 +6,16 @@ public class MapDoor : MonoBehaviour
 {
     Animator animator;
     BoxCollider2D boxCollider2D;
-    public AnimatorStateInfo currentAni;
+    private AnimatorStateInfo currentAni;
+
     public float dashTime = 10f;
     private float dashCounter;
-    public float dashDistance = 2.0f;
 
     public float openTime = 10f;
     private float openCounter;
+    public float dashDistance = 2.0f;
     [SerializeField]
-    private float aSpeed=2f;
-
+    private float aColorSpeed=2f;
     private float dashSpeed = 0;
     private Vector2 dashDir = Vector2.zero;
 
@@ -71,7 +71,7 @@ public class MapDoor : MonoBehaviour
 
     private void UpdateColorA() {
         if (GetComponent<SpriteRenderer>().color.a < 1)
-            GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, aSpeed * Time.deltaTime);
+            GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, aColorSpeed * Time.deltaTime);
         else if (GetComponent<SpriteRenderer>().color.a > 1)
             SetColorA(1);
     }
