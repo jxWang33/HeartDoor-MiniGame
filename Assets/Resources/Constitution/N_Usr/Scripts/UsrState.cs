@@ -48,6 +48,10 @@ public class UsrState : MonoBehaviour
     public bool isControlEnable = true;
     public int OnClimb = 0;//0->否，1->左，2->右
 
+    public int nearSolid = 0;
+    private List<MapSolid> nearSolidL;
+    private List<MapSolid> nearSolidR;
+
     public int nearWall = 0;
     private List<MapWall> nearWallsL;
     private List<MapWall> nearWallsR;
@@ -79,6 +83,9 @@ public class UsrState : MonoBehaviour
     public float maxMentalPower = 100;//精神力
     public float currentMentalPower = 100;
 
+    public int greenKey = 3;
+    public float maxGoldenKeyTime = 5;
+    public float goldenKeyTime = 5;
 
     void Awake() {
         currentDir = new Vector2(0, 1);
@@ -92,15 +99,20 @@ public class UsrState : MonoBehaviour
         nearDoorR = new List<MapDoor>();
         nearWallsL = new List<MapWall>();
         nearWallsR = new List<MapWall>();
+        nearSolidL = new List<MapSolid>();
+        nearSolidR = new List<MapSolid>();
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        dustEffect = GetComponentInChildren<UsrDustEffect>();        
+        dustEffect = GetComponentInChildren<UsrDustEffect>();
+
+        stateUI.SetGreenKey(0, greenKey);
     }
 
     private void FixedUpdate() {
         UpdateOnGround();
         UpdateNearWall();
+        UpdateNearSolid();
         UpdateNearDoor();
         UpdateJumpEnable();
         UpdateClimbingEnable();
@@ -108,12 +120,15 @@ public class UsrState : MonoBehaviour
         UpdateAni();
 
         ResumeManual();
+        GoldenKeyTimeLose();
     }
 
     #region UPDATE
 
     private void UpdateUI() {
         stateUI.SetManualValue(transform.position, currentManualPower/maxManualPower);
+        stateUI.SetMentalValue(currentMentalPower, maxMentalPower, myHeart);
+        stateUI.SetGoldenKey(goldenKeyTime / maxGoldenKeyTime);
     }
 
     private void UpdateClimbingEnable() {
@@ -130,6 +145,15 @@ public class UsrState : MonoBehaviour
             isJumpEnable = true;
         else
             isJumpEnable = false;
+    }
+
+    private void UpdateNearSolid() {
+        if (nearSolidL.Count != 0)
+            nearSolid = LEFT_DIR;
+        else if (nearSolidR.Count != 0)
+            nearSolid = RIGHT_DIR;
+        else
+            nearSolid = 0;
     }
 
     private void UpdateNearWall() {
@@ -160,7 +184,7 @@ public class UsrState : MonoBehaviour
     private void UpdateOnGround() {
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
         Collider2D hit = Physics2D.OverlapBox(colliderPos + new Vector2(0, -0.1f), boxCollider2D.size + new Vector2(-0.1f, 0), 0,
-            1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
+            1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
         if (hit != null) 
             isOnGround = true;
         else 
@@ -233,10 +257,10 @@ public class UsrState : MonoBehaviour
         #region isSlide
         slideCounter += Time.deltaTime;
         if (animator.GetBool("isSlide")) {
-            if (!isOnGround || nearWall != 0 || nearDoor != 0|| slideCounter >= slideInter) {
+            if (!isOnGround || slideCounter >= slideInter) {
                 Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y + 0.2f);
                 Collider2D hit = Physics2D.OverlapBox(colliderPos, startColliderSize, 0,
-                    1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));//站起碰撞盒检测
+                    1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));//站起碰撞盒检测
                 if (hit == null) {
                     slideCounter = 0;
                     animator.SetBool("isSlide", false);
@@ -260,6 +284,13 @@ public class UsrState : MonoBehaviour
     private void ResumeManual() {
         currentManualPower += remanualSpeed * Time.deltaTime;
         currentManualPower = Mathf.Clamp(currentManualPower, 0, maxManualPower);
+    }
+
+    private void GoldenKeyTimeLose() {
+        if (goldenKeyTime > 0)
+            goldenKeyTime -= Time.deltaTime;
+        if (goldenKeyTime < 0)
+            goldenKeyTime = 0;
     }
 
     public MapDoor GetDoor() {//return neardoor
@@ -291,6 +322,15 @@ public class UsrState : MonoBehaviour
         nearDoor = 0;
     }
 
+    public void UseGreenKey() {
+        stateUI.SetGreenKey(greenKey,greenKey-1);
+        greenKey--;
+    }
+
+    public void CollectGreenKey() {
+        stateUI.SetGreenKey(greenKey, greenKey+1);
+        greenKey++;
+    }
 
     #region PHYSICS_CALLBACK
 
@@ -300,12 +340,16 @@ public class UsrState : MonoBehaviour
                 nearWallsL.Add(collision.collider.GetComponent<MapWall>());
             if (collision.collider.GetComponent<MapDoor>())
                 nearDoorL.Add(collision.collider.GetComponent<MapDoor>());
+            if (collision.collider.GetComponent<MapSolid>())
+                nearSolidL.Add(collision.collider.GetComponent<MapSolid>());
         }
         else if (collision.contacts[0].normal.x == -1) {//右边碰撞
             if (collision.collider.GetComponent<MapWall>())
                 nearWallsR.Add(collision.collider.GetComponent<MapWall>());
             if (collision.collider.GetComponent<MapDoor>())
                 nearDoorR.Add(collision.collider.GetComponent<MapDoor>());
+            if (collision.collider.GetComponent<MapSolid>())
+                nearSolidR.Add(collision.collider.GetComponent<MapSolid>());
         }
     }
 
@@ -321,6 +365,24 @@ public class UsrState : MonoBehaviour
                 nearDoorL.Remove(collision.transform.GetComponent<MapDoor>());
             else if (nearDoorR.Contains(collision.transform.GetComponent<MapDoor>()))
                 nearDoorR.Remove(collision.transform.GetComponent<MapDoor>());
+        }
+        if (collision.transform.GetComponent<MapSolid>()) {
+            if (nearSolidL.Contains(collision.transform.GetComponent<MapSolid>()))
+                nearSolidL.Remove(collision.transform.GetComponent<MapSolid>());
+            else if (nearSolidR.Contains(collision.transform.GetComponent<MapSolid>()))
+                nearSolidR.Remove(collision.transform.GetComponent<MapSolid>());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.transform.GetComponent<GoldenKey>() != null || collision.transform.GetComponent<GreenKey>() != null) {
+            if (collision.transform.GetComponent<GreenKey>() != null)
+                CollectGreenKey();
+            else {
+                maxGoldenKeyTime = collision.transform.GetComponent<GoldenKey>().duringTime;
+                goldenKeyTime = maxGoldenKeyTime;
+            }
+            Destroy(collision.gameObject);
         }
     }
 

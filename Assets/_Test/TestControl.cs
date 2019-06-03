@@ -156,7 +156,7 @@ public class TestControl : MonoBehaviour
     private void UpdateOnGround() {
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
         Collider2D hit = Physics2D.OverlapBox(colliderPos+ new Vector2(0, -0.1f), boxCollider2D.size + new Vector2(-0.1f, 0), 0,
-            1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));
+            1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall"));
         if (hit != null) {
             isOnGround = true;
         }
@@ -186,7 +186,7 @@ public class TestControl : MonoBehaviour
             else if (slideCounter >= MIN_SLIDEINTER) {
                 Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y + 0.2f) + startColliderOffset;
                 Collider2D hit = Physics2D.OverlapBox(colliderPos, startColliderSize, 0,
-                    1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));
+                    1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall"));
                 if (hit == null) {
                     slideCounter = 0;
                     isOnSlide = false;
@@ -419,7 +419,7 @@ public class TestControl : MonoBehaviour
         if (!isOnWallL) {
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
         Collider2D hit = Physics2D.OverlapBox(colliderPos+ new Vector2(-1.5f, 0), boxCollider2D.size, 0,
-            1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));
+            1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall"));
             if (hit == null) {
                 //transform.Translate(new Vector2(-1.5f, 0), Space.Self);
             }
@@ -432,7 +432,7 @@ public class TestControl : MonoBehaviour
         if (isOnWallR) {
             Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
             Collider2D hit = Physics2D.OverlapBox(colliderPos + new Vector2(1.5f, 0), boxCollider2D.size, 0,
-                1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall"));
+                1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall"));
             if (hit == null) {
                 //transform.Translate(new Vector2(1.5f, 0), Space.Self);
             }

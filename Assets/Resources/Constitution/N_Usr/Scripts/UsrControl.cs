@@ -42,59 +42,59 @@ public class UsrControl : MonoBehaviour
     }
 
     private void UsrControlCommon() {//一般玩家交互
-        if (Input.GetButtonUp("Left")) {
+        if (Input.GetKeyUp(GMManager.LEFT_KEY)) {
             state.isOnMove = false;
         }
-        if (Input.GetButtonUp("Right")) {
+        if (Input.GetKeyUp(GMManager.RIGHT_KEY)) {
             state.isOnMove = false;
         }
-        if (Input.GetButton("Left") && Input.GetButton("Right")) {
+        if (Input.GetKey(GMManager.LEFT_KEY) && Input.GetKey(GMManager.RIGHT_KEY)) {
             state.isOnMove = false;
         }
 
-        else if (Input.GetButton("Left")) {
+        else if (Input.GetKey(GMManager.LEFT_KEY)) {
             Move(UsrState.LEFT_DIR);//左移动
         }
-        else if (Input.GetButton("Right")) {
+        else if (Input.GetKey(GMManager.RIGHT_KEY)) {
             Move(UsrState.RIGHT_DIR);//右移动
         }
-        if (Input.GetButtonDown("Down")) {
+        if (Input.GetKeyDown(GMManager.DOWN_KEY)) {
             Slide();
         }
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetKeyDown(GMManager.JUMP_KEY)) {
             Jump();//跳跃
         }
-        if (Input.GetButtonDown("Dash")) {
+        if (Input.GetKeyDown(GMManager.DASH_KEY)) {
             Dash();//瞬移
         }
-        if (Input.GetButtonDown("Door")) {
+        if (Input.GetKeyDown(GMManager.DOOR_KEY)) {
             Create();
         }
     }
 
     private void UsrControlClimbing() {//爬墙交互
-        if (Input.GetButton("Left")) {
+        if (Input.GetKey(GMManager.LEFT_KEY)) {
             if (!state.IsNearWall(UsrState.LEFT_DIR) || state.isOnGround)
                 ChangeControlMode(ControlMode.COMMON);
         }
-        if (!Input.GetButton("Left")) {
+        if (!Input.GetKey(GMManager.LEFT_KEY)) {
             if (state.OnClimb == UsrState.LEFT_DIR)
                 ChangeControlMode(ControlMode.COMMON);
         }
-        if (Input.GetButton("Right")) {
+        if (Input.GetKey(GMManager.RIGHT_KEY)) {
             if (!state.IsNearWall(UsrState.RIGHT_DIR) || state.isOnGround)
                 ChangeControlMode(ControlMode.COMMON);
         }
-        if (!Input.GetButton("Right")) {
+        if (!Input.GetKey(GMManager.RIGHT_KEY)) {
             if (state.OnClimb == UsrState.RIGHT_DIR)
                 ChangeControlMode(ControlMode.COMMON);
         }
 
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetKeyDown(GMManager.JUMP_KEY)) {
             ClimbingJump();
         }
 
-        if (Input.GetButtonDown("Dash")) {
+        if (Input.GetKeyDown(GMManager.DASH_KEY)) {
             ClimbingDash();
         }
     }
@@ -157,10 +157,10 @@ public class UsrControl : MonoBehaviour
         if (!state.animator.GetBool("isDash") && state.currentAni.IsName("run") && state.isOnMove && state.nearDoor != 0) {
             //
             dashTarget = state.GetDoor();
-            if (dashTarget == null)
+            if (dashTarget == null||!dashTarget.IsEnable())
                 return;
 
-            if (dashTarget.enabled && Mathf.Abs(transform.position.y - dashTarget.transform.position.y) <= state.doorDistance) {
+            if (Mathf.Abs(transform.position.y - dashTarget.transform.position.y) <= state.doorDistance) {
                 state.animator.SetBool("isDash", true);
                 state.rigidbody2D.bodyType = RigidbodyType2D.Static;
             }
@@ -168,19 +168,30 @@ public class UsrControl : MonoBehaviour
     }
 
     public bool Create() {
+        if (state.goldenKeyTime <= 0 && state.greenKey <= 0)
+            return false;
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + state.boxCollider2D.offset;
         Vector2 endColliderPos = colliderPos + state.currentDir * state.createDistance - new Vector2(0, -0.1f);
         Collider2D hit = Physics2D.OverlapBox(endColliderPos, state.boxCollider2D.size, 0,
-            1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
+            1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
         if (hit != null) { return false; }
 
         if (myCreate != null) {
             state.CheckDoor(myCreate);
-            Destroy(myCreate.gameObject);
+            myCreate.DisAppear();
         }
         GameObject temp = Instantiate(pbDoor, (Vector2)transform.position + state.currentDir * state.createDistance, Quaternion.identity);
+        temp.transform.parent = GameObject.Find("MapManager").transform;
         myCreate = temp.GetComponent<MapDoor>();
         myCreate.SetColorA(0);
+        myCreate.dashDistance = 3.0f;
+        if (state.goldenKeyTime > 0) {
+            myCreate.reCollectable = false;
+        }
+        else {
+            myCreate.reCollectable = true;
+            state.UseGreenKey();
+        }
         return true;
     }
 
@@ -193,16 +204,26 @@ public class UsrControl : MonoBehaviour
         if (state.nearWall == UsrState.RIGHT_DIR)
             state.currentDir = new Vector2(-1, 0);
 
-        if (!Create())
+        if (!Create()) {
+            if (state.nearWall == UsrState.LEFT_DIR)
+                state.currentDir = new Vector2(-1, 0);
+            if (state.nearWall == UsrState.RIGHT_DIR)
+                state.currentDir = new Vector2(1, 0);
             return;
-
-        myCreate.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        ChangeControlMode(ControlMode.COMMON);        
+        }    
 
         dashTarget = myCreate;
         if (Mathf.Abs(transform.position.y - dashTarget.transform.position.y) <= state.doorDistance) {
+            myCreate.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            ChangeControlMode(ControlMode.COMMON);
             state.animator.SetBool("isDash", true);
             state.rigidbody2D.bodyType = RigidbodyType2D.Static;
+        }
+        else {
+            if (state.nearWall == UsrState.LEFT_DIR)
+                state.currentDir = new Vector2(-1, 0);
+            if (state.nearWall == UsrState.RIGHT_DIR)
+                state.currentDir = new Vector2(1, 0);
         }
     }
 

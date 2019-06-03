@@ -36,6 +36,17 @@ public class UsrAniCallBack : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+
+        jump.events = null;
+        climbingJump.events = null;
+        idleBreathe.events = null;
+        idleBlink.events = null;
+        slideOn.events = null;
+        slideOff.events = null;
+        dashOn.events = null;
+        land.events = null;
+
+
         AnimationEvent jumpEndEvent = new AnimationEvent {
             time = jump.length,
             functionName = "JumpEnd"
@@ -104,6 +115,7 @@ public class UsrAniCallBack : MonoBehaviour
         animator.SetBool("isJump", false);
         Vector2 forceDir = new Vector2(0, 1);
         rigidbody2D.AddForce(forceDir * state.jumpForceValue, ForceMode2D.Impulse);
+        state.isOnMove = false;
     }
 
     private void JumpStart() {
@@ -155,13 +167,15 @@ public class UsrAniCallBack : MonoBehaviour
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + state.boxCollider2D.offset;
         Vector2 endColliderPos = colliderPos + state.currentDir * mapDoor.dashDistance - new Vector2(0, -0.1f);
         Collider2D hit = Physics2D.OverlapBox(endColliderPos, state.boxCollider2D.size, 0,
-            1 << LayerMask.NameToLayer("soild") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
+            1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
         if (hit == null) {//瞬移目标位置无碰撞
             transform.Translate(state.currentDir * mapDoor.dashDistance, Space.Self);
             mapDoor.SetDash(state);
         }
         else {
             state.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            state.CheckDoor(mapDoor);
+            mapDoor.DisAppear();
             animator.SetBool("isDash",false);
         }
         state.isOnMove = false;

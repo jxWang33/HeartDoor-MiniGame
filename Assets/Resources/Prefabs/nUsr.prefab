@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1592659343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592659344}
+  m_Layer: 0
+  m_Name: Camera Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1592659344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592659343}
+  m_LocalRotation: {x: -0, y: -0, z: -0.000008726646, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3139597915138860222}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3139597913510236765
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,11 +108,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3139597915138860221}
-  m_LocalRotation: {x: 0, y: 0, z: 0.000008726646, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3139597913510236764}
+  - {fileID: 1592659344}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,7 +134,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31e12a48684021d44bfc344a434f5eb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,7 +201,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3, y: 1.8}
+    oldSize: {x: 1.4, y: 1.8}
     newSize: {x: 1.3, y: 1.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -308,9 +339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147fdd7c2ddc25b46aa95c07f95be84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizonA: 0.5
-  maxMoveSpeed: 3
-  createDistance: 0.5
   pbDoor: {fileID: 5160231417470222706, guid: 22efc4fbfe5bb24439fe555801cc6e0e, type: 3}
   myCreate: {fileID: 0}
   dashTarget: {fileID: 0}
@@ -327,37 +355,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idelInter: 5
-  slideInter: 0.4
+  slideInter: 0.8
   climbingInter: 0.4
+  moveForceValue: 50
+  jumpForceValue: 8
+  climbSlideSpeed: 0.8
+  minSlideSpeed: 3
+  maxSlideSpeed: 8
+  maxMoveSpeed: 3
+  climbJumpSpeed: 6
+  slideSpeedDecA: 6
+  airDragA: 0.5
+  createDistance: 0.5
+  doorDistance: 0.5
+  ManualCostOnClimbingJump: 40
+  currentDir: {x: 0, y: 0}
   isOnGround: 0
   isOnMove: 0
+  isJumpEnable: 0
+  isClimbEnable: 0
+  isControlEnable: 1
   OnClimb: 0
   nearWall: 0
   nearDoor: 0
   animator: {fileID: 0}
-  audioSource: {fileID: 0}
   rigidbody2D: {fileID: 0}
   boxCollider2D: {fileID: 0}
   dustEffect: {fileID: 0}
+  stateUI: {fileID: 0}
   startColliderOffset: {x: 0, y: 0}
   startColliderSize: {x: 0, y: 0}
-  audioRunL: {fileID: 8300000, guid: c26086cce1dd252469b7cc7ce46432df, type: 3}
-  audioRunR: {fileID: 8300000, guid: e4b8ac058b3513f4b9d16db7752df3d0, type: 3}
-  audioIdle: {fileID: 8300000, guid: b756327ab2161af4097a1c6df5c133e1, type: 3}
-  currentDir: {x: 0, y: 0}
-  moveForceValue: 50
-  jumpForceValue: 8
-  climbSlideSpeed: 0.8
-  slideSpeed: 7
-  climbJumpSpeed: 6
-  dashOffset: 0.5
-  isJumpEnable: 0
-  isClimbEnable: 0
   maxManualPower: 100
   currentManualPower: 100
+  remanualSpeed: 10
   myHeart: 3
   maxMentalPower: 100
   currentMentalPower: 100
+  greenKey: 3
+  maxGoldenKeyTime: 5
+  goldenKeyTime: 5
 --- !u!114 &3139597915138860196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +414,9 @@ MonoBehaviour:
   slideOff: {fileID: 7400000, guid: 94610b5a77bdf5c47aef8227f9685a36, type: 2}
   dashOn: {fileID: 7400000, guid: c4f1ab08ec46a9d4bb69b0bda214208b, type: 2}
   land: {fileID: 7400000, guid: 798fc626ffd09274d9bd54831a08ccd7, type: 2}
+  audioRunL: {fileID: 8300000, guid: c26086cce1dd252469b7cc7ce46432df, type: 3}
+  audioRunR: {fileID: 8300000, guid: e4b8ac058b3513f4b9d16db7752df3d0, type: 3}
+  audioIdle: {fileID: 8300000, guid: b756327ab2161af4097a1c6df5c133e1, type: 3}
   audioLand: {fileID: 8300000, guid: 7f350e6fe752d914c8f51829c0ec0ad3, type: 3}
   audioJump: {fileID: 8300000, guid: 345d6dae0aa98d64d8f3dccf4418bda3, type: 3}
 --- !u!1 &3139597915232518527

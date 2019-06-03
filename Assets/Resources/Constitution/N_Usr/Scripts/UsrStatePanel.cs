@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UsrStatePanel : MonoBehaviour
 {
-    #region Manual
+    #region MANUAL
     public Transform manualTrans;
     public Image manualImage;
 
@@ -19,6 +19,19 @@ public class UsrStatePanel : MonoBehaviour
     private float manualRemainCounter = 0;
 
     private float manualDistance = 0.5f;
+    #endregion
+
+    #region MENTAL
+    public Image mentalImage;
+    public Text mentalText;
+    public Text heartText;
+    #endregion
+
+    #region KEY
+    public Transform goldenKey;
+    public Transform greenKey;
+    public Image goldenKeyImage;
+    public UIGreenKey greenKeyUI;
     #endregion
 
     void Awake()
@@ -69,5 +82,44 @@ public class UsrStatePanel : MonoBehaviour
         if (scPos.x < 0)
             scPos = Camera.main.WorldToScreenPoint(pos + new Vector3(manualDistance, 0, 0));
         currentManualPos = scPos;
+    }
+
+    public void SetMentalValue(float currentValue, float maxValue = 100, int heartCount = -1) {
+        if (heartCount >= 0)
+            heartText.text = heartCount.ToString();
+
+        mentalText.text = currentValue.ToString();
+        float value = currentValue / maxValue;
+        value = Mathf.Clamp(value, 0, 1);
+        mentalImage.fillAmount = value;
+    }
+
+    public void SetGoldenKey(float goldenKeyRemain = 0) {//update time
+        goldenKeyRemain = Mathf.Clamp(goldenKeyRemain, 0, 1);
+        if (goldenKeyRemain > 0) {
+            if (!goldenKey.gameObject.activeSelf)
+                goldenKey.gameObject.SetActive(true);
+            if (greenKey.gameObject.activeSelf)
+                greenKey.gameObject.SetActive(false);
+            goldenKeyImage.fillAmount = goldenKeyRemain;
+        }
+        else {
+            if (goldenKey.gameObject.activeSelf)
+                goldenKey.gameObject.SetActive(false);
+            if (!greenKey.gameObject.activeSelf)
+                greenKey.gameObject.SetActive(true);
+            goldenKeyImage.fillAmount = 0;
+        }
+    }
+
+    public void SetGreenKey(int pre,int current) {
+        if (current == pre)
+            return;
+        else if (current - pre == 1)
+            greenKeyUI.Add();
+        else if (current - pre == -1)
+            greenKeyUI.Dec();
+        else
+            greenKeyUI.Set(current);
     }
 }
