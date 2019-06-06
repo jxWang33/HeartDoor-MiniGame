@@ -10,13 +10,13 @@ public class UsrState : MonoBehaviour
     [Space()]
     [Header("常量设置")]
 
-    [Range(3,10)]
+    [Range(3, 10)]
     public float idelInter = 5.0f;//闲置idle播放间隔
     private float idleCounter = 0;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float slideInter = 0.4f;//基本滑行时间
     private float slideCounter = 0;
-    [Range(0.3f,1)]
+    [Range(0.3f, 1)]
     public float climbingInter = 0.5f;//两次climb最小间隔
     private float climbingCounter = 0;
 
@@ -33,8 +33,14 @@ public class UsrState : MonoBehaviour
 
     public float createDistance = 0.5f;
     public float doorDistance = 0.5f;//垂直距离
-    
+
     public float ManualCostOnClimbingJump = 40;
+    public float ManualCostOnSlide = 20;
+
+    public float colorRed = 0;
+    public float colorRedSpeed = 2f;
+
+    public GameObject pbHeartPrompt;
 
     [Space()]
     [Header("状态反馈")]
@@ -68,6 +74,7 @@ public class UsrState : MonoBehaviour
     public BoxCollider2D boxCollider2D;
     public UsrDustEffect dustEffect;
     public UsrStatePanel stateUI;
+    public LoadingPanel loadingPanel;
 
     public Vector2 startColliderOffset;
     public Vector2 startColliderSize;
@@ -79,7 +86,8 @@ public class UsrState : MonoBehaviour
     public float currentManualPower = 0;
     public float remanualSpeed = 10f;//恢复速度
 
-    public int myHeart = 3;//心
+    public int myHeart = 2;//心
+    public int myHeartMax = 20;//心
     public float maxMentalPower = 100;//精神力
     public float currentMentalPower = 100;
 
@@ -106,7 +114,7 @@ public class UsrState : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         dustEffect = GetComponentInChildren<UsrDustEffect>();
 
-        stateUI.SetGreenKey(0, greenKey);
+        stateUI.SetGreenKey(0, greenKey, transform);
     }
 
     private void FixedUpdate() {
@@ -116,6 +124,7 @@ public class UsrState : MonoBehaviour
         UpdateNearDoor();
         UpdateJumpEnable();
         UpdateClimbingEnable();
+        UpdateColor();
         UpdateUI();
         UpdateAni();
 
@@ -126,9 +135,20 @@ public class UsrState : MonoBehaviour
     #region UPDATE
 
     private void UpdateUI() {
-        stateUI.SetManualValue(transform.position, currentManualPower/maxManualPower);
+        stateUI.SetManualValue(transform.position, currentManualPower / maxManualPower);
         stateUI.SetMentalValue(currentMentalPower, maxMentalPower, myHeart);
         stateUI.SetGoldenKey(goldenKeyTime / maxGoldenKeyTime);
+    }
+
+    private void UpdateColor() {
+        if (colorRed > 0) {
+            colorRed -= colorRedSpeed * Time.deltaTime;
+            colorRed = Mathf.Clamp(colorRed, 0, 1);
+        }
+        Color tempColor = GetComponent<SpriteRenderer>().color;
+        tempColor.g = 1 - colorRed;
+        tempColor.b = 1 - colorRed;
+        GetComponent<SpriteRenderer>().color = tempColor;
     }
 
     private void UpdateClimbingEnable() {
@@ -185,9 +205,9 @@ public class UsrState : MonoBehaviour
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + boxCollider2D.offset;
         Collider2D hit = Physics2D.OverlapBox(colliderPos + new Vector2(0, -0.1f), boxCollider2D.size + new Vector2(-0.1f, 0), 0,
             1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
-        if (hit != null) 
+        if (hit != null)
             isOnGround = true;
-        else 
+        else
             isOnGround = false;
     }
 
@@ -232,7 +252,7 @@ public class UsrState : MonoBehaviour
         #endregion
 
         #region isClimb
-        if (OnClimb != 0&&!currentAni.IsName("climbing_jump")) {
+        if (OnClimb != 0 && !currentAni.IsName("climbing_jump")) {
             animator.SetBool("isClimb", true);
         }
         else
@@ -267,7 +287,7 @@ public class UsrState : MonoBehaviour
                 }
             }
             if (Mathf.Abs(rigidbody2D.velocity.x) > minSlideSpeed) {
-                rigidbody2D.velocity = (Mathf.Abs(rigidbody2D.velocity.x)-slideSpeedDecA*Time.deltaTime) * currentDir;
+                rigidbody2D.velocity = (Mathf.Abs(rigidbody2D.velocity.x) - slideSpeedDecA * Time.deltaTime) * currentDir;
                 if (Mathf.Abs(rigidbody2D.velocity.x) < minSlideSpeed) {
                     rigidbody2D.velocity = minSlideSpeed * currentDir;
                 }
@@ -323,13 +343,52 @@ public class UsrState : MonoBehaviour
     }
 
     public void UseGreenKey() {
-        stateUI.SetGreenKey(greenKey,greenKey-1);
+        stateUI.SetGreenKey(greenKey, greenKey - 1, transform);
         greenKey--;
     }
 
     public void CollectGreenKey() {
-        stateUI.SetGreenKey(greenKey, greenKey+1);
+        stateUI.SetGreenKey(greenKey, greenKey + 1, transform);
         greenKey++;
+    }
+
+    public void SetMental(int num) {
+        if (num < 0)
+            return;
+        currentMentalPower = num;
+        currentMentalPower = Mathf.Clamp(currentMentalPower,0,maxMentalPower);
+    }
+
+    public void ChangeMental(int change) {
+        currentMentalPower += change;
+        currentMentalPower = Mathf.Clamp(currentMentalPower, 0, maxMentalPower);
+        if (currentMentalPower <= 0) {
+            ChangeHeart(-1);
+        }
+    }
+
+    public void SetHeartPrompt(int num) {
+        GameObject temp = Instantiate(pbHeartPrompt, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        temp.GetComponent<HeartPropmt>().Set(num);
+    }
+
+    public void ChangeHeart(int change) {
+        SetHeartPrompt(change);
+        myHeart += change;
+        myHeart = Mathf.Clamp(myHeart, 0, myHeartMax);
+        SetMental(100);
+
+        if (myHeart <= 0) {
+            //
+            loadingPanel.gameObject.SetActive(true);
+            loadingPanel.Set("Start");
+            Destroy(gameObject);
+        }
+    }
+
+    public void Hurted(Vector2 hurtDir) {
+        rigidbody2D.AddForce(hurtDir * jumpForceValue, ForceMode2D.Impulse);
+        colorRed = 1;
     }
 
     #region PHYSICS_CALLBACK

@@ -62,6 +62,7 @@ cfee64b17e685895e3dcdecdcb2486b5 Assembly-CSharp.dll:.bomb
 d2d85170fb8c9b5657709adfa78a440b Assembly-CSharp.dll:DynamicLight2D.LensFlares
 98ad81e9f689a492509f07e75b810aaa Unity.TextMeshPro.dll:TMPro.TMP_InputField
 17b8a64e7930af8547f61355d5cb817d Assembly-CSharp.dll:.PlayerStatusManager
+f1b6e308513a0c4598294bcaf09d957b Assembly-CSharp.dll:.GreenKey
 17c7525f412c6c9a610a5390e5b73c8e Assembly-CSharp.dll:.SmoothFollow
 17b9a99fc67579a80fc5fbc80962c12a Assembly-CSharp.dll:.fpsClass
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -142,6 +143,7 @@ f7b75ac4f5bacd4eb40d7a7ced5cd94b Assembly-CSharp.dll:.MapManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.interface_manager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MapSolid
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
+40dd9b175d542b9d1b652124a0b8801d Assembly-CSharp.dll:.UIGreenKey
 820b8d97adc6e0364c1d4a54d06dbc0f Assembly-CSharp.dll:.BlinkLight
 31d539087b66eabf65e6ce2671ff6ea9 Assembly-CSharp.dll:.TestUsrAniCallback
 7e4a66514ed599c154b63b3fd3c7386f Assembly-CSharp.dll:DynamicLight2D.Illumination
@@ -155,7 +157,8 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 14a5a2e5cdf8fb05a06abfcbd609c22a Assembly-CSharp.dll:.followPlayer
 fcc524e590f5b53ae7cc133882265388 Assembly-CSharp.dll:.TimerClass
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-6a00a3a364c0ecc0bad7df0b7e41156e Assembly-CSharp.dll:.UsrState
+aa863b0ace272262d88e222d874c897a Assembly-CSharp.dll:.UsrState
+b7376420394e7b6f9c519cfc00b2fdc7 Assembly-CSharp.dll:.GoldenKey
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestDoor
 3b9f1dba7df63266fe4a9b297de38706 Assembly-CSharp.dll:.SetProximityFactor
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -222,6 +225,3 @@ afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.rotate_2
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:DynamicLight2D.AddOnBase
 7d49f616f4fa0bea10a0eb41a691c2df Assembly-CSharp.dll:DynamicLight2D.Rotation
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GMManager
-40dd9b175d542b9d1b652124a0b8801d Assembly-CSharp.dll:.UIGreenKey
-f1b6e308513a0c4598294bcaf09d957b Assembly-CSharp.dll:.GreenKey
-b7376420394e7b6f9c519cfc00b2fdc7 Assembly-CSharp.dll:.GoldenKey

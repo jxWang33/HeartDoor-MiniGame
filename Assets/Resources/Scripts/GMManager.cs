@@ -14,15 +14,12 @@ public class GMManager : MonoBehaviour
     public const KeyCode JUMP_KEY = KeyCode.J;
     public const KeyCode DASH_KEY = KeyCode.K;
     public const KeyCode DOOR_KEY = KeyCode.L;
-    public const KeyCode FUNC_KEY = KeyCode.E;
+    public const KeyCode FUNC_KEY = KeyCode.Space;
+
+    public const string LEVEL_1 = "Level1-MysteriousCall";
     void Awake()
     {
         Application.targetFrameRate = 60;
-    }
-
-    void Update()
-    {
-        
     }
 
     private static int GetRandomSeed() {

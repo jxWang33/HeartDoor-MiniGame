@@ -101,6 +101,8 @@ public class MapDoor : MonoBehaviour
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         animator.SetBool("isDash",true);
 
+        boxCollider2D.isTrigger = true;
+
         if (dashDir == new Vector2(1, 0))
             transform.localScale = new Vector3(1, 1, 1);
         else if (dashDir == new Vector2(-1, 0))
@@ -123,6 +125,7 @@ public class MapDoor : MonoBehaviour
         record.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         record.rigidbody2D.velocity = record.currentDir;
+        boxCollider2D.isTrigger = false;
     }
 
     private void CloseEnd() {
@@ -136,5 +139,12 @@ public class MapDoor : MonoBehaviour
             temp.transform.parent = GameObject.Find("MapManager").transform;
         }
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.transform.GetComponent<EasyBoss>() != null) {
+            collision.transform.GetComponent<EasyBoss>().ChangeHp(-20);
+            collision.transform.GetComponent<EasyBoss>().Hurted(dashDir);
+        }
     }
 }

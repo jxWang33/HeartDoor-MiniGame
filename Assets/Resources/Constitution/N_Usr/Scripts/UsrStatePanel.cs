@@ -34,6 +34,8 @@ public class UsrStatePanel : MonoBehaviour
     public UIGreenKey greenKeyUI;
     #endregion
 
+    public GameObject greenKeyEffect;
+
     void Awake()
     {
 
@@ -112,13 +114,19 @@ public class UsrStatePanel : MonoBehaviour
         }
     }
 
-    public void SetGreenKey(int pre,int current) {
+    public void SetGreenKey(int pre,int current,Transform tf) {
         if (current == pre)
             return;
-        else if (current - pre == 1)
+        else if (current - pre == 1) {
             greenKeyUI.Add();
-        else if (current - pre == -1)
+            GameObject temp = Instantiate(greenKeyEffect);
+            temp.GetComponent<GreenKeyEffect>().Set(tf.position, Camera.main.ScreenToWorldPoint(greenKeyUI.GetLastPos()));
+        }
+        else if (current - pre == -1) {
             greenKeyUI.Dec();
+            GameObject temp = Instantiate(greenKeyEffect);
+            temp.GetComponent<GreenKeyEffect>().Set(Camera.main.ScreenToWorldPoint(greenKeyUI.GetLastPos()), tf.position);
+        }
         else
             greenKeyUI.Set(current);
     }

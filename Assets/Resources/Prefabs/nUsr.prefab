@@ -153,7 +153,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: f3af765cb11f7414ab696a6b379c77b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -226,7 +226,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6efb4c4239f24f34c970a4b5005d2b38, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -369,6 +369,9 @@ MonoBehaviour:
   createDistance: 0.5
   doorDistance: 0.5
   ManualCostOnClimbingJump: 40
+  ManualCostOnSlide: 20
+  pbHeartPrompt: {fileID: 3203588131433368055, guid: 737ea88eb2f60b24bac106ca5c6f950f,
+    type: 3}
   currentDir: {x: 0, y: 0}
   isOnGround: 0
   isOnMove: 0
@@ -376,6 +379,7 @@ MonoBehaviour:
   isClimbEnable: 0
   isControlEnable: 1
   OnClimb: 0
+  nearSolid: 0
   nearWall: 0
   nearDoor: 0
   animator: {fileID: 0}
@@ -387,13 +391,14 @@ MonoBehaviour:
   startColliderSize: {x: 0, y: 0}
   maxManualPower: 100
   currentManualPower: 100
-  remanualSpeed: 10
+  remanualSpeed: 15
   myHeart: 3
+  myHeartMax: 20
   maxMentalPower: 100
   currentMentalPower: 100
-  greenKey: 3
+  greenKey: 0
   maxGoldenKeyTime: 5
-  goldenKeyTime: 5
+  goldenKeyTime: 0
 --- !u!114 &3139597915138860196
 MonoBehaviour:
   m_ObjectHideFlags: 0

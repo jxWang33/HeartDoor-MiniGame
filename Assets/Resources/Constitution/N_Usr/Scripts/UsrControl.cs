@@ -228,8 +228,9 @@ public class UsrControl : MonoBehaviour
     }
 
     public void Slide() {
-        if (!state.animator.GetBool("isSlide") && state.currentAni.IsName("run") && state.isOnMove) {
+        if (!state.animator.GetBool("isSlide") && state.currentAni.IsName("run") && state.isOnMove && state.currentManualPower >= state.ManualCostOnSlide) {
             state.animator.SetBool("isSlide", true);
+            state.currentManualPower -= state.ManualCostOnSlide;
         }
     }
 
@@ -273,6 +274,12 @@ public class UsrControl : MonoBehaviour
             float tempy = state.rigidbody2D.velocity.y;
             state.rigidbody2D.velocity = new Vector2(-state.maxMoveSpeed, tempy);
         }
+    }
+
+    public void Stand() {
+        state.isControlEnable = false;
+        state.rigidbody2D.Sleep();
+        state.isOnMove = false;
     }
 
 }

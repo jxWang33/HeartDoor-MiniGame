@@ -38,4 +38,8 @@ public class UIGreenKey : MonoBehaviour
             return;
         Destroy(transform.GetChild(--currentNum).gameObject);
     }
+
+    public Vector2 GetLastPos() {        
+        return transform.TransformPoint(new Vector2(currentNum * posInter, 0) + startPos);
+    }
 }

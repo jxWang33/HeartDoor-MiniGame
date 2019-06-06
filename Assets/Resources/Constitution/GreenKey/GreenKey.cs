@@ -5,8 +5,8 @@ using UnityEngine;
 public class GreenKey : MonoBehaviour
 {
     float radian = 0; 
-    public float radianSpeed = 0.5f;
-    public float radius = 0.5f;
+    public float radianSpeed = 2f;
+    public float radius = 0.2f;
     Vector3 startPos; 
     void Awake()
     {

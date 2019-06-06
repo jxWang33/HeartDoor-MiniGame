@@ -70,7 +70,7 @@ public class DialoguePanel : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetKeyDown(GMManager.FUNC_KEY)) {
             OnClick();
         }
     }

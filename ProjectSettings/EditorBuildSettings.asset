@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 2a84008efdea22545b437efe59e88029
+  - enabled: 1
     path: Assets/Scenes/Level1-MysteriousCall.unity
     guid: 2712c4671fb244046a9241ce5d7edf40
   m_configObjects: {}
