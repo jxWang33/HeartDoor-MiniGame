@@ -27,10 +27,15 @@ public class MapDoor : MonoBehaviour
     public AnimationClip open;
     public AnimationClip close;
 
+    public AudioClip audioOpen;
+    public AudioClip audioClose;
+    public AudioSource audioSource;
+
     void Awake() {
         gameObject.layer = LayerMask.NameToLayer("door");
         animator = GetComponent<Animator>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
         dashCounter = dashTime;
         openCounter = openTime;
         open.events = null;
@@ -39,6 +44,11 @@ public class MapDoor : MonoBehaviour
             time = open.length,
             functionName = "OpenEnd"
         };
+        AnimationEvent OpenStartEvent = new AnimationEvent {
+            time = 0,
+            functionName = "OpenStart"
+        };
+        open.AddEvent(OpenStartEvent);
         open.AddEvent(OpenEndEvent);
 
         AnimationEvent CloseEndEvent = new AnimationEvent {
@@ -126,6 +136,11 @@ public class MapDoor : MonoBehaviour
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         record.rigidbody2D.velocity = record.currentDir;
         boxCollider2D.isTrigger = false;
+        SoundPlay(audioClose);
+    }
+
+    private void OpenStart() {
+        SoundPlay(audioOpen);
     }
 
     private void CloseEnd() {
@@ -140,11 +155,21 @@ public class MapDoor : MonoBehaviour
         }
         Destroy(gameObject);
     }
+    private void SoundPlay(AudioClip ac, bool forceChange = false, float vol = 1.0f) {
+        if (!audioSource.isPlaying || forceChange) {
+            audioSource.volume = vol;
+            audioSource.clip = ac;
+            audioSource.Play();
+        }
+    }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnTriggerExit2D(Collider2D collision) {
         if (collision.transform.GetComponent<EasyBoss>() != null) {
             collision.transform.GetComponent<EasyBoss>().ChangeHp(-20);
             collision.transform.GetComponent<EasyBoss>().Hurted(dashDir);
+        }
+        if (collision.transform.GetComponent<DoorSwitch>() != null) {
+            collision.transform.GetComponent<DoorSwitch>().Change();
         }
     }
 }

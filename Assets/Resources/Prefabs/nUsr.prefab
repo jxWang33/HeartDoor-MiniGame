@@ -370,6 +370,8 @@ MonoBehaviour:
   doorDistance: 0.5
   ManualCostOnClimbingJump: 40
   ManualCostOnSlide: 20
+  colorRed: 0
+  colorRedSpeed: 2
   pbHeartPrompt: {fileID: 3203588131433368055, guid: 737ea88eb2f60b24bac106ca5c6f950f,
     type: 3}
   currentDir: {x: 0, y: 0}
@@ -387,6 +389,7 @@ MonoBehaviour:
   boxCollider2D: {fileID: 0}
   dustEffect: {fileID: 0}
   stateUI: {fileID: 0}
+  loadingPanel: {fileID: 0}
   startColliderOffset: {x: 0, y: 0}
   startColliderSize: {x: 0, y: 0}
   maxManualPower: 100
@@ -424,6 +427,9 @@ MonoBehaviour:
   audioIdle: {fileID: 8300000, guid: b756327ab2161af4097a1c6df5c133e1, type: 3}
   audioLand: {fileID: 8300000, guid: 7f350e6fe752d914c8f51829c0ec0ad3, type: 3}
   audioJump: {fileID: 8300000, guid: 345d6dae0aa98d64d8f3dccf4418bda3, type: 3}
+  audioHurt: {fileID: 8300000, guid: 3007b15d62f0b8e4698ecb9a2d64a4c5, type: 3}
+  audioGotKey: {fileID: 8300000, guid: 7914d5e67658af640a9f93e1fdf238a4, type: 3}
+  audioError: {fileID: 8300000, guid: 91ccaed9549c844438e50a660477e9b1, type: 3}
 --- !u!1 &3139597915232518527
 GameObject:
   m_ObjectHideFlags: 0

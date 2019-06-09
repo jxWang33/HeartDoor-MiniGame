@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,8 +13,15 @@ public class LoadingPanel : MonoBehaviour
     private float dotNum = 0;
     private float progress = 0;
 
-    public void Set(string levelName) {
+    public void SetAndSave(string levelName, int heartNum) {
+        SaveToFile("game", levelName, heartNum);
         StartCoroutine(StartLoading(levelName));
+    }
+    public void Restart() {
+        StartCoroutine(StartLoading(SceneManager.GetActiveScene().name));
+    }
+    public void ToTitle() {
+        StartCoroutine(StartLoading("Start"));
     }
 
     private void Update() {
@@ -46,5 +54,12 @@ public class LoadingPanel : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         loading.allowSceneActivation = true;
+    }
+
+    private void SaveToFile(string fileName, string levelName,int heartNum) {
+        BinaryWriter bw = new BinaryWriter(new FileStream(fileName + ".save", FileMode.Create));
+        bw.Write(levelName);
+        bw.Write(heartNum);
+        bw.Close();
     }
 }

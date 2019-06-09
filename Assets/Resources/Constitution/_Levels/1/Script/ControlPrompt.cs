@@ -6,7 +6,7 @@ public class ControlPrompt : MonoBehaviour
 {
     TextMesh mText;
     public enum PromptKind {
-        Move,Jump,Dash,Climb, Door, Slide
+        Move,Jump,Dash,Climb, Door, Slide, ClimbingJump
     };
     public PromptKind mKind;
     // Start is called before the first frame update
@@ -31,6 +31,9 @@ public class ControlPrompt : MonoBehaviour
                 break;
             case PromptKind.Slide:
                 mText.text = GMManager.DOWN_KEY + "↓";
+                break;
+            case PromptKind.ClimbingJump:
+                mText.text = GMManager.DASH_KEY + " >";
                 break;
         }
     }

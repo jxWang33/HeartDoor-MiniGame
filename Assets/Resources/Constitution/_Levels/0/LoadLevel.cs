@@ -14,7 +14,7 @@ public class LoadLevel : MonoBehaviour
     void Awake() {
         startButton.onClick.AddListener(() => {
             loadingPanel.gameObject.SetActive(true);
-            loadingPanel.Set(GMManager.LEVEL_1);
+            loadingPanel.SetAndSave(GMManager.LEVEL_1, 2);
         });
     }
 }

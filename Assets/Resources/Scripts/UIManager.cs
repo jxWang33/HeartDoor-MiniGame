@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public DialoguePanel dialoguePanel;
+    public EscPanel escPanel;
 
     public bool SetDialogues(List<DialogueUnit> units, DialogueDelegate OnDialogueEnd = null) {
         if (dialoguePanel.gameObject.activeSelf)
@@ -15,4 +16,16 @@ public class UIManager : MonoBehaviour
         dialoguePanel.SetDialogues(units);
         return true;
     }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (!escPanel.gameObject.activeSelf) {
+                escPanel.gameObject.SetActive(true);
+            }
+            else {
+                escPanel.gameObject.SetActive(false);
+            }
+        }
+    }
+
 }

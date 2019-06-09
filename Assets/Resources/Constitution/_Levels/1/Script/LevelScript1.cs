@@ -12,11 +12,13 @@ public class LevelScript1 : MonoBehaviour
     public UIManager uiManager;
     public GameObject timer;
     public GameObject titleFlash;
+    public MapManager mapManager;
 
     int scriptTag = 0;//剧情推进标签
 
     void Start()
     {
+        GMManager.Init();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = keyboardClip;
         audioSource.Play();
@@ -50,12 +52,13 @@ public class LevelScript1 : MonoBehaviour
                 GameObject tempT = Instantiate(titleFlash,GameObject.Find("Canvas").transform);
                 tempT.GetComponent<TitleFlash>().Set("十月一日","神秘电话","小试牛刀");
                 SoundPlay(timerClip);
+                mapManager.GetComponent<AudioSource>().Play();
             });
         }
 
     }
-    private void SoundPlay(AudioClip ac, float vol = 1.0f) {
-        if (!audioSource.isPlaying) {
+    private void SoundPlay(AudioClip ac, bool forceChange = false, float vol = 1.0f) {
+        if (!audioSource.isPlaying || forceChange) { 
             audioSource.volume = vol;
             audioSource.clip = ac;
             audioSource.Play();

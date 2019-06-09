@@ -15,9 +15,18 @@ public class GMManager : MonoBehaviour
     public const KeyCode DASH_KEY = KeyCode.K;
     public const KeyCode DOOR_KEY = KeyCode.L;
     public const KeyCode FUNC_KEY = KeyCode.Space;
-
     public const string LEVEL_1 = "Level1-MysteriousCall";
-    void Awake()
+    public const string LEVEL_2 = "Level2-GateCrasher";
+    public const string LEVEL_3 = "Level3-BestFriend";
+    public const string LEVEL_4 = "Level4-GoAhead";
+    public const string LEVEL_5 = "Level5-HeartLock";
+
+    public const string BadEnd_1 = "BadEnd1-Alone";
+    public const string BadEnd_2 = "BadEnd2-RunAway";
+    public const string NormalEnd = "NormalEnd-Conservatism";
+    public const string HappyEnd = "HappyEnd-ForFuture";
+
+    public static void Init()
     {
         Application.targetFrameRate = 60;
     }

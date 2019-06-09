@@ -342,13 +342,21 @@ public class UsrState : MonoBehaviour
         nearDoor = 0;
     }
 
-    public void UseGreenKey() {
+    public bool UseGreenKey() {
+        if (greenKey <= 0) {
+            GetComponent<UsrAniCallBack>().ErrorSound();
+            return false;
+        }
+
         stateUI.SetGreenKey(greenKey, greenKey - 1, transform);
         greenKey--;
+        return true;
     }
 
     public void CollectGreenKey() {
         stateUI.SetGreenKey(greenKey, greenKey + 1, transform);
+        GetComponent<UsrAniCallBack>().GotKeySound();
+
         greenKey++;
     }
 
@@ -381,14 +389,25 @@ public class UsrState : MonoBehaviour
         if (myHeart <= 0) {
             //
             loadingPanel.gameObject.SetActive(true);
-            loadingPanel.Set("Start");
+            loadingPanel.SetAndSave(GMManager.BadEnd_2, 0);
             Destroy(gameObject);
         }
     }
 
-    public void Hurted(Vector2 hurtDir) {
+    public void SetHeart(int num) {
+        myHeart = num;
+        myHeart = Mathf.Clamp(myHeart, 0, myHeartMax);
+        SetMental(100);
+    }
+
+    public void Hurted(Vector2 hurtDir, int damage) {
+        if (colorRed != 0)
+            return;
+
+        ChangeMental(-damage);
         rigidbody2D.AddForce(hurtDir * jumpForceValue, ForceMode2D.Impulse);
         colorRed = 1;
+        GetComponent<UsrAniCallBack>().HurtSound();
     }
 
     #region PHYSICS_CALLBACK

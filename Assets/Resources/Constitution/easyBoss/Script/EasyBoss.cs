@@ -37,10 +37,14 @@ public class EasyBoss : MonoBehaviour
     private bool shotR = false;
     public Transform fireR;
 
-    void Awake()
-    {
+    public AudioClip auiofire;
+    public AudioSource audioSource;
+
+    void Awake() {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+
         fire.events = null;
         AnimationEvent fireEndEvent = new AnimationEvent {
             time = fire.length,
@@ -52,9 +56,8 @@ public class EasyBoss : MonoBehaviour
         moveTimeCounter = moveTime;
         hp = maxHp;
     }
-    
-    void Update()
-    {
+
+    void Update() {
         UpdateAni();
         UpdateColor();
         AIControl();
@@ -64,7 +67,7 @@ public class EasyBoss : MonoBehaviour
     /// <summary>
     /// 简单AI
     /// 移动开火交替
-    /// 碰到solid转头
+    /// 碰到非玩家障碍转头
     /// </summary>
     private void AIControl() {
         if (moveTimeCounter > 0) {
@@ -87,7 +90,7 @@ public class EasyBoss : MonoBehaviour
         if (GetComponent<SpriteRenderer>().sprite.name == "robot_1" && !shotL) {
             shotL = true;
             GameObject temp = Instantiate(pbBullet, fireL.position, Quaternion.identity);
-            temp.GetComponent<EasyBullet>().Set(currentDir,20);
+            temp.GetComponent<EasyBullet>().Set(currentDir, 20);
         }
         if (GetComponent<SpriteRenderer>().sprite.name == "robot_2" && !shotR) {
             shotR = true;
@@ -113,14 +116,17 @@ public class EasyBoss : MonoBehaviour
 
     private void Move() {
         animator.SetBool("isMove", true);
-        
+
         rigidbody2D.AddForce(currentDir * moveForceValue, ForceMode2D.Force);
-        rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -maxMoveSpeed, maxMoveSpeed),0);
+        rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -maxMoveSpeed, maxMoveSpeed), 0);
     }
 
     private void Fire() {
         animator.SetBool("isMove", false);
         animator.SetBool("isFire", true);
+
+        audioSource.clip = auiofire;
+        audioSource.Play();
     }
 
     #endregion
@@ -150,7 +156,7 @@ public class EasyBoss : MonoBehaviour
         hp += change;
         hp = Mathf.Clamp(hp, 0, maxHp);
         if (hp <= 0) {
-            if(barricade!=null)
+            if (barricade != null)
                 Destroy(barricade);
             Destroy(gameObject);
         }
@@ -162,22 +168,30 @@ public class EasyBoss : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.contacts[0].normal.x == 1 && collision.transform.GetComponent<MapSolid>() != null) {
+        if (collision.contacts[0].normal.x == 1 && (collision.transform.GetComponent<MapSolid>() != null
+            || collision.transform.GetComponent<MapDoor>() != null || collision.transform.GetComponent<MapWall>() != null)) {
             currentDir.x = 1;
         }
-        if (collision.contacts[0].normal.x == -1 && collision.transform.GetComponent<MapSolid>() != null) {
+        if (collision.contacts[0].normal.x == -1 && (collision.transform.GetComponent<MapSolid>() != null
+            || collision.transform.GetComponent<MapDoor>() != null || collision.transform.GetComponent<MapWall>() != null)) {
             currentDir.x = -1;
         }
 
+    }
+    private void OnCollisionStay2D(Collision2D collision) {
         if (collision.transform.GetComponent<UsrState>() != null) {
-            collision.transform.GetComponent<UsrState>().ChangeMental(-10);
-            if (transform.position.x > collision.transform.position.x) 
-                collision.transform.GetComponent<UsrState>().Hurted(new Vector2(1,0));
-            else if (transform.position.x > collision.transform.position.x) 
-                collision.transform.GetComponent<UsrState>().Hurted(new Vector2(-1, 0));
+            if (transform.position.x > collision.transform.position.x)
+                collision.transform.GetComponent<UsrState>().Hurted(new Vector2(1, 0), 10);
+            else if (transform.position.x > collision.transform.position.x)
+                collision.transform.GetComponent<UsrState>().Hurted(new Vector2(-1, 0), 10);
             else
-                collision.transform.GetComponent<UsrState>().Hurted(currentDir);
+                collision.transform.GetComponent<UsrState>().Hurted(currentDir, 10);
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.transform.GetComponent<DoorSwitch>() != null) {
+            collision.transform.GetComponent<DoorSwitch>().Change();
+        }
+    }
 }

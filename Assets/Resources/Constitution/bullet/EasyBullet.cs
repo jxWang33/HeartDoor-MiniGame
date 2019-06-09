@@ -55,8 +55,7 @@ public class EasyBullet : MonoBehaviour
         boxCollider2D.isTrigger = true;
 
         if (collision.transform.GetComponent<UsrState>() != null) {
-            collision.transform.GetComponent<UsrState>().ChangeMental(-20);
-            collision.transform.GetComponent<UsrState>().Hurted(direction);
+            collision.transform.GetComponent<UsrState>().Hurted(direction, 20);
         }
     }
 }

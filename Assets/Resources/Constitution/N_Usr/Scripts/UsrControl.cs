@@ -168,14 +168,18 @@ public class UsrControl : MonoBehaviour
     }
 
     public bool Create() {
-        if (state.goldenKeyTime <= 0 && state.greenKey <= 0)
+        if (state.goldenKeyTime <= 0 && state.greenKey <= 0) {
+            GetComponent<UsrAniCallBack>().ErrorSound();
             return false;
+        }
         Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y) + state.boxCollider2D.offset;
         Vector2 endColliderPos = colliderPos + state.currentDir * state.createDistance - new Vector2(0, -0.1f);
         Collider2D hit = Physics2D.OverlapBox(endColliderPos, state.boxCollider2D.size, 0,
             1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
-        if (hit != null) { return false; }
-
+        if (hit != null) {
+            GetComponent<UsrAniCallBack>().ErrorSound();
+            return false;
+        }
         if (myCreate != null) {
             state.CheckDoor(myCreate);
             myCreate.DisAppear();
@@ -236,9 +240,7 @@ public class UsrControl : MonoBehaviour
 
     #endregion
 
-    private bool IsInUnActAni() {//检查是否在不可交互动画中
-        return
-            state.currentAni.IsName("dashing") ||
+    private bool IsInUnActAni() => state.currentAni.IsName("dashing") ||
             state.currentAni.IsName("dash_on") ||
             state.currentAni.IsName("dash_off") ||
             state.currentAni.IsName("sliding") ||
@@ -250,7 +252,6 @@ public class UsrControl : MonoBehaviour
             //            state.currentAni.IsName("land") ||
             state.currentAni.IsName("jump") ||
             state.animator.GetBool("isDash");
-    }
 
     private void SetF() {
         if (state.rigidbody2D.velocity.x > 0) {
