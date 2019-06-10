@@ -270,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentDir: {x: 0, y: 0}
   fire: {fileID: 7400000, guid: b654caa49eb55d444a0c1800a4c81d86, type: 2}
-  maxHp: 100
+  maxHp: 50
   hp: 0
   colorRed: 0
   colorRedSpeed: 2

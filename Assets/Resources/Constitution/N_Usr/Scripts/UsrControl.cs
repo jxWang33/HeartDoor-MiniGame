@@ -168,6 +168,11 @@ public class UsrControl : MonoBehaviour
     }
 
     public bool Create() {
+        if (myCreate != null) {
+            state.CheckDoor(myCreate);
+            myCreate.DisAppear();
+        }
+
         if (state.goldenKeyTime <= 0 && state.greenKey <= 0) {
             GetComponent<UsrAniCallBack>().ErrorSound();
             return false;
@@ -179,10 +184,6 @@ public class UsrControl : MonoBehaviour
         if (hit != null) {
             GetComponent<UsrAniCallBack>().ErrorSound();
             return false;
-        }
-        if (myCreate != null) {
-            state.CheckDoor(myCreate);
-            myCreate.DisAppear();
         }
         GameObject temp = Instantiate(pbDoor, (Vector2)transform.position + state.currentDir * state.createDistance, Quaternion.identity);
         temp.transform.parent = GameObject.Find("MapManager").transform;

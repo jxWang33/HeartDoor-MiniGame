@@ -6,10 +6,12 @@ Assets/Scenes/Start.unity
 Assets/Scenes/Level1-MysteriousCall.unity
 Assets/Scenes/Level2-GateCrasher.unity
 Assets/Scenes/Level3-BestFriend.unity
+Assets/Scenes/Level4-GoAhead.unity
+Assets/Scenes/Level5-HeartLock.unity
 Assets/Scenes/BadEnd1-Alone.unity
 Assets/Scenes/BadEnd2-RunAway.unity
-Assets/Scenes/HappyEnd-ForFuture.unity
 Assets/Scenes/NormalEnd-Conservatism.unity
+Assets/Scenes/HappyEnd-ForFuture.unity
 SceneListEnd?
 75722827f06862f182ba983b4be41260 Assembly-CSharp.dll:.MapDoor
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:DynamicLight2D.InstanceEvents
@@ -29,6 +31,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+218bff6347afc2446d4814a32c985fdf Assembly-CSharp.dll:.DoorPower
 fb00d3b433d6a8a625be10768be418c8 Assembly-CSharp.dll:.BgStarTwinkle
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MapWall
 e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
@@ -176,7 +179,7 @@ d2abb768c39b48c775776d6d3bdbb0e0 Assembly-CSharp.dll:.TriggerGood
 fcc524e590f5b53ae7cc133882265388 Assembly-CSharp.dll:.TimerClass
 6eaa23b36cd9e920fde58d09bc9c0b84 Assembly-CSharp.dll:.TitleFlash
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-b98cc03a9d6a624a2c3df86a85e3c6b2 Assembly-CSharp.dll:.LoadLevel
+f5628e882c29ed4b7f14ccb0a1e259bd Assembly-CSharp.dll:.LoadLevel
 f16fa64d945e682a0170aa8550eba942 Assembly-CSharp.dll:.UsrState
 b7376420394e7b6f9c519cfc00b2fdc7 Assembly-CSharp.dll:.GoldenKey
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestDoor
@@ -220,7 +223,9 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 733f6fdc55569168cbc0f8459e327a36 Assembly-CSharp.dll:.GLDebug
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.rotate
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestState
+f88effeea6a15d8353592e44172973d5 Assembly-CSharp.dll:.EscPanel
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestInteract
+0b2cb398722835af2c9d16d0029a5f35 Assembly-CSharp.dll:.SolidMoveUpDown
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 0efa64051a80bc94500bff2b46436b13 Assembly-CSharp.dll:.UsrStatePanel
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.addingCastersUnefficient
@@ -244,6 +249,7 @@ c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.rotate_2
 822f5cc794a4fb487a57ce252bcda495 Assembly-CSharp.dll:.UsrDustEffect
+1c416532f7dcfef07a623942f24b5a08 Assembly-CSharp.dll:.BackToTitle
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SpawnCasters
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.CreditsScript
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
@@ -253,6 +259,5 @@ f6c120b2894d31b63ce11e00cdfa4923 Assembly-CSharp.dll:.ControlPrompt
 7d49f616f4fa0bea10a0eb41a691c2df Assembly-CSharp.dll:DynamicLight2D.Rotation
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GMManager
 d88203d406a8a4eb9c0e69dfb04d68b9 Assembly-CSharp.dll:.TimeCounter
-15692c5223a1cc87df76463f33ed9396 Assembly-CSharp.dll:.DoorPower
-0b2cb398722835af2c9d16d0029a5f35 Assembly-CSharp.dll:.SolidMoveUpDown
-f88effeea6a15d8353592e44172973d5 Assembly-CSharp.dll:.EscPanel
+c78c568e61544d723812fdfd73f2941c Assembly-CSharp.dll:.NumbFish
+765bb39310f2fffc081270f3e6951b6e Assembly-CSharp.dll:.LevelScript3

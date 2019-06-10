@@ -7,6 +7,7 @@ public class DoorPower : MonoBehaviour
     public Sprite spriteLock;
     public Sprite spriteUnlock;
     public SpriteRenderer spriteRenderer;
+    public GameObject cube;
 
     private AudioSource audioSource;
     public AudioClip audioUnlock;
@@ -16,6 +17,8 @@ public class DoorPower : MonoBehaviour
     private TextMesh text;
     public float textColorAShowSpeed = 1f;
     public float textColorADisappearSpeed = 2f;
+    [SerializeField]
+    private float rotateSpeed = 90;
     private float textColorA;
 
     private UsrState record;
@@ -43,6 +46,11 @@ public class DoorPower : MonoBehaviour
             text.color = tempColor;
         }
 
+        if (!isLock) {
+            Vector3 tempRot = cube.transform.localEulerAngles;
+            tempRot.z += Time.deltaTime * rotateSpeed;
+            cube.transform.localEulerAngles = tempRot;
+        }
 
         if (Input.GetKeyDown(GMManager.UP_KEY) && inPlace && isLock) {
             if (record.UseGreenKey()) {
@@ -50,6 +58,7 @@ public class DoorPower : MonoBehaviour
                 spriteRenderer.sprite = spriteUnlock;
                 audioSource.clip = audioUnlock;
                 audioSource.Play();
+                cube.SetActive(true);
             }
         }
     }

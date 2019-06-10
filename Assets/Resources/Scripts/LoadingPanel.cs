@@ -23,6 +23,9 @@ public class LoadingPanel : MonoBehaviour
     public void ToTitle() {
         StartCoroutine(StartLoading("Start"));
     }
+    public void Set(string levelName) {
+        StartCoroutine(StartLoading(levelName));
+    }
 
     private void Update() {
         loadingText.text = "Loading";

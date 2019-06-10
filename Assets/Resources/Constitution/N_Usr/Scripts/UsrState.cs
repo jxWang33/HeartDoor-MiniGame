@@ -389,7 +389,7 @@ public class UsrState : MonoBehaviour
         if (myHeart <= 0) {
             //
             loadingPanel.gameObject.SetActive(true);
-            loadingPanel.SetAndSave(GMManager.BadEnd_2, 0);
+            loadingPanel.Set(GMManager.BadEnd_2);
             Destroy(gameObject);
         }
     }

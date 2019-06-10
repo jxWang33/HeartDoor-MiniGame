@@ -16,8 +16,8 @@ public class LevelScript2 : MonoBehaviour
     void Start() {
         GMManager.Init();
         ReadFromFile("game");
-        audioSource = GetComponent<AudioSource>();
 
+        audioSource = GetComponent<AudioSource>();
         audioSource.clip = callingClip;
         audioSource.Play();
 

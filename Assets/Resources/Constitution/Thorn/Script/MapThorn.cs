@@ -33,12 +33,16 @@ public class MapThorn : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision) {
         if (spriteRender.sprite.name != activeName)
             return;
-        UsrState temp = collision.GetComponent<UsrState>();
-        if (temp != null) {
-            Vector2 hurtDir = temp.currentDir;
+        UsrState tempState = collision.GetComponent<UsrState>();
+        if (tempState != null) {
+            Vector2 hurtDir = tempState.currentDir;
             hurtDir.x = -hurtDir.x;
 
-            temp.Hurted(hurtDir,damage);
+            tempState.Hurted(hurtDir,damage);
+        }
+        NumbFish tempFish = collision.GetComponent<NumbFish>();
+        if (tempFish != null) {
+            tempFish.Dead();
         }
     }
 
