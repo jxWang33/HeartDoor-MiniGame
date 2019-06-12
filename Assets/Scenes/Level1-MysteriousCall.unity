@@ -6578,7 +6578,73 @@ PrefabInstance:
       propertyPath: mapOn
       value: 
       objectReference: {fileID: 196359735}
-    m_RemovedComponents: []
+    - target: {fileID: 31025858105596254, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 31025858105596254, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: blurShapeShader
+      value: 
+      objectReference: {fileID: 4800000, guid: 1ae5b1f46a9e1144b95c2727db07ba1d, type: 3}
+    - target: {fileID: 31025858105596254, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: blurSpread
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 31025858105596254, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: iterations
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 31025858105596254, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: downSample
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844112561857912396, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: scopeTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 9654c5d170631984c9800ab33ee07e5b, type: 3}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: downSample
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: iterations
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: blurSpread
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: brightness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374577846833637404, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4374577846833637404, guid: acbebb47ee94d4341ad9f36ce5970cd8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: acbebb47ee94d4341ad9f36ce5970cd8, type: 3}
 --- !u!1001 &8406712948490192113
 PrefabInstance:
@@ -6591,11 +6657,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MapManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
-        type: 3}
-      propertyPath: mapSize.x
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8406712948312732359, guid: bdf8b48776aad0142ad2193797cddab3,
         type: 3}
@@ -6651,6 +6712,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
+        type: 3}
+      propertyPath: mapSize.x
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8406712948544926768, guid: bdf8b48776aad0142ad2193797cddab3,
         type: 3}

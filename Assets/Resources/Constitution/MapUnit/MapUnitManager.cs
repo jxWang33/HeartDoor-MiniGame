@@ -39,7 +39,7 @@ public class MapUnitManager : MonoBehaviour
             keyList.Add(tempGameObject);
             tempX = (float)GMManager.rd.NextDouble() * 8 - 4;
             tempGameObject = Instantiate(pbGoldenKey, new Vector2(tempX, mapUnitList[1].transform.position.y), Quaternion.identity);
-            keyList.Add(tempGameObject);         
+            keyList.Add(tempGameObject);
         }
     }
 }

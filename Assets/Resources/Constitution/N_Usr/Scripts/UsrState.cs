@@ -22,6 +22,7 @@ public class UsrState : MonoBehaviour
 
     public float moveForceValue = 0.01f;
     public float jumpForceValue = 0.01f;
+    public float hurtForceValue = 0.01f;
     public float climbSlideSpeed = 0.8f;
     public float minSlideSpeed = 3.0f;
     public float maxSlideSpeed = 8.0f;
@@ -417,7 +418,7 @@ public class UsrState : MonoBehaviour
             return;
 
         ChangeMental(-damage);
-        rigidbody2D.AddForce(hurtDir * jumpForceValue, ForceMode2D.Impulse);
+        rigidbody2D.AddForce(hurtDir * hurtForceValue, ForceMode2D.Impulse);
         colorRed = 1;
         GetComponent<UsrAniCallBack>().HurtSound();
     }

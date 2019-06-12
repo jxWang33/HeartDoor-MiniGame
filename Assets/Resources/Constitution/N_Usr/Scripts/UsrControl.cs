@@ -10,6 +10,7 @@ public enum ControlMode
 
 public class UsrControl : MonoBehaviour
 {
+    public LayerMask platform;
     private UsrState state;
     private ControlMode currentMode;
     [SerializeField]
@@ -18,6 +19,8 @@ public class UsrControl : MonoBehaviour
     public MapDoor dashTarget = null;
 
     private float startG;
+    // the distance between the player and platform
+    private Vector3 platformPosDelta = Vector2.zero;
 
     void Start()
     {
@@ -39,6 +42,26 @@ public class UsrControl : MonoBehaviour
                 break;
         }
         SetF();//水平阻力
+
+        Ray2D ray = new Ray2D(transform.position, Vector2.down);
+        Debug.DrawRay(ray.origin, ray.direction, Color.blue);
+        RaycastHit2D info = Physics2D.Raycast(ray.origin, ray.direction, 1, platform);
+        if (info.collider != null) {
+            UsrState state = gameObject.GetComponent<UsrState>();
+            CalculateMovingPlatformVelocity calc = info.transform.gameObject.GetComponent<CalculateMovingPlatformVelocity>();
+            if (calc != null && state != null) {
+                if (state.isOnGround == true && state.isOnMove == false) {
+                    gameObject.transform.position = platformPosDelta + info.transform.gameObject.transform.position;
+                } else if (state.isOnGround == true && state.isOnMove == true) {
+                    Vector2 v = gameObject.GetComponent<Rigidbody2D>().velocity;
+                    v.x = calc.m_velocity.x;
+                    gameObject.GetComponent<Rigidbody2D>().velocity = v;
+                }
+            }
+            // Update platforPosDelta
+            platformPosDelta = gameObject.transform.position - info.transform.gameObject.transform.position;
+            Debug.Log(platformPosDelta.ToString()); // Debug
+        }
     }
 
     private void UsrControlCommon() {//一般玩家交互

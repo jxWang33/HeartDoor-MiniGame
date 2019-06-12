@@ -876,7 +876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 112838064}
   - component: {fileID: 112838065}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: "\u7535\u8111\u684C\u5E26\u4E66\u67DC (1)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,7 +1071,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.22194332, g: 0.3490566, b: 0.09714311, a: 1}
+  m_Color: {r: 0.15294118, g: 0.4117647, b: 0.5176471, a: 1}
   m_Intensity: 3.64
   m_Range: 5.32
   m_SpotAngle: 30
@@ -2435,6 +2435,26 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1133643636}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: scopeTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 9654c5d170631984c9800ab33ee07e5b, type: 3}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: iterations
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: blurSpread
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: downSample
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acbebb47ee94d4341ad9f36ce5970cd8, type: 3}
 --- !u!4 &433762686 stripped
@@ -3316,7 +3336,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.22194332, g: 0.3490566, b: 0.09714311, a: 1}
+  m_Color: {r: 0.15294118, g: 0.4117647, b: 0.5176471, a: 1}
   m_Intensity: 3.64
   m_Range: 5.32
   m_SpotAngle: 30
@@ -4408,7 +4428,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.22194332, g: 0.3490566, b: 0.09714311, a: 1}
+  m_Color: {r: 0.15294118, g: 0.4117647, b: 0.5176471, a: 1}
   m_Intensity: 3.64
   m_Range: 5.32
   m_SpotAngle: 30
@@ -4477,7 +4497,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.22194332, g: 0.3490566, b: 0.09714311, a: 1}
+  m_Color: {r: 0.15294118, g: 0.4117647, b: 0.5176471, a: 1}
   m_Intensity: 3.64
   m_Range: 5.32
   m_SpotAngle: 30
@@ -5372,7 +5392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204216810}
   - component: {fileID: 1204216811}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: "\u9A6C\u6876"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5568,6 +5588,11 @@ PrefabInstance:
       propertyPath: loadingPanel
       value: 
       objectReference: {fileID: 1603878358}
+    - target: {fileID: 3139597915138860218, guid: cffaa073b1a0ab540b6e0c42a5cac151,
+        type: 3}
+      propertyPath: hurtForceValue
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
 --- !u!1 &1232187745
@@ -5887,16 +5912,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
-        type: 3}
-      propertyPath: mapSize.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
-        type: 3}
-      propertyPath: mapSize.y
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 8406712948312732359, guid: bdf8b48776aad0142ad2193797cddab3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5951,6 +5966,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
+        type: 3}
+      propertyPath: mapSize.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
+        type: 3}
+      propertyPath: mapSize.y
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf8b48776aad0142ad2193797cddab3, type: 3}
@@ -6381,7 +6406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371648198}
   - component: {fileID: 1371648199}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: "\u6D17\u624B\u6C60"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9663,6 +9688,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4241547480348865038, guid: 6c804b3ea4b0b8f448f5d745456d0487,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.15419188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241547480348865038, guid: 6c804b3ea4b0b8f448f5d745456d0487,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.41060472
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241547480348865038, guid: 6c804b3ea4b0b8f448f5d745456d0487,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5188679
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c804b3ea4b0b8f448f5d745456d0487, type: 3}
 --- !u!1001 &4912890822906151590
@@ -9800,6 +9840,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204060116704235630, guid: 061e5acf65d1975468f8986939a8292a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.6226415
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204060116704235630, guid: 061e5acf65d1975468f8986939a8292a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6226415
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204060116704235630, guid: 061e5acf65d1975468f8986939a8292a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6226415
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 061e5acf65d1975468f8986939a8292a, type: 3}

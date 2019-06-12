@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8338309794581050541}
   - component: {fileID: 8338309794581050540}
   - component: {fileID: 8338309794581050528}
+  - component: {fileID: 7216192804236613678}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -107,3 +108,20 @@ MonoBehaviour:
   freezeZ: 0
   smoothTime: 0.3
   mapOn: {fileID: 0}
+--- !u!114 &7216192804236613678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338309794581050543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10cb362339345ee418819effda5d2427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blurShapeShader: {fileID: 4800000, guid: 1ae5b1f46a9e1144b95c2727db07ba1d, type: 3}
+  iterations: 3
+  blurSpread: 0.6
+  downSample: 2
+  scopeTexture: {fileID: 0}
