@@ -68,6 +68,9 @@ public class CameraFollow : MonoBehaviour {
         if (transform.position.x - Camera.main.orthographicSize / 9 * 16 < -mapOn.mapSize.x / 2)
             transform.position = new Vector3(-mapOn.mapSize.x / 2 + Camera.main.orthographicSize / 9 * 16, transform.position.y, -10);
 
+        if (mapOn.mapSize.y == -1)
+            return;
+
         if (transform.position.y + Camera.main.orthographicSize > mapOn.mapSize.y / 2)
             transform.position = new Vector3(transform.position.x, mapOn.mapSize.y / 2 - Camera.main.orthographicSize, -10);
         if (transform.position.y - Camera.main.orthographicSize < -mapOn.mapSize.y / 2)

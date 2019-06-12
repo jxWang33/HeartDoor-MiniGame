@@ -168,6 +168,10 @@ public class MapDoor : MonoBehaviour
             collision.transform.GetComponent<EasyBoss>().ChangeHp(-20);
             collision.transform.GetComponent<EasyBoss>().Hurted(dashDir);
         }
+        if (collision.transform.GetComponent<HeartBoss>() != null) {
+            collision.transform.GetComponent<HeartBoss>().ChangeHp(-10);
+            collision.transform.GetComponent<HeartBoss>().Hurted();
+        }
         if (collision.transform.GetComponent<DoorSwitch>() != null) {
             collision.transform.GetComponent<DoorSwitch>().Change();
         }

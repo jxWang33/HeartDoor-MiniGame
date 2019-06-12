@@ -130,6 +130,12 @@ public class UsrState : MonoBehaviour
 
         ResumeManual();
         GoldenKeyTimeLose();
+
+        if (rigidbody2D.velocity.y < -maxMoveSpeed*10) {
+            Vector2 tempV = rigidbody2D.velocity;
+            tempV.y = -maxMoveSpeed * 10;
+            rigidbody2D.velocity = tempV;
+        }
     }
 
     #region UPDATE
@@ -360,6 +366,12 @@ public class UsrState : MonoBehaviour
         greenKey++;
     }
 
+    public void CollectGoldenKey(float dt) {
+        maxGoldenKeyTime = dt;
+        goldenKeyTime = maxGoldenKeyTime;
+        GetComponent<UsrAniCallBack>().GotKeySound();
+    }
+
     public void SetMental(int num) {
         if (num < 0)
             return;
@@ -457,8 +469,7 @@ public class UsrState : MonoBehaviour
             if (collision.transform.GetComponent<GreenKey>() != null)
                 CollectGreenKey();
             else {
-                maxGoldenKeyTime = collision.transform.GetComponent<GoldenKey>().duringTime;
-                goldenKeyTime = maxGoldenKeyTime;
+                CollectGoldenKey(collision.transform.GetComponent<GoldenKey>().duringTime);
             }
             Destroy(collision.gameObject);
         }

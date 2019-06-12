@@ -12,12 +12,12 @@ public class GoldenKey : MonoBehaviour
     void Awake() {
         gameObject.name = "goldenKey";
         gameObject.layer = LayerMask.NameToLayer("interact");
-        startPos = transform.position;
+        startPos = transform.localPosition;
     }
 
     void Update() {
         radian += radianSpeed * Time.deltaTime;
         float dy = Mathf.Cos(radian) * radius;
-        transform.position = startPos + new Vector3(0, dy, 0);
+        transform.localPosition = startPos + new Vector3(0, dy, 0);
     }
 }

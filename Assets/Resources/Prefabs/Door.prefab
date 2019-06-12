@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reCollectable: 1
   dashTime: 0.2
-  dashDistance: 2
+  dashDistance: 3
   useTime: 1
   openTime: 0.5
   aColorSpeed: 2
@@ -4926,7 +4926,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e31a4459f67ec284190e7eac2ca41e30, type: 2}
+  - {fileID: 2100000, guid: 7de8977ddbd6af34d87aa64397d64937, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

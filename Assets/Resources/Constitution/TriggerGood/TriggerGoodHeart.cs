@@ -199,21 +199,9 @@ public class TriggerGoodHeart : TriggerGood
     private void _4_1() {
         usrState.GetComponent<UsrControl>().Stand();
         List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("好漂亮的画。", "小N", null),
-                    new DialogueUnit("仔细查看--", "小N", null),
-                    new DialogueUnit("偶尔出去走走说不定也不错。", "小N", null)
-                };
-        uiManager.SetDialogues(temp, () => {
-            usrState.ChangeHeart(2);
-            usrState.isControlEnable = true;
-        });
-    }
-
-    private void _4_2() {
-        usrState.GetComponent<UsrControl>().Stand();
-        List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("好漂亮的盆栽。", "小N", null),
-                    new DialogueUnit("等我闲下来把它从地下室拿出去吧。", "小N", null)
+                    new DialogueUnit("这个帽子真酷。", "小N", null),
+                    new DialogueUnit("不知道还能不能戴上。", "小N", null),
+                    new DialogueUnit("心 +1", "心", null)
                 };
         uiManager.SetDialogues(temp, () => {
             usrState.ChangeHeart(1);
@@ -221,16 +209,28 @@ public class TriggerGoodHeart : TriggerGood
         });
     }
 
-    private void _4_3() {
+    private void _4_2() {
         usrState.GetComponent<UsrControl>().Stand();
         List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("唔- 好痛", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("这个玻璃杯是梦游时碰碎的吗。", "小N", null),
-                    new DialogueUnit("真可惜......", "小N", null)
+                    new DialogueUnit("唔......", "小N", null),
+                    new DialogueUnit("好像是有这么一回事。", "小N", null),
+                    new DialogueUnit("心 -2", "心", null)
                 };
         uiManager.SetDialogues(temp, () => {
             usrState.ChangeHeart(-2);
+            usrState.isControlEnable = true;
+        });
+    }
+
+    private void _4_3() {
+        usrState.GetComponent<UsrControl>().Stand();
+        List<DialogueUnit> temp = new List<DialogueUnit> {
+                    new DialogueUnit("工作什么的，", "小N", null),
+                    new DialogueUnit("真无聊。", "小N", null),
+                    new DialogueUnit("心 -3", "心", null)
+                };
+        uiManager.SetDialogues(temp, () => {
+            usrState.ChangeHeart(-3);
             usrState.isControlEnable = true;
         });
     }

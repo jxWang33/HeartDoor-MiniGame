@@ -129,6 +129,7 @@
     <Compile Include="Assets\2DDL\Examples\OLD Examples\8 - ConeOfSight - FieldOfView\rotate_2.cs" />
     <Compile Include="Assets\Resources\Constitution\_Levels\0\BackToTitle.cs" />
     <Compile Include="Assets\Resources\Constitution\_Levels\0\LoadLevel.cs" />
+    <Compile Include="Assets\Resources\Constitution\_Levels\0\StartSceneButton.cs" />
     <Compile Include="Assets\Resources\Constitution\_Levels\1\Script\BgStarTwinkle.cs" />
     <Compile Include="Assets\Resources\Constitution\_Levels\1\Script\ControlPrompt.cs" />
     <Compile Include="Assets\Resources\Constitution\_Levels\1\Script\LevelScript1.cs" />
@@ -136,6 +137,8 @@
     <Compile Include="Assets\Resources\Constitution\_Levels\1\Script\TextTwin.cs" />
     <Compile Include="Assets\Resources\Constitution\_Levels\2\Script\LevelScript2.cs" />
     <Compile Include="Assets\Resources\Constitution\_Levels\3\LevelScript3.cs" />
+    <Compile Include="Assets\Resources\Constitution\_Levels\4\LevelScript4.cs" />
+    <Compile Include="Assets\Resources\Constitution\_Levels\5\LevelScript5.cs" />
     <Compile Include="Assets\Resources\Constitution\_Solids\MapSolid.cs" />
     <Compile Include="Assets\Resources\Constitution\_Solids\SolidMoveUpDown.cs" />
     <Compile Include="Assets\Resources\Constitution\_Walls\MapWall.cs" />
@@ -148,7 +151,14 @@
     <Compile Include="Assets\Resources\Constitution\GoldenKey\GoldenKey.cs" />
     <Compile Include="Assets\Resources\Constitution\GreenKey\GreenKey.cs" />
     <Compile Include="Assets\Resources\Constitution\GreenKeyEffect\GreenKeyEffect.cs" />
+    <Compile Include="Assets\Resources\Constitution\HeartBoss\Script\BossHandL.cs" />
+    <Compile Include="Assets\Resources\Constitution\HeartBoss\Script\BossHandR.cs" />
+    <Compile Include="Assets\Resources\Constitution\HeartBoss\Script\HeartBoss.cs" />
     <Compile Include="Assets\Resources\Constitution\HeartPropmt\HeartPropmt.cs" />
+    <Compile Include="Assets\Resources\Constitution\Laser\AliveInLaser.cs" />
+    <Compile Include="Assets\Resources\Constitution\Laser\MapLaser.cs" />
+    <Compile Include="Assets\Resources\Constitution\MapUnit\MapUnit.cs" />
+    <Compile Include="Assets\Resources\Constitution\MapUnit\MapUnitManager.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UIGreenKey.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrAniCallBack.cs" />
     <Compile Include="Assets\Resources\Constitution\N_Usr\Scripts\UsrControl.cs" />

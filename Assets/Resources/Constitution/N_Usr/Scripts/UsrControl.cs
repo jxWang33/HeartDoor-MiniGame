@@ -189,7 +189,6 @@ public class UsrControl : MonoBehaviour
         temp.transform.parent = GameObject.Find("MapManager").transform;
         myCreate = temp.GetComponent<MapDoor>();
         myCreate.SetColorA(0);
-        myCreate.dashDistance = 3.0f;
         if (state.goldenKeyTime > 0) {
             myCreate.reCollectable = false;
         }

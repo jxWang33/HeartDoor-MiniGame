@@ -21,6 +21,7 @@ public class LoadLevel : MonoBehaviour
             loadingPanel.gameObject.SetActive(true);
             loadingPanel.SetAndSave(GMManager.LEVEL_1, 2);
         });
+
         quitButton.onClick.AddListener(() => {
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

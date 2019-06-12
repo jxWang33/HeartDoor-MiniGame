@@ -175,7 +175,7 @@ public class TriggerGoodFinal : TriggerGood
     }
 
     void _3() {
-        if (timeCounter.minute < 10) {
+        if (timeCounter.minute <5) {
             usrState.GetComponent<UsrControl>().Stand();
             List<DialogueUnit> temp = new List<DialogueUnit> {
                     new DialogueUnit("这里是尽头了吗。", "小N", null),
@@ -205,7 +205,7 @@ public class TriggerGoodFinal : TriggerGood
                 }
             });
         }
-        if (timeCounter.minute < 30) {
+        if (timeCounter.minute < 10) {
             usrState.GetComponent<UsrControl>().Stand();
             List<DialogueUnit> temp = new List<DialogueUnit> {
                     new DialogueUnit("这里是尽头了吗。", "小N", null),
@@ -252,143 +252,82 @@ public class TriggerGoodFinal : TriggerGood
     }
 
     void _4() {
-        if (timeCounter.minute < 10) {
+        if (timeCounter.minute < 1) {
             usrState.GetComponent<UsrControl>().Stand();
             List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("你好，你的快递，请签收。", "快递员", null),
-                    new DialogueUnit("嗯。", "小N", null),
-                    new DialogueUnit("拆开-", "小N", null),
-                    new DialogueUnit("呃，一个鳗鱼玩偶。", "小N", null),
-                    new DialogueUnit("......", "小A", null),
-                    new DialogueUnit("很精致。", "小N", null),
-                    new DialogueUnit("不过是谁送来的呢。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("并没有写发件人的姓名。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("好像又有点困了。", "小N", null),
-                    new DialogueUnit("就在这里睡吧。", "小N", null)
+                    new DialogueUnit(".......", "小N", null),
+                    new DialogueUnit("真的要开门吗。", "小N", null),
+                    new DialogueUnit("现在的生活也不错。", "小N", null),
+                    new DialogueUnit("......", "小N", null)
                 };
             uiManager.SetDialogues(temp, () => {
                 usrState.ChangeHeart(2);
                 usrState.isControlEnable = true;
                 loadingPanel.gameObject.SetActive(true);
-                loadingPanel.SetAndSave(GMManager.LEVEL_3, usrState.myHeart);
+                if (usrState.myHeart < 10)
+                    loadingPanel.Set(GMManager.NormalEnd);
+                else
+                    loadingPanel.SetAndSave(GMManager.LEVEL_5, usrState.myHeart);
             });
         }
-        if (timeCounter.minute < 30) {
+        if (timeCounter.minute < 2) {
             usrState.GetComponent<UsrControl>().Stand();
             List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("你好，你的快递，请签收。", "快递员", null),
-                    new DialogueUnit("嗯。", "小N", null),
-                    new DialogueUnit("拆开-", "小N", null),
-                    new DialogueUnit("呃，一个鳗鱼玩偶。", "小N", null),
-                    new DialogueUnit("......", "小A", null),
-                    new DialogueUnit("有点皱皱巴巴的了。", "小N", null),
-                    new DialogueUnit("不过是谁送来的呢。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("并没有写发件人的姓名。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("好像又有点困了。", "小N", null),
-                    new DialogueUnit("就在这里睡吧。", "小N", null)
+                    new DialogueUnit(".......", "小N", null),
+                    new DialogueUnit("真的要开门吗。", "小N", null),
+                    new DialogueUnit("现在的生活也不错。", "小N", null),
+                    new DialogueUnit("......", "小N", null)
                 };
             uiManager.SetDialogues(temp, () => {
                 usrState.ChangeHeart(1);
                 usrState.isControlEnable = true;
                 loadingPanel.gameObject.SetActive(true);
-                loadingPanel.SetAndSave(GMManager.LEVEL_3, usrState.myHeart);
+                if (usrState.myHeart < 10)
+                    loadingPanel.Set(GMManager.NormalEnd);
+                else
+                    loadingPanel.SetAndSave(GMManager.LEVEL_5, usrState.myHeart);
             });
         }
 
         else {
             usrState.GetComponent<UsrControl>().Stand();
             List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("额......", "小N", null),
-                    new DialogueUnit("等太久走掉了吗。", "小N", null),
-                    new DialogueUnit("开门-", "小N", null),
-                    new DialogueUnit("门口这个就是快递吗。", "小N", null),
-                    new DialogueUnit("是个鳗鱼玩偶。破破烂烂的。", "小A", null),
-                    new DialogueUnit("是谁的恶作剧吗。", "小N", null),
-                    new DialogueUnit("好像又有点困了。", "小N", null),
-                    new DialogueUnit("明天再说吧。", "小N", null)
+                    new DialogueUnit(".......", "小N", null),
+                    new DialogueUnit("真的要开门吗。", "小N", null),
+                    new DialogueUnit("现在的生活也不错。", "小N", null),
+                    new DialogueUnit("......", "小N", null)
                 };
             uiManager.SetDialogues(temp, () => {
                 usrState.isControlEnable = true;
                 loadingPanel.gameObject.SetActive(true);
-                if (usrState.myHeart < 4)
-                    loadingPanel.Set(GMManager.BadEnd_2);
+                if (usrState.myHeart < 10)
+                    loadingPanel.Set(GMManager.NormalEnd);
                 else
-                    loadingPanel.SetAndSave(GMManager.LEVEL_3, usrState.myHeart);
+                    loadingPanel.SetAndSave(GMManager.LEVEL_5, usrState.myHeart);
             });
         }
     }
 
     void _5() {
         if (timeCounter.minute < 10) {
-            usrState.GetComponent<UsrControl>().Stand();
-            List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("你好，你的快递，请签收。", "快递员", null),
-                    new DialogueUnit("嗯。", "小N", null),
-                    new DialogueUnit("拆开-", "小N", null),
-                    new DialogueUnit("呃，一个鳗鱼玩偶。", "小N", null),
-                    new DialogueUnit("......", "小A", null),
-                    new DialogueUnit("很精致。", "小N", null),
-                    new DialogueUnit("不过是谁送来的呢。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("并没有写发件人的姓名。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("好像又有点困了。", "小N", null),
-                    new DialogueUnit("就在这里睡吧。", "小N", null)
-                };
-            uiManager.SetDialogues(temp, () => {
-                usrState.ChangeHeart(2);
-                usrState.isControlEnable = true;
-                loadingPanel.gameObject.SetActive(true);
-                loadingPanel.SetAndSave(GMManager.LEVEL_3, usrState.myHeart);
-            });
-        }
-        if (timeCounter.minute < 30) {
-            usrState.GetComponent<UsrControl>().Stand();
-            List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("你好，你的快递，请签收。", "快递员", null),
-                    new DialogueUnit("嗯。", "小N", null),
-                    new DialogueUnit("拆开-", "小N", null),
-                    new DialogueUnit("呃，一个鳗鱼玩偶。", "小N", null),
-                    new DialogueUnit("......", "小A", null),
-                    new DialogueUnit("有点皱皱巴巴的了。", "小N", null),
-                    new DialogueUnit("不过是谁送来的呢。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("并没有写发件人的姓名。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("好像又有点困了。", "小N", null),
-                    new DialogueUnit("就在这里睡吧。", "小N", null)
-                };
-            uiManager.SetDialogues(temp, () => {
-                usrState.ChangeHeart(1);
-                usrState.isControlEnable = true;
-                loadingPanel.gameObject.SetActive(true);
-                loadingPanel.SetAndSave(GMManager.LEVEL_3, usrState.myHeart);
-            });
+            loadingPanel.gameObject.SetActive(true);
+            loadingPanel.SetAndSave(GMManager.HappyEnd, usrState.myHeart);
         }
 
         else {
             usrState.GetComponent<UsrControl>().Stand();
             List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("额......", "小N", null),
+                    new DialogueUnit("......", "小N", null),
                     new DialogueUnit("等太久走掉了吗。", "小N", null),
-                    new DialogueUnit("开门-", "小N", null),
-                    new DialogueUnit("门口这个就是快递吗。", "小N", null),
-                    new DialogueUnit("是个鳗鱼玩偶。破破烂烂的。", "小A", null),
-                    new DialogueUnit("是谁的恶作剧吗。", "小N", null),
-                    new DialogueUnit("好像又有点困了。", "小N", null),
-                    new DialogueUnit("明天再说吧。", "小N", null)
+                    new DialogueUnit("......", "小N", null),
+                    new DialogueUnit("有一张纸条。", "小N", null),
+                    new DialogueUnit("我们都很担心你，这些天的东西都是我们送的，希望没有吓到你，也希望你能快点好起来。", "小A", null),
+                    new DialogueUnit("抱歉这么晚打扰你，这次很遗憾没有见到你，希望明年可以见到。", "小N", null)
                 };
             uiManager.SetDialogues(temp, () => {
                 usrState.isControlEnable = true;
                 loadingPanel.gameObject.SetActive(true);
-                if (usrState.myHeart < 4)
-                    loadingPanel.Set(GMManager.BadEnd_2);
-                else
-                    loadingPanel.SetAndSave(GMManager.LEVEL_3, usrState.myHeart);
+                loadingPanel.Set(GMManager.NormalEnd);
             });
         }
     }

@@ -7115,6 +7115,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: greenKey (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3930797491638035137, guid: 8cbe78e14ec9c3241b50cdf76cc3d522,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3930797491638035166, guid: 8cbe78e14ec9c3241b50cdf76cc3d522,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8278,7 +8283,7 @@ PrefabInstance:
     - target: {fileID: 8990631754874717471, guid: eaf197e0b3adccc438f2a2ae9a9c7e9f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 0.197
       objectReference: {fileID: 0}
     - target: {fileID: 8990631754874717471, guid: eaf197e0b3adccc438f2a2ae9a9c7e9f,
         type: 3}
@@ -8512,7 +8517,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -9767,6 +9772,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: numbFish
       objectReference: {fileID: 0}
+    - target: {fileID: 7239463294733913318, guid: 6c8f4dd7cf241de45bb3cdc2379e1117,
+        type: 3}
+      propertyPath: dead
+      value: 
+      objectReference: {fileID: 7400000, guid: 12852c251d96e9840b3d323ec496846b, type: 2}
+    - target: {fileID: 7239463294733913318, guid: 6c8f4dd7cf241de45bb3cdc2379e1117,
+        type: 3}
+      propertyPath: loadingPanel
+      value: 
+      objectReference: {fileID: 770112449}
     - target: {fileID: 7239463294733913315, guid: 6c8f4dd7cf241de45bb3cdc2379e1117,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9827,16 +9842,6 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 7239463294733913318, guid: 6c8f4dd7cf241de45bb3cdc2379e1117,
-        type: 3}
-      propertyPath: dead
-      value: 
-      objectReference: {fileID: 7400000, guid: 12852c251d96e9840b3d323ec496846b, type: 2}
-    - target: {fileID: 7239463294733913318, guid: 6c8f4dd7cf241de45bb3cdc2379e1117,
-        type: 3}
-      propertyPath: loadingPanel
-      value: 
-      objectReference: {fileID: 770112449}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c8f4dd7cf241de45bb3cdc2379e1117, type: 3}
 --- !u!1 &8406712947293361488
@@ -9871,7 +9876,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
