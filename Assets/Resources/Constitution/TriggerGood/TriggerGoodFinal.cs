@@ -310,8 +310,17 @@ public class TriggerGoodFinal : TriggerGood
 
     void _5() {
         if (timeCounter.minute < 10) {
-            loadingPanel.gameObject.SetActive(true);
-            loadingPanel.SetAndSave(GMManager.HappyEnd, usrState.myHeart);
+            usrState.GetComponent<UsrControl>().Stand();
+            List<DialogueUnit> temp = new List<DialogueUnit> {
+                    new DialogueUnit("......", "小N", null),
+                    new DialogueUnit("果然还是想和他们在一起。", "小N", null),
+                    new DialogueUnit("吱——", "开门", null)
+                };
+            uiManager.SetDialogues(temp, () => {
+                usrState.isControlEnable = true;
+                loadingPanel.gameObject.SetActive(true);
+                loadingPanel.SetAndSave(GMManager.HappyEnd, usrState.myHeart);
+            });
         }
 
         else {

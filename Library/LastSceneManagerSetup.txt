@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Level4-GoAhead.unity
+- path: Assets/Scenes/Level5-HeartLock.unity
   isLoaded: 1
   isActive: 1

@@ -38,6 +38,10 @@ public class HeartBoss : MonoBehaviour
     public float attackInter = 2;
     private float attackCounter = 0;
 
+    public Transform finalPos;
+    public AudioClip audioTh;
+    public MapManager mapManager;
+
 
     void Awake() {
         hp = maxHp;
@@ -128,27 +132,11 @@ public class HeartBoss : MonoBehaviour
         hp += change;
         hp = Mathf.Clamp(hp, 0, maxHp);
         if (hp <= 0) {
-            if (timeCounter.minute < 10) {
-                loadingPanel.gameObject.SetActive(true);
-                loadingPanel.Set(GMManager.HappyEnd);
-            }
+            usrState.transform.position = finalPos.position;
+            mapManager.GetComponent<AudioSource>().clip = audioTh;
+            mapManager.GetComponent<AudioSource>().loop = false;
+            mapManager.GetComponent<AudioSource>().Play();
 
-            else {
-                usrState.GetComponent<UsrControl>().Stand();
-                List<DialogueUnit> temp = new List<DialogueUnit> {
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("等太久走掉了吗。", "小N", null),
-                    new DialogueUnit("......", "小N", null),
-                    new DialogueUnit("有一张纸条。", "小N", null),
-                    new DialogueUnit("我们都很担心你，这些天的东西都是我们送的，希望没有吓到你，也希望你能快点好起来。", "小A", null),
-                    new DialogueUnit("抱歉这么晚打扰你，这次很遗憾没有见到你，希望明年可以见到。", "小N", null)
-                };
-                uiManager.SetDialogues(temp, () => {
-                    usrState.isControlEnable = true;
-                    loadingPanel.gameObject.SetActive(true);
-                    loadingPanel.Set(GMManager.NormalEnd);
-                });
-            }
             Destroy(gameObject);
         }
     }
