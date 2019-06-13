@@ -2214,6 +2214,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3930797491638035165, guid: 8cbe78e14ec9c3241b50cdf76cc3d522,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1213460136}
     - target: {fileID: 3930797492732312844, guid: 8cbe78e14ec9c3241b50cdf76cc3d522,
         type: 3}
       propertyPath: m_Intensity
@@ -2448,7 +2453,7 @@ PrefabInstance:
     - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
         type: 3}
       propertyPath: blurSpread
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
         type: 3}
@@ -5595,6 +5600,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
+--- !u!1 &1213460136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3139597915138860221, guid: cffaa073b1a0ab540b6e0c42a5cac151,
+    type: 3}
+  m_PrefabInstance: {fileID: 1213460135}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1232187745
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,7 +5905,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1213460135}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1213460136}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 847f6af8d71ebbf4aaf806a8c55d48c5, type: 3}

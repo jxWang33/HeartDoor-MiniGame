@@ -4639,7 +4639,7 @@ ParticleSystem:
 --- !u!199 &3930797491482178536
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4811,6 +4811,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radianSpeed: 2
   radius: 0.2
+  player: {fileID: 3139597915138860221, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
+  moveSpeed: 0.1
+  radiusOfAdsorption: 1
 --- !u!1 &3930797492732312846
 GameObject:
   m_ObjectHideFlags: 0
