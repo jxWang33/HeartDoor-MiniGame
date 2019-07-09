@@ -987,8 +987,7 @@ MonoBehaviour:
   rigidbody2D: {fileID: 0}
   boxCollider2D: {fileID: 0}
   dustEffect: {fileID: 3139597913510236767}
-  stateUI: {fileID: 0}
-  loadingPanel: {fileID: 0}
+  uiManager: {fileID: 0}
   startColliderOffset: {x: 0, y: 0}
   startColliderSize: {x: 0, y: 0}
   startG: 0
@@ -10439,6 +10438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4040394362839676175}
   - component: {fileID: 7204687720926061861}
+  - component: {fileID: 5970034908497784123}
   m_Layer: 0
   m_Name: door_prompt
   m_TagString: Untagged
@@ -10508,3 +10508,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5970034908497784123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124997272261019275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3eff834bd2e7c49b335fe6d9a9b24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

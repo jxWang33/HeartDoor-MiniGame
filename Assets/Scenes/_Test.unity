@@ -626,6 +626,11 @@ PrefabInstance:
       propertyPath: fixCollisionInter
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3139597915138860218, guid: cffaa073b1a0ab540b6e0c42a5cac151,
+        type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1917475353}
     - target: {fileID: 3139597915138860220, guid: cffaa073b1a0ab540b6e0c42a5cac151,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -2348,6 +2353,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1005919876}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1917475353 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 962317188234591755, guid: 0bab857176c9d0149bdab7bac8a72015,
+    type: 3}
+  m_PrefabInstance: {fileID: 1043729208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a98dababe288974786eb7da940f3141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1921919216
 GameObject:
   m_ObjectHideFlags: 0
