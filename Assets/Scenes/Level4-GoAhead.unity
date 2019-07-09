@@ -217,7 +217,7 @@ PrefabInstance:
     - target: {fileID: 2344461707137369587, guid: eaf197e0b3adccc438f2a2ae9a9c7e9f,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7679684951128318197, guid: eaf197e0b3adccc438f2a2ae9a9c7e9f,
         type: 3}
@@ -467,10 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 1419678193}
-  endPos: {x: 0, y: 0}
   distance: {x: 0, y: -5.5}
   moveSpeed: 1
+  stayTimeInter: 0
 --- !u!1 &179082027 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 962317188157270737, guid: 0bab857176c9d0149bdab7bac8a72015,
@@ -998,10 +997,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 1419678193}
-  endPos: {x: 0, y: 0}
   distance: {x: 0, y: 6.5}
   moveSpeed: 1
+  stayTimeInter: 0
 --- !u!1 &320027285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,10 +1396,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 1419678193}
-  endPos: {x: 0, y: 0}
   distance: {x: 0, y: -6.5}
   moveSpeed: 1
+  stayTimeInter: 0
 --- !u!1001 &441302645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2898,6 +2895,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
+        type: 3}
+      propertyPath: mapSize.x
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8406712948312732359, guid: bdf8b48776aad0142ad2193797cddab3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2952,11 +2954,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8406712948312732358, guid: bdf8b48776aad0142ad2193797cddab3,
-        type: 3}
-      propertyPath: mapSize.x
-      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf8b48776aad0142ad2193797cddab3, type: 3}
@@ -3237,8 +3234,11 @@ MonoBehaviour:
   uiManager: {fileID: 668137187}
   needInquire: 1
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   pointer: 41
 --- !u!212 &859002208
 SpriteRenderer:
@@ -3376,8 +3376,11 @@ MonoBehaviour:
   uiManager: {fileID: 668137187}
   needInquire: 0
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   pointer: 42
 --- !u!212 &935238494
 SpriteRenderer:
@@ -4649,10 +4652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 1419678193}
-  endPos: {x: 0, y: 0}
   distance: {x: 2, y: 0}
   moveSpeed: 1
+  stayTimeInter: 0
 --- !u!114 &1205210477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4666,18 +4668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_velocity: {x: 0, y: 0}
---- !u!114 &1205210478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205210471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68487bb5ffb6f084689f0bf4e6b6a781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1231257871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5228,18 +5218,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 818026649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1419678193 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4059921603931163857, guid: 9ee92b698eb430c458e9bfed55060de8,
-    type: 3}
-  m_PrefabInstance: {fileID: 818026649}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1109086274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6dc3e007c7ab24da3ab7fb5cfb9ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1434761337
 GameObject:
   m_ObjectHideFlags: 0
@@ -5840,7 +5818,7 @@ PrefabInstance:
     - target: {fileID: 2344461707137369587, guid: eaf197e0b3adccc438f2a2ae9a9c7e9f,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7679684951128318197, guid: eaf197e0b3adccc438f2a2ae9a9c7e9f,
         type: 3}
@@ -6404,10 +6382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 1419678193}
-  endPos: {x: 0, y: 0}
   distance: {x: 69, y: 0}
   moveSpeed: 1
+  stayTimeInter: 0
 --- !u!82 &1703090484
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7756,8 +7733,11 @@ MonoBehaviour:
   uiManager: {fileID: 668137187}
   needInquire: 0
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   pointer: 43
 --- !u!212 &2063955423
 SpriteRenderer:
@@ -7944,10 +7924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 1419678193}
-  endPos: {x: 0, y: 0}
   distance: {x: -2, y: 0}
   moveSpeed: 1
+  stayTimeInter: 0
 --- !u!114 &2104024426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7961,18 +7940,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_velocity: {x: 0, y: 0}
---- !u!114 &2104024427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2104024420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68487bb5ffb6f084689f0bf4e6b6a781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2109572525
 GameObject:
   m_ObjectHideFlags: 0
@@ -8023,8 +7990,11 @@ MonoBehaviour:
   uiManager: {fileID: 668137187}
   needInquire: 1
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   loadingPanel: {fileID: 2023179078}
   timeCounter: {fileID: 179082028}
   pointer: 4

@@ -6,6 +6,9 @@ public class UIManager : MonoBehaviour
 {
     public DialoguePanel dialoguePanel;
     public EscPanel escPanel;
+    public LoadingPanel loadingPanel;
+    public UsrStatePanel usrStatePanel;
+    public TimeCounter timeCounter;
 
     public bool SetDialogues(List<DialogueUnit> units, DialogueDelegate OnDialogueEnd = null) {
         if (dialoguePanel.gameObject.activeSelf)
@@ -15,6 +18,16 @@ public class UIManager : MonoBehaviour
         dialoguePanel.OnDialogueEnd = OnDialogueEnd;
         dialoguePanel.SetDialogues(units);
         return true;
+    }
+
+    public void SetLoading(string levelName) {
+        loadingPanel.gameObject.SetActive(true);
+        loadingPanel.Set(GMManager.BadEnd_2);
+    }
+
+    public void SetLoadingWithSave(string levelName,int hn) {
+        loadingPanel.gameObject.SetActive(true);
+        loadingPanel.SetAndSave(GMManager.BadEnd_2, hn);
     }
 
     private void Update() {

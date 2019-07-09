@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - deadTrigger
-  - onlyTrigger
+  - doorable
+  - Doorable
   layers:
   - Default
   - TransparentFX
@@ -15,12 +15,12 @@ TagManager:
   - UI
   - 
   - 
+  - env
+  - door
   - solid
   - wall
-  - door
   - interact
-  - env
-  - enemy
+  - 
   - 
   - 
   - 

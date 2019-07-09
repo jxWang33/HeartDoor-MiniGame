@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Level2-GateCrasher.unity
+- path: Assets/Scenes/Level1-MysteriousCall.unity
   isLoaded: 1
   isActive: 1

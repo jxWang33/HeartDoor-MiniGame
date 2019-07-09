@@ -12,7 +12,10 @@ public class LoadingPanel : MonoBehaviour
 
     private float dotNum = 0;
     private float progress = 0;
-
+    
+    public void Set(string levelName) {
+        StartCoroutine(StartLoading(levelName));
+    }
     public void SetAndSave(string levelName, int heartNum) {
         SaveToFile("game", levelName, heartNum);
         StartCoroutine(StartLoading(levelName));
@@ -22,9 +25,6 @@ public class LoadingPanel : MonoBehaviour
     }
     public void ToTitle() {
         StartCoroutine(StartLoading("Start"));
-    }
-    public void Set(string levelName) {
-        StartCoroutine(StartLoading(levelName));
     }
 
     private void Update() {
@@ -42,23 +42,25 @@ public class LoadingPanel : MonoBehaviour
         AsyncOperation loading = SceneManager.LoadSceneAsync(str);
         loading.allowSceneActivation = false;
         while (loading.progress < 0.9f) {
-            progress = (int)loading.progress;
+            progress = loading.progress;
             while (currentProgress < progress) {
-                ++currentProgress;
-                progressText.text = currentProgress.ToString() + " %";
+                currentProgress += 0.01f;
+                progressText.text = Mathf.Round(currentProgress * 100) + " %";
                 yield return new WaitForEndOfFrame();
             }
             yield return null;
         }
-        progress = 100;
+        progress = 1;
         while (currentProgress < progress) {
-            ++currentProgress;
-            progressText.text = currentProgress.ToString() + " %";
+            currentProgress += 0.01f;
+            if (Mathf.Round(currentProgress * 100) > 100)
+                progressText.text = "100 %";
+            else
+                progressText.text = Mathf.Round(currentProgress * 100).ToString() + " %";
             yield return new WaitForEndOfFrame();
         }
         loading.allowSceneActivation = true;
     }
-
     private void SaveToFile(string fileName, string levelName,int heartNum) {
         BinaryWriter bw = new BinaryWriter(new FileStream(fileName + ".save", FileMode.Create));
         bw.Write(levelName);

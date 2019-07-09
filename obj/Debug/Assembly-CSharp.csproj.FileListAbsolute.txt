@@ -4,7 +4,6 @@ D:\project\unity\HeartDoor\Temp\bin\Debug\Microsoft.Win32.Primitives.dll
 D:\project\unity\HeartDoor\Temp\bin\Debug\mscorlib.dll
 D:\project\unity\HeartDoor\Temp\bin\Debug\netstandard.dll
 D:\project\unity\HeartDoor\Temp\bin\Debug\nunit.framework.dll
-D:\project\unity\HeartDoor\Temp\bin\Debug\Resources2DDL.dll
 D:\project\unity\HeartDoor\Temp\bin\Debug\System.AppContext.dll
 D:\project\unity\HeartDoor\Temp\bin\Debug\System.Collections.Concurrent.dll
 D:\project\unity\HeartDoor\Temp\bin\Debug\System.Collections.dll
