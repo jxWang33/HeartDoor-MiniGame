@@ -511,31 +511,18 @@ public class UsrState : MonoBehaviour
 
     #region PHYSICS_CALLBACK
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (Mathf.Abs(collision.GetContact(0).normal.x - 1) <= nearAngleLoss) {//左方碰撞
-            if (collision.collider.GetComponent<MapWall>())
-                nearWallsL.Add(collision.collider.GetComponent<MapWall>());
-            if (collision.collider.GetComponent<MapDoor>())
-                nearDoorL.Add(collision.collider.GetComponent<MapDoor>());
-            if (collision.collider.GetComponent<MapSolid>())
-                nearSolidL.Add(collision.collider.GetComponent<MapSolid>());
-        }
-        else if (Mathf.Abs(collision.GetContact(0).normal.x + 1) <= nearAngleLoss) {//右方碰撞
-            if (collision.collider.GetComponent<MapWall>())
-                nearWallsR.Add(collision.collider.GetComponent<MapWall>());
-            if (collision.collider.GetComponent<MapDoor>())
-                nearDoorR.Add(collision.collider.GetComponent<MapDoor>());
-            if (collision.collider.GetComponent<MapSolid>())
-                nearSolidR.Add(collision.collider.GetComponent<MapSolid>());
-        }
-        
+    private void OnCollisionEnter2D(Collision2D collision) {        
         ContactPoint2D[] contacts = new ContactPoint2D[10];
         int contactNum = boxCollider2D.GetContacts(contacts);
         for (int i = 0; i < collision.contactCount; i++) {
             if (collision.GetContact(i).collider.GetComponent<PlatformEffector2D>() && Mathf.Abs(collision.GetContact(0).normal.y - 1) > nearAngleLoss)
                 continue;
+            if (!collision.GetContact(i).collider.GetComponent<MapWall>() && !collision.GetContact(i).collider.GetComponent<MapSolid>())
+                continue;
             for (int j = 0; j < contactNum; j++) {
                 if (contacts[j].collider.GetComponent<PlatformEffector2D>() && Mathf.Abs(contacts[j].normal.y - 1) > nearAngleLoss)
+                    continue;
+                if (!contacts[j].collider.GetComponent<MapWall>() && !contacts[j].collider.GetComponent<MapSolid>())
                     continue;
                 float tempAngle = Vector2.Angle(collision.GetContact(i).normal, contacts[j].normal);
                 if (tempAngle >= GMManager.JAM_ANGLE) {
@@ -546,7 +533,10 @@ public class UsrState : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision) {
+    private void OnCollisionStay2D(Collision2D collision) {//微小碰撞修复
+        if (collision.collider.GetComponent<PlatformEffector2D>())
+            return;
+
         if (Mathf.Abs(collision.GetContact(0).normal.x - 1) <= nearAngleLoss) {//左方碰撞
             if (isOnMove && isfixEnable) {
                 float tempLoss;
@@ -629,6 +619,28 @@ public class UsrState : MonoBehaviour
                 }
             }
         }
+
+        if (Mathf.Abs(collision.GetContact(0).normal.x - 1) <= nearAngleLoss) {//左方碰撞
+            if (collision.collider.GetComponent<MapWall>() && !nearWallsL.Contains(collision.collider.GetComponent<MapWall>())
+                && collision.contactCount > 1
+                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) > boxCollider2D.size.y / 2)
+                nearWallsL.Add(collision.collider.GetComponent<MapWall>());
+            if (collision.collider.GetComponent<MapDoor>() && !nearDoorL.Contains(collision.collider.GetComponent<MapDoor>()))
+                nearDoorL.Add(collision.collider.GetComponent<MapDoor>());
+            if (collision.collider.GetComponent<MapSolid>() && !nearSolidL.Contains(collision.collider.GetComponent<MapSolid>()))
+                nearSolidL.Add(collision.collider.GetComponent<MapSolid>());
+        }
+        else if (Mathf.Abs(collision.GetContact(0).normal.x + 1) <= nearAngleLoss) {//右方碰撞
+            if (collision.collider.GetComponent<MapWall>() && !nearWallsR.Contains(collision.collider.GetComponent<MapWall>())
+                && collision.contactCount > 1
+                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) > boxCollider2D.size.y / 2)
+                nearWallsR.Add(collision.collider.GetComponent<MapWall>());
+            if (collision.collider.GetComponent<MapDoor>() && !nearDoorR.Contains(collision.collider.GetComponent<MapDoor>()))
+                nearDoorR.Add(collision.collider.GetComponent<MapDoor>());
+            if (collision.collider.GetComponent<MapSolid>() && !nearSolidR.Contains(collision.collider.GetComponent<MapSolid>()))
+                nearSolidR.Add(collision.collider.GetComponent<MapSolid>());
+        }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision) {

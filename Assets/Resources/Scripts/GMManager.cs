@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GMManager
 {
+    public const float JAM_ANGLE = 140;
     public static readonly System.Random rd = new System.Random(GetRandomSeed());//随机种子
 
     public const KeyCode UP_KEY = KeyCode.W;
@@ -15,8 +16,6 @@ public class GMManager
     public const KeyCode DASH_KEY = KeyCode.K;
     public const KeyCode DOOR_KEY = KeyCode.L;
     public const KeyCode FUNC_KEY = KeyCode.Space;
-
-    public const float JAM_ANGLE = 140;
 
     public const string LEVEL_1 = "Level1-MysteriousCall";
     public const string LEVEL_2 = "Level2-GateCrasher";

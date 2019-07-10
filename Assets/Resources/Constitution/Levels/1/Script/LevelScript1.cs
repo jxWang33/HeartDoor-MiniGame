@@ -13,10 +13,14 @@ public class LevelScript1 : MonoBehaviour
     public GameObject timer;
     public GameObject titleFlash;
     public MapManager mapManager;
-    
+
+    public bool skip = true;
+
     void Start()
     {
         GMManager.Init();
+        if (skip)
+            return;
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = keyboardClip;
         audioSource.Play();

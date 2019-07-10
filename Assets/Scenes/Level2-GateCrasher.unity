@@ -800,6 +800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &78996704
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1368,6 +1370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &275525493
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2297,6 +2301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &422384871
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2351,18 +2357,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1173015142}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &430719734 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4059921603931163857, guid: 9ee92b698eb430c458e9bfed55060de8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1173015142}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6dc3e007c7ab24da3ab7fb5cfb9ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &433762685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2712,6 +2706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &438526441
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3876,10 +3872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 430719734}
-  endPos: {x: 0, y: 0}
   distance: {x: 0, y: 3}
   moveSpeed: 1
+  stayTimeInter: 0
+  nearAngleLoss: 0.1
 --- !u!61 &739838072
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3918,6 +3914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &739838074
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4302,10 +4300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0589bcb03a3847a16153b198b492f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPower: {fileID: 1528781913}
-  endPos: {x: 0, y: 0}
   distance: {x: 0, y: 3}
   moveSpeed: 1
+  stayTimeInter: 0
+  nearAngleLoss: 0.1
 --- !u!61 &873673985
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4344,6 +4342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &873673987
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4691,8 +4691,11 @@ MonoBehaviour:
   uiManager: {fileID: 1603878360}
   needInquire: 1
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   pointer: 21
 --- !u!212 &1035976391
 SpriteRenderer:
@@ -5182,8 +5185,11 @@ MonoBehaviour:
   uiManager: {fileID: 1603878360}
   needInquire: 1
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   pointer: 22
 --- !u!212 &1146668464
 SpriteRenderer:
@@ -5598,6 +5604,11 @@ PrefabInstance:
       propertyPath: hurtForceValue
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3139597915138860218, guid: cffaa073b1a0ab540b6e0c42a5cac151,
+        type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1603878360}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
 --- !u!1 &1213460136 stripped
@@ -6646,6 +6657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &1456121304
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7011,18 +7024,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 146ae052a587f5e46aae7561de156bae, type: 3}
---- !u!114 &1528781913 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4059921603931163857, guid: 9ee92b698eb430c458e9bfed55060de8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4059921604587491464}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6dc3e007c7ab24da3ab7fb5cfb9ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1528781914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4059921603931163858, guid: 9ee92b698eb430c458e9bfed55060de8,
@@ -7184,8 +7185,11 @@ MonoBehaviour:
   uiManager: {fileID: 1603878360}
   needInquire: 0
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   pointer: 23
 --- !u!212 &1542064312
 SpriteRenderer:
@@ -7590,18 +7594,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a98dababe288974786eb7da940f3141, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1603878361 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 962317188157270749, guid: 0bab857176c9d0149bdab7bac8a72015,
-    type: 3}
-  m_PrefabInstance: {fileID: 1603878357}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130999996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cccaf3efa54c36c4bb1ebfe55b0ef085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1613437846
@@ -8459,6 +8451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &1953171968
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8697,6 +8691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &1956039725
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9033,6 +9029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &2098119211
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9231,6 +9229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0668de158bda5cb4fa84ad2c8947da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOneSide: 0
+  colliderSize: {x: -1, y: -1}
 --- !u!212 &2109196953
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9335,10 +9335,11 @@ MonoBehaviour:
   uiManager: {fileID: 1603878360}
   needInquire: 1
   isInquired: 0
+  textContent: 
   textColorAShowSpeed: 1
   textColorADisappearSpeed: 2
-  loadingPanel: {fileID: 1603878358}
-  timeCounter: {fileID: 1603878361}
+  textAboveDistance: 1.5
+  textStartColor: {r: 1, g: 1, b: 1, a: 1}
   pointer: 2
 --- !u!61 &2128935736
 BoxCollider2D:

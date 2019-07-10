@@ -5,37 +5,37 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 2a84008efdea22545b437efe59e88029
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level1-MysteriousCall.unity
     guid: 2712c4671fb244046a9241ce5d7edf40
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level2-GateCrasher.unity
     guid: 884cd0d0d582e924783fa6bf76d2a83e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level3-BestFriend.unity
     guid: fba065ea0abac2a40a0bc3ffcab5f5b0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level4-GoAhead.unity
     guid: 62b9632a3df917e4fb2d4e0621e1e8d1
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level5-HeartLock.unity
     guid: 565462acffcb04748899c231a4b7c658
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BadEnd1-Alone.unity
     guid: 11b3349efda0bce40a8d203b3d341045
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BadEnd2-RunAway.unity
     guid: 0d474fab51b5f6b45aa7bb8e40933f0a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/NormalEnd-Conservatism.unity
     guid: 0930b47feb3f5824389af67fc65a8f22
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/HappyEnd-ForFuture.unity
     guid: 8be97da1491f94f449a2e7e311465e0c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/_Test.unity
     guid: b46ee9ca41840e0478070712f132fea5
   m_configObjects: {}

@@ -5,8 +5,8 @@ using UnityEngine;
 public class MapDoor : MonoBehaviour
 {
     Animator animator;
-    public BoxCollider2D boxCollider2D;
     public bool reCollectable = true;
+    public BoxCollider2D boxCollider2D;
     private AnimatorStateInfo currentAni;
 
     public float dashTime = 10f;
@@ -186,12 +186,12 @@ public class MapDoor : MonoBehaviour
         for (int i = 0; i < collision.contactCount; i++) {
             if (collision.GetContact(i).collider.GetComponent<PlatformEffector2D>() && Mathf.Abs(collision.GetContact(0).normal.y - 1) > 0.1f)
                 continue;
-            if (collision.GetContact(i).collider.GetComponent<UsrState>())
+            if (!collision.GetContact(i).collider.GetComponent<MapWall>() && !collision.GetContact(i).collider.GetComponent<MapSolid>())
                 continue;
             for (int j = 0; j < contactNum; j++) {
                 if (contacts[j].collider.GetComponent<PlatformEffector2D>() && Mathf.Abs(contacts[j].normal.y - 1) > 0.1f)
                     continue;
-                if (contacts[j].collider.GetComponent<UsrState>())
+                if (!collision.GetContact(i).collider.GetComponent<MapWall>() && !collision.GetContact(i).collider.GetComponent<MapSolid>())
                     continue;
                 float tempAngle = Vector2.Angle(collision.GetContact(i).normal, contacts[j].normal);                
                 if (tempAngle >= GMManager.JAM_ANGLE) {

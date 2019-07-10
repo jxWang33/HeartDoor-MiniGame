@@ -60,13 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\AfterEffect\CameraBlurShape.cs" />
+    <Compile Include="Assets\Resources\AfterEffect\CameraWaterWave.cs" />
     <Compile Include="Assets\Resources\Constitution\Effects\EasyBullet\EasyBullet.cs" />
     <Compile Include="Assets\Resources\Constitution\Effects\GetKeyEffect\GreenKeyEffect.cs" />
     <Compile Include="Assets\Resources\Constitution\Effects\HeartPropmt\HeartPropmt.cs" />
     <Compile Include="Assets\Resources\Constitution\Effects\TitleFlash\TitleFlash.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\0\BackToTitle.cs" />
-    <Compile Include="Assets\Resources\Constitution\Levels\0\StartSceneButton.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\0\StartSceneManager.cs" />
+    <Compile Include="Assets\Resources\Constitution\Levels\0\StartScenePrompt.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\1\Script\BgStarTwinkle.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\1\Script\ComputerLightEffect.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\1\Script\ControlPrompt.cs" />
@@ -111,7 +113,6 @@
     <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Textures\TriggerGoodFinal.cs" />
     <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Textures\TriggerGoodHeart.cs" />
     <Compile Include="Assets\Resources\Constitution\Maps\Walls\MapWall.cs" />
-    <Compile Include="Assets\Resources\Scripts\CameraBlurShape.cs" />
     <Compile Include="Assets\Resources\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Resources\Scripts\DialoguePanel.cs" />
     <Compile Include="Assets\Resources\Scripts\EscPanel.cs" />
@@ -125,6 +126,7 @@
     <None Include="Assets\Resources\AfterEffect\BlurShape.shader" />
     <None Include="Assets\Resources\Constitution\Lives\N_Usr\Material\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\Resources\Constitution\Lives\N_Usr\Material\Shaders\PriorityParticleAddSoft.shader" />
+    <None Include="Assets\Resources\AfterEffect\WaterWave.shader" />
     <None Include="Assets\Resources\Constitution\Maps\Door\Texture\动画帧建议.txt" />
     <None Include="Assets\Resources\Constitution\Lives\N_Usr\Texture\动作建议.txt" />
     <None Include="Assets\Resources\Constitution\Lives\N_Usr\Material\Shaders\PriorityParticleAdd.shader" />
