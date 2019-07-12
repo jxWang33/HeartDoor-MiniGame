@@ -334,12 +334,23 @@ public class UsrState : MonoBehaviour
         if (animator.GetBool("isSlide")) {
             if (slideCounter >= slideInter) {
                 Vector2 colliderPos = new Vector2(transform.position.x, transform.position.y + 0.2f);
-                Collider2D hit = Physics2D.OverlapBox(colliderPos, startColliderSize, 0,
+                Collider2D[] hits = Physics2D.OverlapBoxAll(colliderPos, startColliderSize, 0,
                     1 << LayerMask.NameToLayer("solid") | 1 << LayerMask.NameToLayer("wall") | 1 << LayerMask.NameToLayer("door"));
-                if (hit == null||hit.GetComponent<PlatformEffector2D>()) {//站起碰撞盒检测
+                if (hits.Length == 0) {//站起碰撞盒检测
                     slideCounter = 0;
                     rigidbody2D.gravityScale = startG;
                     animator.SetBool("isSlide", false);
+                }
+                else {
+                    int tempCount = 0;
+                    foreach (Collider2D i in hits)
+                        if (i.GetComponent<PlatformEffector2D>())
+                            tempCount++;
+                    if (tempCount == hits.Length) {
+                        slideCounter = 0;
+                        rigidbody2D.gravityScale = startG;
+                        animator.SetBool("isSlide", false);
+                    }
                 }
             }
             if (Mathf.Abs(rigidbody2D.velocity.x) > minSlideSpeed) {
@@ -511,18 +522,19 @@ public class UsrState : MonoBehaviour
 
     #region PHYSICS_CALLBACK
 
-    private void OnCollisionEnter2D(Collision2D collision) {        
+    private void OnCollisionEnter2D(Collision2D collision) {
+        //挤压判定
         ContactPoint2D[] contacts = new ContactPoint2D[10];
         int contactNum = boxCollider2D.GetContacts(contacts);
         for (int i = 0; i < collision.contactCount; i++) {
             if (collision.GetContact(i).collider.GetComponent<PlatformEffector2D>() && Mathf.Abs(collision.GetContact(0).normal.y - 1) > nearAngleLoss)
                 continue;
-            if (!collision.GetContact(i).collider.GetComponent<MapWall>() && !collision.GetContact(i).collider.GetComponent<MapSolid>())
+            if (!collision.GetContact(i).collider.GetComponent<MapWall>() && !collision.GetContact(i).collider.GetComponent<MapSolid>() && !collision.GetContact(i).collider.GetComponent<MapDoor>())
                 continue;
             for (int j = 0; j < contactNum; j++) {
                 if (contacts[j].collider.GetComponent<PlatformEffector2D>() && Mathf.Abs(contacts[j].normal.y - 1) > nearAngleLoss)
                     continue;
-                if (!contacts[j].collider.GetComponent<MapWall>() && !contacts[j].collider.GetComponent<MapSolid>())
+                if (!contacts[j].collider.GetComponent<MapWall>() && !contacts[j].collider.GetComponent<MapSolid>() && !contacts[j].collider.GetComponent<MapDoor>())
                     continue;
                 float tempAngle = Vector2.Angle(collision.GetContact(i).normal, contacts[j].normal);
                 if (tempAngle >= GMManager.JAM_ANGLE) {
@@ -533,10 +545,42 @@ public class UsrState : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision) {//微小碰撞修复
+    private void OnCollisionStay2D(Collision2D collision) {
+        //临近物体更新
+        if (Mathf.Abs(collision.GetContact(0).normal.x - 1) <= nearAngleLoss) {//左方碰撞
+            if (collision.collider.GetComponent<MapWall>() && !nearWallsL.Contains(collision.collider.GetComponent<MapWall>())
+                && collision.contactCount > 1
+                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) > boxCollider2D.size.y / 2)
+                nearWallsL.Add(collision.collider.GetComponent<MapWall>());
+            if (collision.collider.GetComponent<MapWall>() && nearWallsL.Contains(collision.collider.GetComponent<MapWall>())
+                && collision.contactCount > 1
+                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) < boxCollider2D.size.y / 2)
+                nearWallsL.Remove(collision.collider.GetComponent<MapWall>());
+
+            if (collision.collider.GetComponent<MapDoor>() && !nearDoorL.Contains(collision.collider.GetComponent<MapDoor>()))
+                nearDoorL.Add(collision.collider.GetComponent<MapDoor>());
+            if (collision.collider.GetComponent<MapSolid>() && !nearSolidL.Contains(collision.collider.GetComponent<MapSolid>()))
+                nearSolidL.Add(collision.collider.GetComponent<MapSolid>());
+        }
+        else if (Mathf.Abs(collision.GetContact(0).normal.x + 1) <= nearAngleLoss) {//右方碰撞
+            if (collision.collider.GetComponent<MapWall>() && !nearWallsR.Contains(collision.collider.GetComponent<MapWall>())
+                && collision.contactCount > 1
+                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) > boxCollider2D.size.y / 2)
+                nearWallsR.Add(collision.collider.GetComponent<MapWall>());
+            if (collision.collider.GetComponent<MapWall>() && nearWallsR.Contains(collision.collider.GetComponent<MapWall>())
+                && collision.contactCount > 1
+                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) < boxCollider2D.size.y / 2)
+                nearWallsR.Remove(collision.collider.GetComponent<MapWall>());
+
+            if (collision.collider.GetComponent<MapDoor>() && !nearDoorR.Contains(collision.collider.GetComponent<MapDoor>()))
+                nearDoorR.Add(collision.collider.GetComponent<MapDoor>());
+            if (collision.collider.GetComponent<MapSolid>() && !nearSolidR.Contains(collision.collider.GetComponent<MapSolid>()))
+                nearSolidR.Add(collision.collider.GetComponent<MapSolid>());
+        }
+
+        //微小碰撞修复
         if (collision.collider.GetComponent<PlatformEffector2D>())
             return;
-
         if (Mathf.Abs(collision.GetContact(0).normal.x - 1) <= nearAngleLoss) {//左方碰撞
             if (isOnMove && isfixEnable) {
                 float tempLoss;
@@ -620,27 +664,6 @@ public class UsrState : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(collision.GetContact(0).normal.x - 1) <= nearAngleLoss) {//左方碰撞
-            if (collision.collider.GetComponent<MapWall>() && !nearWallsL.Contains(collision.collider.GetComponent<MapWall>())
-                && collision.contactCount > 1
-                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) > boxCollider2D.size.y / 2)
-                nearWallsL.Add(collision.collider.GetComponent<MapWall>());
-            if (collision.collider.GetComponent<MapDoor>() && !nearDoorL.Contains(collision.collider.GetComponent<MapDoor>()))
-                nearDoorL.Add(collision.collider.GetComponent<MapDoor>());
-            if (collision.collider.GetComponent<MapSolid>() && !nearSolidL.Contains(collision.collider.GetComponent<MapSolid>()))
-                nearSolidL.Add(collision.collider.GetComponent<MapSolid>());
-        }
-        else if (Mathf.Abs(collision.GetContact(0).normal.x + 1) <= nearAngleLoss) {//右方碰撞
-            if (collision.collider.GetComponent<MapWall>() && !nearWallsR.Contains(collision.collider.GetComponent<MapWall>())
-                && collision.contactCount > 1
-                && Mathf.Abs(collision.GetContact(0).point.y - collision.GetContact(1).point.y) > boxCollider2D.size.y / 2)
-                nearWallsR.Add(collision.collider.GetComponent<MapWall>());
-            if (collision.collider.GetComponent<MapDoor>() && !nearDoorR.Contains(collision.collider.GetComponent<MapDoor>()))
-                nearDoorR.Add(collision.collider.GetComponent<MapDoor>());
-            if (collision.collider.GetComponent<MapSolid>() && !nearSolidR.Contains(collision.collider.GetComponent<MapSolid>()))
-                nearSolidR.Add(collision.collider.GetComponent<MapSolid>());
-        }
-
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
@@ -668,9 +691,8 @@ public class UsrState : MonoBehaviour
         if (collision.transform.GetComponent<GoldenKey>() != null || collision.transform.GetComponent<GreenKey>() != null) {
             if (collision.transform.GetComponent<GreenKey>() != null)
                 CollectGreenKey();
-            else {
+            else 
                 CollectGoldenKey(collision.transform.GetComponent<GoldenKey>().duringTime);
-            }
             Destroy(collision.gameObject);
         }
     }

@@ -66,7 +66,6 @@
     <Compile Include="Assets\Resources\Constitution\Effects\GetKeyEffect\GreenKeyEffect.cs" />
     <Compile Include="Assets\Resources\Constitution\Effects\HeartPropmt\HeartPropmt.cs" />
     <Compile Include="Assets\Resources\Constitution\Effects\TitleFlash\TitleFlash.cs" />
-    <Compile Include="Assets\Resources\Constitution\Levels\0\BackToTitle.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\0\StartSceneManager.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\0\StartScenePrompt.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\1\Script\BgStarTwinkle.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Assets\Resources\Constitution\Levels\4\LevelScript4.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\5\LevelScript5.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\5\Moon.cs" />
+    <Compile Include="Assets\Resources\Constitution\Levels\BackToTitle.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\MapUnit-BossLevelOnly\MapUnit.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\MapUnit-BossLevelOnly\MapUnitManager.cs" />
     <Compile Include="Assets\Resources\Constitution\Levels\Timer\TimeCounter.cs" />
@@ -109,9 +109,9 @@
     <Compile Include="Assets\Resources\Constitution\Maps\MoveMapP2P\MoveMapP2P.cs" />
     <Compile Include="Assets\Resources\Constitution\Maps\Thorn\Script\MapThorn.cs" />
     <Compile Include="Assets\Resources\Constitution\Maps\Thorn\Script\ThornAuto.cs" />
-    <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Textures\TriggerGood.cs" />
-    <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Textures\TriggerGoodFinal.cs" />
-    <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Textures\TriggerGoodHeart.cs" />
+    <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Scripts\TriggerGood.cs" />
+    <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Scripts\TriggerGoodFinal.cs" />
+    <Compile Include="Assets\Resources\Constitution\Maps\TriggerGood\Scripts\TriggerGoodHeart.cs" />
     <Compile Include="Assets\Resources\Constitution\Maps\Walls\MapWall.cs" />
     <Compile Include="Assets\Resources\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Resources\Scripts\DialoguePanel.cs" />

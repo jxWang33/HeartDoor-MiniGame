@@ -2375,7 +2375,7 @@ MonoBehaviour:
   escPanel: {fileID: 581630735}
   loadingPanel: {fileID: 529040578}
   usrStatePanel: {fileID: 962317188156466365}
-  Timer: {fileID: 962317188157270749}
+  timeCounter: {fileID: 962317188157270749}
 --- !u!1 &962317188296222941
 GameObject:
   m_ObjectHideFlags: 0

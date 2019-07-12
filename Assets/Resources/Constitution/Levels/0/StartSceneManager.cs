@@ -9,8 +9,14 @@ public class StartSceneManager : MonoBehaviour
     public Text loadText;
     public Text quitText;
     public Image cursor;
+    public Image openBG;
     public int currentChoosePoint = 0;
-    
+    public AudioSource cursorSoure;
+    public AudioSource levelSoure;
+    public AudioClip audioChoose;
+    public AudioClip audioOK;
+    public AudioClip audioWrong;
+
     public LoadingPanel loadingPanel;
     public CameraWaterWave cameraWaterWave;
     struct StartChoose {
@@ -49,16 +55,39 @@ public class StartSceneManager : MonoBehaviour
 
         InvokeRepeating("RandomWaterWave", 3, 3);
     }
-
     private void Update() {
+        if (Time.timeSinceLevelLoad < 1) 
+            return;
+        if (Time.timeSinceLevelLoad >= 1 && Time.timeSinceLevelLoad <= 2) {
+            Color tempColor = openBG.color;
+            if (tempColor.a == 1) {
+                cameraWaterWave.Emit(new Vector2(960, 540));
+                levelSoure.Play();
+            }
+            tempColor.a = 2 - Time.timeSinceLevelLoad;
+            openBG.color = tempColor;
+        }
+        if (Time.timeSinceLevelLoad > 2 && openBG.color.a != 0) {
+            Color tempColor = openBG.color;
+            tempColor.a = 0;
+            openBG.color = tempColor;
+        }
+
         if (loadingPanel.gameObject.activeSelf)
             return;
         if (Input.GetKeyDown(GMManager.UP_KEY)) {
             startChooses[currentChoosePoint].text.fontStyle = FontStyle.Normal;
             do {
                 currentChoosePoint--;
-                if (currentChoosePoint < 0)
+                if (currentChoosePoint < 0) {
+                    cursorSoure.clip = audioWrong;
+                    cursorSoure.Play();
                     currentChoosePoint = 0;
+                }
+                else {
+                    cursorSoure.clip = audioChoose;
+                    cursorSoure.Play();
+                }
             } while (!startChooses[currentChoosePoint].active);
             cursor.transform.position = startChooses[currentChoosePoint].text.transform.position - new Vector3(150, 0, 0);
             startChooses[currentChoosePoint].text.fontStyle = FontStyle.Bold;
@@ -67,14 +96,23 @@ public class StartSceneManager : MonoBehaviour
             startChooses[currentChoosePoint].text.fontStyle = FontStyle.Normal;
             do {
                 currentChoosePoint++;
-                if (currentChoosePoint > startChooses.Count - 1)
+                if (currentChoosePoint > startChooses.Count - 1) {
+                    cursorSoure.clip = audioWrong;
+                    cursorSoure.Play();
                     currentChoosePoint = startChooses.Count - 1;
+                }
+                else {
+                    cursorSoure.clip = audioChoose;
+                    cursorSoure.Play();
+                }
             } while (!startChooses[currentChoosePoint].active);
             cursor.transform.position = startChooses[currentChoosePoint].text.transform.position - new Vector3(150, 0, 0);
             startChooses[currentChoosePoint].text.fontStyle = FontStyle.Bold;
         }
         if (Input.GetKeyDown(GMManager.FUNC_KEY)) {
             CancelInvoke("RandomWaterWave");
+            cursorSoure.clip = audioOK;
+            cursorSoure.Play();
             switch (currentChoosePoint) {
                 case 0:
                     PressStart();
@@ -92,6 +130,7 @@ public class StartSceneManager : MonoBehaviour
     void RandomWaterWave() {
         Vector2 tempVec = new Vector2((float)GMManager.rd.NextDouble() * 1920, (float)GMManager.rd.NextDouble() * 1080);
         cameraWaterWave.Emit(tempVec);
+        GetComponent<AudioSource>().Play();
     }
 
     private void PressStart() {

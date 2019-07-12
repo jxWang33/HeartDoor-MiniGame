@@ -44,7 +44,7 @@ public class CameraWaterWave : MonoBehaviour
         material.SetVector("_Params1", new Vector4(cam.aspect, 1, 1 / waveSpeed, 0));
         material.SetVector("_Params2", new Vector4(1, 1 / cam.aspect, refractionStrength, reflectionStrength));
     }
-    void Start() {
+    void Awake() {
         cam = GetComponent<Camera>();//获取相机组件
         if (cam == null)
             Debug.Log("error  it is null");
@@ -64,8 +64,6 @@ public class CameraWaterWave : MonoBehaviour
         };
         material.SetTexture("_GradTex", gradTexture);
         UpdateShaderParameters();
-
-        Emit(new Vector2(960, 540));
     }
     void Update() {
         droplet.Update();//更新涟漪

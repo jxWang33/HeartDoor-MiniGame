@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5752332414690156843}
   - component: {fileID: 5752332414690156842}
   m_Layer: 8
-  m_Name: "\u843D\u5730\u7A97"
+  m_Name: "env-\u843D\u5730\u7A97"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ SpriteMask:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6101f300ee265254185abab797e6e014, type: 3}
-  m_MaskAlphaCutoff: 0.2
+  m_MaskAlphaCutoff: 0
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0

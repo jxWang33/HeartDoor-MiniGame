@@ -22,12 +22,12 @@ public class UIManager : MonoBehaviour
 
     public void SetLoading(string levelName) {
         loadingPanel.gameObject.SetActive(true);
-        loadingPanel.Set(GMManager.BadEnd_2);
+        loadingPanel.Set(levelName);
     }
 
     public void SetLoadingWithSave(string levelName,int hn) {
         loadingPanel.gameObject.SetActive(true);
-        loadingPanel.SetAndSave(GMManager.BadEnd_2, hn);
+        loadingPanel.SetAndSave(levelName, hn);
     }
 
     private void Update() {

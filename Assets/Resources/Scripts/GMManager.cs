@@ -30,6 +30,7 @@ public class GMManager
 
     public static void Init() {
         QualitySettings.vSyncCount = 0;
+        QualitySettings.pixelLightCount = 16;
         Application.targetFrameRate = 60;
     }
 
