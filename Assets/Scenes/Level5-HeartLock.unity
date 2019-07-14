@@ -293,7 +293,7 @@ Transform:
   - {fileID: 1907653979}
   - {fileID: 1095375798}
   m_Father: {fileID: 1922338329}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &411373162
 GameObject:
@@ -605,7 +605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &749251094
 Animator:
   serializedVersion: 3
@@ -704,7 +704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2383ea43f76efba4f8875227f4cb40b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingPanel: {fileID: 956694040}
   uiManager: {fileID: 1138793619}
   timeCounter: {fileID: 1873594431}
   floatSpeed: 2
@@ -1180,6 +1179,14 @@ PrefabInstance:
       propertyPath: myHeart
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1592659344, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592659344, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 3139597915138860216, guid: cffaa073b1a0ab540b6e0c42a5cac151,
         type: 3}
       propertyPath: m_GravityScale
@@ -1191,14 +1198,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8413328469181609552, guid: 130c7cc746aca7a468f90efebebcda6b,
         type: 3}
-    - target: {fileID: 1592659344, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1592659344, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cffaa073b1a0ab540b6e0c42a5cac151, type: 3}
 --- !u!1 &1071186096
@@ -1566,8 +1565,6 @@ MonoBehaviour:
   textColorADisappearSpeed: 2
   textAboveDistance: 1.5
   textStartColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
-  loadingPanel: {fileID: 956694040}
-  timeCounter: {fileID: 1873594431}
   pointer: 5
 --- !u!61 &1601423447
 BoxCollider2D:
@@ -2187,7 +2184,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1922338329}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!108 &1987046156
 Light:
@@ -2690,6 +2687,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandR
       objectReference: {fileID: 0}
+    - target: {fileID: 5418147913781102137, guid: 70c44b16df700784dbcd61d07027c0f6,
+        type: 3}
+      propertyPath: heartBoss
+      value: 
+      objectReference: {fileID: 749251097}
     - target: {fileID: 5418147913781102119, guid: 70c44b16df700784dbcd61d07027c0f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2745,11 +2747,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5418147913781102137, guid: 70c44b16df700784dbcd61d07027c0f6,
-        type: 3}
-      propertyPath: heartBoss
-      value: 
-      objectReference: {fileID: 749251097}
     - target: {fileID: 2707670881714536458, guid: 70c44b16df700784dbcd61d07027c0f6,
         type: 3}
       propertyPath: m_Constraints
