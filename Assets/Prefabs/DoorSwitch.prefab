@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7338301400903977387}
   - component: {fileID: 5039673941592680814}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: hurtCollider
-  m_TagString: Doorable
+  m_TagString: doorable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7546243918122220066}
   - component: {fileID: 7546243918122220069}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7546243918122800555}
   - component: {fileID: 7546243918122800554}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7546243918536016877}
   - component: {fileID: 7546243918536016879}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 7546243918694108930}
   - component: {fileID: 7546243918694108933}
   - component: {fileID: 7546243918694108932}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: DoorSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -410,8 +410,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 5
+  MinDistance: 10
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -496,7 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7546243918738443761}
   - component: {fileID: 7546243918738443760}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}

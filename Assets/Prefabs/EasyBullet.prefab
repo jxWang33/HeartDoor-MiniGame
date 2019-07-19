@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4021515874899672214}
   - component: {fileID: 4021515874899672213}
   - component: {fileID: 2698129067547146483}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EasyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 307381bf60354424aa65dbd02767f0c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

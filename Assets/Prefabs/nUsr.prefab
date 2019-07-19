@@ -878,7 +878,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3139597915138860221}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6efb4c4239f24f34c970a4b5005d2b38, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -952,7 +952,7 @@ MonoBehaviour:
   fixCollisionInter: 0.1
   nearAngleLoss: 0.1
   collisionLoss: 0.15
-  onGroundLoss: 0.02
+  onGroundLoss: 0.1
   moveForceValue: 50
   jumpForceValue: 7
   hurtForceValue: 5
@@ -992,6 +992,8 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   startColliderOffset: {x: 0, y: 0}
   startColliderSize: {x: 0, y: 0}
+  slideColliderOffset: {x: 0.055, y: -0.6}
+  slideColliderSize: {x: 1.15, y: 0.45}
   startG: 0
   startCameraTargetLocalPos: {x: 0, y: 0, z: 0}
   maxManualPower: 100
@@ -15196,7 +15198,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 3c46a097fad9bdb4ca223b3d0eb7c0f3, type: 3}
   m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0.21568628}
   m_FlipX: 0
