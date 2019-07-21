@@ -54,7 +54,6 @@ public class BossHandR : MonoBehaviour
             screenPos += attackDir * attackSpeed * Time.deltaTime;
             Vector2 tempV = Camera.main.ScreenToWorldPoint(screenPos);
             transform.localPosition = tempV;
-            //transform.Translate(attackDir * attackSpeed * Time.deltaTime, Space.Self);
             if (Mathf.Abs(transform.position.x) > 100) {
                 isAttack = false;
                 animator.SetBool("isDead", true);
@@ -68,7 +67,7 @@ public class BossHandR : MonoBehaviour
 
     void AttackOnEnd() {
         if (heartBoss.usrState) {
-            attackDir = heartBoss.usrState.transform.position - transform.position;
+            attackDir = (heartBoss.usrState.transform.position - transform.position).normalized;
             screenPos = Camera.main.WorldToScreenPoint(transform.position);
             isAttack = true;
             transform.parent = null;

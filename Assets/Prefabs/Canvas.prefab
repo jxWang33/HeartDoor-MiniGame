@@ -2856,6 +2856,7 @@ MonoBehaviour:
   photoCo: {fileID: 21300000, guid: 0deaba99c79b3584b849dc01f09326ca, type: 3}
   photoX: {fileID: 21300000, guid: 56659a101dd3b8f4782f20f740e65e39, type: 3}
   photoToy: {fileID: 21300000, guid: e8cd8d49303473644a8c6eabf706268b, type: 3}
+  photoBoss: {fileID: 21300000, guid: 36cd206fa05aa5240b1a83b0528d8dca, type: 3}
 --- !u!1 &962317188784892402
 GameObject:
   m_ObjectHideFlags: 0

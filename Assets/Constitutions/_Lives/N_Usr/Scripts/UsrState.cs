@@ -217,6 +217,13 @@ public class UsrState : MonoBehaviour
     }
 
     private void UpdateNearWall() {
+        for (int i = 0; i < nearWallsL.Count; i++)
+            if (!(nearWallsL[i] ?? null))
+                nearWallsL.RemoveAt(i);
+        for (int i = 0; i < nearWallsR.Count; i++)
+            if (!(nearWallsR[i] ?? null))
+                nearWallsR.RemoveAt(i);
+
         if (nearWallsL.Count != 0)
             nearWall = LEFT_DIR;
         else if (nearWallsR.Count != 0)
@@ -227,10 +234,10 @@ public class UsrState : MonoBehaviour
 
     private void UpdateNearDoor() {
         for (int i = 0; i < nearDoorL.Count; i++)
-            if (nearDoorL[i] == null)
+            if (!(nearDoorL[i] ?? null)) 
                 nearDoorL.RemoveAt(i);
         for (int i = 0; i < nearDoorR.Count; i++)
-            if (nearDoorR[i] == null)
+            if (!(nearDoorR[i] ?? null)) 
                 nearDoorR.RemoveAt(i);
 
         if (nearDoorL.Count != 0)

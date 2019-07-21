@@ -768,14 +768,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7203441858682460, guid: be5f1751bee65a54585a62e16548891d, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 5.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203441858682460, guid: be5f1751bee65a54585a62e16548891d, type: 3}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7203441858682458, guid: be5f1751bee65a54585a62e16548891d, type: 3}
       propertyPath: m_SortingOrder
       value: 5
@@ -787,6 +779,14 @@ PrefabInstance:
     - target: {fileID: 7203441858682459, guid: be5f1751bee65a54585a62e16548891d, type: 3}
       propertyPath: colliderSize.x
       value: 5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203441858682460, guid: be5f1751bee65a54585a62e16548891d, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203441858682460, guid: be5f1751bee65a54585a62e16548891d, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be5f1751bee65a54585a62e16548891d, type: 3}
@@ -6285,6 +6285,7 @@ MonoBehaviour:
   pointer: 1
   mapManager: {fileID: 196359735}
   levelManager: {fileID: 2094283003}
+  pbBlackShadow: {fileID: 0}
 --- !u!1 &1564046205
 GameObject:
   m_ObjectHideFlags: 0
@@ -8987,10 +8988,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimeCounter
       objectReference: {fileID: 0}
-    - target: {fileID: 537234453, guid: 0bab857176c9d0149bdab7bac8a72015, type: 3}
-      propertyPath: m_Text
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 962317188751975439, guid: 0bab857176c9d0149bdab7bac8a72015,
         type: 3}
       propertyPath: m_IsActive
@@ -9009,6 +9006,10 @@ PrefabInstance:
     - target: {fileID: 6823008849797200297, guid: 0bab857176c9d0149bdab7bac8a72015,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 537234453, guid: 0bab857176c9d0149bdab7bac8a72015, type: 3}
+      propertyPath: m_Text
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1616583597, guid: 0bab857176c9d0149bdab7bac8a72015, type: 3}
@@ -10027,6 +10028,11 @@ PrefabInstance:
       propertyPath: mapOn
       value: 
       objectReference: {fileID: 196359735}
+    - target: {fileID: 8338309794581050541, guid: acbebb47ee94d4341ad9f36ce5970cd8,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 7735
+      objectReference: {fileID: 0}
     - target: {fileID: 7216192804236613678, guid: acbebb47ee94d4341ad9f36ce5970cd8,
         type: 3}
       propertyPath: m_Enabled
@@ -10056,11 +10062,6 @@ PrefabInstance:
         type: 3}
       propertyPath: brightness
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338309794581050541, guid: acbebb47ee94d4341ad9f36ce5970cd8,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 7735
       objectReference: {fileID: 0}
     - target: {fileID: 31025858105596254, guid: acbebb47ee94d4341ad9f36ce5970cd8,
         type: 3}

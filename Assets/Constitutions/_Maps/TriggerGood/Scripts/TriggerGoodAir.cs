@@ -96,7 +96,7 @@ public class TriggerGoodAir : TriggerGood
                     new DialogueUnit("你居然还会说话。",DialogueKind.Talk, null, uiManager.dialoguePanel.photoNSad),
                     new DialogueUnit("你不是一个玩偶吗？",DialogueKind.Talk, null, uiManager.dialoguePanel.photoNSad),
                     new DialogueUnit("你是谁，要做什么？",DialogueKind.Talk, null, uiManager.dialoguePanel.photoNSad),
-                    new DialogueUnit("我是一直玩偶，不过我被寄托着一些其他东西，我现在可能是一个，惊喜。",DialogueKind.Talk, null, uiManager.dialoguePanel.photoToy),
+                    new DialogueUnit("我是一只玩偶，不过我被寄托着一些其他东西，我现在可能是一个，惊喜。",DialogueKind.Talk, null, uiManager.dialoguePanel.photoToy),
                     new DialogueUnit("......",DialogueKind.Talk, null, uiManager.dialoguePanel.photoNSad),
                     new DialogueUnit("惊喜吗？",DialogueKind.Talk, null, uiManager.dialoguePanel.photoNSad),
                     new DialogueUnit("快，小N，打开这堵墙。",DialogueKind.Talk, null, uiManager.dialoguePanel.photoToy),

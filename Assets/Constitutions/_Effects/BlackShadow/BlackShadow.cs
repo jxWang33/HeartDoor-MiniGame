@@ -14,7 +14,6 @@ public class BlackShadow : MonoBehaviour
         damage = dam;
         direction = dir;
         GetComponent<Rigidbody2D>().velocity = direction * speed;
-
         if (direction == new Vector2(1, 0))
             transform.localScale = new Vector3(1, 1, 1);
         else if (direction == new Vector2(-1, 0))

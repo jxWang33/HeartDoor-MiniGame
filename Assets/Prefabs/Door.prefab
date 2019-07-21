@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reCollectable: 1
+  boxCollider2D: {fileID: 0}
   dashTime: 0.2
   dashDistance: 3
   useTime: 1
@@ -173,7 +174,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 6efb4c4239f24f34c970a4b5005d2b38, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!82 &7916336720332806175
 AudioSource:

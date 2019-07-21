@@ -75,6 +75,7 @@
     <Compile Include="Assets\Constitutions\_Levels\Scripts\Level1\ControlPrompt.cs" />
     <Compile Include="Assets\Constitutions\_Levels\Scripts\Level1\TextFloat.cs" />
     <Compile Include="Assets\Constitutions\_Levels\Scripts\Level1\TextTwin.cs" />
+    <Compile Include="Assets\Constitutions\_Levels\Scripts\Level5\MapReborn.cs" />
     <Compile Include="Assets\Constitutions\_Levels\Scripts\Level5\Moon.cs" />
     <Compile Include="Assets\Constitutions\_Levels\Scripts\Manager\LevelManager.cs" />
     <Compile Include="Assets\Constitutions\_Levels\Scripts\Manager\LevelScript1.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Assets\Constitutions\Scripts\BackToTitle.cs" />
     <Compile Include="Assets\Constitutions\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Constitutions\Scripts\DialoguePanel.cs" />
+    <Compile Include="Assets\Constitutions\Scripts\EndSceneBlack.cs" />
     <Compile Include="Assets\Constitutions\Scripts\EscPanel.cs" />
     <Compile Include="Assets\Constitutions\Scripts\GMManager.cs" />
     <Compile Include="Assets\Constitutions\Scripts\LoadingPanel.cs" />
@@ -129,12 +131,13 @@
     <Compile Include="Assets\Constitutions\Scripts\UIGreenKey.cs" />
     <Compile Include="Assets\Constitutions\Scripts\UIManager.cs" />
     <None Include="Assets\Constitutions\_AfterEffect\BlurShape.shader" />
-    <None Include="Assets\Constitutions\_Lives\N_Usr\Material\Shaders\PriorityParticleAlpha.shader" />
-    <None Include="Assets\Constitutions\_Lives\N_Usr\Material\Shaders\PriorityParticleAddSoft.shader" />
+    <None Include="Assets\Constitutions\Shaders\Disappear.shader" />
+    <None Include="Assets\Constitutions\Shaders\PriorityParticleAlpha.shader" />
+    <None Include="Assets\Constitutions\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\Constitutions\_AfterEffect\WaterWave.shader" />
     <None Include="Assets\Constitutions\_Maps\Door\Texture\动画帧建议.txt" />
     <None Include="Assets\Constitutions\_Lives\N_Usr\Texture\动作建议.txt" />
-    <None Include="Assets\Constitutions\_Lives\N_Usr\Material\Shaders\PriorityParticleAdd.shader" />
+    <None Include="Assets\Constitutions\Shaders\PriorityParticleAdd.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/project/unity/HeartDoor/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

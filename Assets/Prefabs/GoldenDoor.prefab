@@ -4841,6 +4841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reCollectable: 0
+  boxCollider2D: {fileID: 0}
   dashTime: 0.2
   dashDistance: 8
   useTime: 1
@@ -4851,7 +4852,6 @@ MonoBehaviour:
   open: {fileID: 7400000, guid: ae01d2ccd4773894fad3a5b84b7f1dcd, type: 2}
   close: {fileID: 7400000, guid: d69dc3d35b5a1bf448fd4d1d86f37eaf, type: 2}
   audioOpen: {fileID: 8300000, guid: 4c312ff554a4f1043988c7c2fd3237f0, type: 3}
-  audioClose: {fileID: 8300000, guid: d07d13e7cd0fd76459a5ae61d306ec39, type: 3}
   audioSource: {fileID: 0}
 --- !u!50 &8671818862443199930
 Rigidbody2D:
@@ -4872,7 +4872,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!82 &6810160366095363901
 AudioSource:

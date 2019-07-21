@@ -9,6 +9,7 @@ public class MapUnitManager : MonoBehaviour
     public UsrState usrState;
     public HeartBoss heartBoss;
     public Transform cameraPos;
+    public Transform envCameraPos;
 
     public GameObject pbGoldenKey;
 
@@ -63,13 +64,17 @@ public class MapUnitManager : MonoBehaviour
         tempPos = usrState.transform.position;
         tempPos.y += d;
         usrState.transform.position = tempPos;
-
-        tempPos = heartBoss.transform.position;
-        tempPos.y += d;
-        heartBoss.transform.position = tempPos;
-
+        if (heartBoss) {
+            tempPos = heartBoss.transform.position;
+            tempPos.y += d;
+            heartBoss.transform.position = tempPos;
+        }
         tempPos = cameraPos.transform.position;
         tempPos.y += d;
         cameraPos.transform.position = tempPos;
+
+        tempPos = envCameraPos.transform.position;
+        tempPos.y += d;
+        envCameraPos.transform.position = tempPos;
     }
 }

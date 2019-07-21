@@ -3,47 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class LevelScript5 : MonoBehaviour
+public class LevelScript5 : LevelManager
 {
-    public UsrState usrState;
-    public GameObject timer;
-    public UIManager uiManager;
-    public GameObject titleFlash;
-    AudioSource audioSource;
-    public AudioClip timerClip;
-    public MapManager mapManager;
-    void Start() {
-        GMManager.Init();
-        ReadFromFile("game");
+    public AudioClip openDoorClip;
 
-        audioSource = GetComponent<AudioSource>();
+    public void OpenDoorSound() {
+        SoundPlay(openDoorClip);
+    }
+
+    protected override void OnCommonStart() {
         usrState.gameObject.SetActive(true);
-        timer.SetActive(true);
+        uiManager.timeCounter.gameObject.SetActive(true);
+        uiManager.usrStatePanel.gameObject.SetActive(true);
         GameObject tempT = Instantiate(titleFlash, GameObject.Find("Canvas").transform);
-        tempT.GetComponent<TitleFlash>().Set("十月五日", "心之门", "最后一步");
-        SoundPlay(timerClip);
+        tempT.GetComponent<TitleFlash>().Set("十月五日", "心之门", "我战与我");
     }
 
-    public void ReadFromFile(string fileName) {
-        BinaryReader br = new BinaryReader(new FileStream(fileName + ".save", FileMode.Open));
-        if (br == null)
-            return;
-
-        string levelName = br.ReadString();
-        if (levelName != GMManager.LEVEL_5) {
-            br.Close();
-            return;
-        }
-
-        usrState.SetHeart(br.ReadInt32());
-        br.Close();
+    protected override void OnDebugStart() {
+        usrState.gameObject.SetActive(true);
+        uiManager.timeCounter.gameObject.SetActive(true);
+        uiManager.usrStatePanel.gameObject.SetActive(true);
+        GameObject tempT = Instantiate(titleFlash, GameObject.Find("Canvas").transform);
+        tempT.GetComponent<TitleFlash>().Set("十月五日", "心之门", "我战与我");
     }
 
-    private void SoundPlay(AudioClip ac, bool forceChange = false, float vol = 1.0f) {
-        if (!audioSource.isPlaying || forceChange) {
-            audioSource.volume = vol;
-            audioSource.clip = ac;
-            audioSource.Play();
-        }
+    public override void SoundInvoke(string clipName) {
+        Invoke(clipName + "Sound", 0);
     }
 }

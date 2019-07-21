@@ -182,6 +182,7 @@ public class DialoguePanel : MonoBehaviour
     public Sprite photoCo;//快递员
     public Sprite photoX;//陌生人
     public Sprite photoToy;//鳗鱼
+    public Sprite photoBoss;
     #endregion
 }
 //使用流程

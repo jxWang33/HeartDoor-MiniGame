@@ -203,44 +203,46 @@ public class TriggerGoodHeart : TriggerGood
     #region DAY4_GOODS
 
     private void _4_1() {
-        //usrState.GetComponent<UsrControl>().Stand();
-        //List<DialogueUnit> temp = new List<DialogueUnit> {
-        //            new DialogueUnit("这个帽子真酷。", "小N", null),
-        //            new DialogueUnit("不知道还能不能戴上。", "小N", null),
-        //            new DialogueUnit("心 +1", "心", null)
-        //        };
-        //uiManager.SetDialogues(temp, () => {
-        //    usrState.ChangeHeart(1);
-        //    usrState.isControlEnable = true;
-        //});
+        usrState.GetComponent<UsrControl>().Stand();
+        List<DialogueUnit> temp = new List<DialogueUnit> {
+                    new DialogueUnit("这个帽子真酷。", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNHappy),
+                    new DialogueUnit("不知道还能不能戴上。", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNHappy),
+                    new DialogueUnit("心 +1", DialogueKind.Sound,() => {
+                            usrState.ChangeHeart(1);
+                            usrState.isControlEnable = true;
+                    })
+        };
+        uiManager.SetDialogues(temp);
     }
 
     private void _4_2() {
-        //usrState.GetComponent<UsrControl>().Stand();
-        //List<DialogueUnit> temp = new List<DialogueUnit> {
-        //            new DialogueUnit("唔......", "小N", null),
-        //            new DialogueUnit("好像是有这么一回事。", "小N", null),
-        //            new DialogueUnit("心 -2", "心", null)
-        //        };
-        //uiManager.SetDialogues(temp, () => {
-        //    usrState.ChangeHeart(-2);
-        //    usrState.isControlEnable = true;
-        //});
+        usrState.GetComponent<UsrControl>().Stand();
+        List<DialogueUnit> temp = new List<DialogueUnit> {
+                    new DialogueUnit("......", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNSad),
+                    new DialogueUnit("这不是小C的欠条吗。", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNSad),
+                    new DialogueUnit("......", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNSad),
+                    new DialogueUnit("好像是有这么一回事。", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNSad),
+                    new DialogueUnit("心 -2", DialogueKind.Sound,() => {
+                            usrState.ChangeHeart(-2);
+                            usrState.isControlEnable = true;
+                    })
+        };
+        uiManager.SetDialogues(temp);
     }
 
     private void _4_3() {
-        //usrState.GetComponent<UsrControl>().Stand();
-        //List<DialogueUnit> temp = new List<DialogueUnit> {
-        //            new DialogueUnit("工作什么的，", "小N", null),
-        //            new DialogueUnit("真无聊。", "小N", null),
-        //            new DialogueUnit("心 -3", "心", null)
-        //        };
-        //uiManager.SetDialogues(temp, () => {
-        //    usrState.ChangeHeart(-3);
-        //    usrState.isControlEnable = true;
-        //});
+        usrState.GetComponent<UsrControl>().Stand();
+        List<DialogueUnit> temp = new List<DialogueUnit> {
+                    new DialogueUnit("离职申请吗。", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNSad),
+                    new DialogueUnit("......", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNSad),
+                    new DialogueUnit("工作什么的，真无聊。", DialogueKind.Talk, null,uiManager.dialoguePanel.photoNSad),
+                    new DialogueUnit("心 -3", DialogueKind.Sound,() => {
+                            usrState.ChangeHeart(-3);
+                            usrState.isControlEnable = true;
+                    })
+        };
+        uiManager.SetDialogues(temp);
     }
 
     #endregion
-
 }
