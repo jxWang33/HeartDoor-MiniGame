@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/NormalEnd-Conservatism.unity
+- path: Assets/Scenes/Level5-HeartLock.unity
   isLoaded: 1
   isActive: 1
